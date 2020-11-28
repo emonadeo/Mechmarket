@@ -1,0 +1,49 @@
+{
+  "name": "mechmarket",
+  "version": "1.0.0",
+  "description": "user interface for better browsing on r/mechmarket",
+  "main": "./src/app.js",
+  "scripts": {
+    "start": "webpack serve --config webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Emonadeo/Mechmarket.git"
+  },
+  "keywords": [
+    "mechmarket"
+  ],
+  "author": "Emonadeo",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/eslint-parser": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "cross-env": "^7.0.2",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^7.0.1",
+    "file-loader": "^6.2.0",
+    "html-loader": "^1.3.2",
+    "html-webpack-plugin": "^5.0.0-alpha.14",
+    "mini-css-extract-plugin": "^1.3.0",
+    "normalize.css": "^8.0.1",
+    "prettier": "^2.1.2",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "terser-webpack-plugin": "^5.0.3",
+    "url-loader": "^4.1.1",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.5",
+    "vue-router": "^3.4.9",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
