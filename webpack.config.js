@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
-const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
+const PUBLIC_PATH = PROD ? '/Mechmarket' : '/';
 
 module.exports = {
     mode: PROD ? 'production' : 'development',
