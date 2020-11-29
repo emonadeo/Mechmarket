@@ -1,19 +1,21 @@
+const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const prod = process.env.NODE_ENV === 'production';
+const PROD = process.env.NODE_ENV === 'production';
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
 
 module.exports = {
-    mode: prod ? 'production' : 'development',
+    mode: PROD ? 'production' : 'development',
     entry: path.resolve(__dirname, './src/app.js'),
     devtool: 'source-map',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, './dist'),
-        publicPath: '/',
+        publicPath: PUBLIC_PATH,
     },
     resolve: {
         alias: {
@@ -65,13 +67,17 @@ module.exports = {
         ],
     },
     optimization: {
-        minimize: prod,
+        minimize: PROD,
         minimizer: [new TerserPlugin()],
         splitChunks: {
             chunks: 'all',
         },
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+            'process.env.PUBLIC_PATH': JSON.stringify(PUBLIC_PATH),
+        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
         }),
