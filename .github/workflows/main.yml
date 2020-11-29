@@ -12,10 +12,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
-    - name: Build
+    - name: Setup Node
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
+
+    - name: Build
       run: |
         npm ci
         npm run build
