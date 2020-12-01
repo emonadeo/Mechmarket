@@ -15,6 +15,7 @@ module.exports = {
     entry: path.resolve(__dirname, './src/app.js'),
     devtool: 'source-map',
     devServer: {
+        historyApiFallback: true,
         quiet: true,
     },
     output: {
