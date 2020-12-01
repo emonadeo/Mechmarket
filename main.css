@@ -1,8 +1,4 @@
 @import url(https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap);
-.textfield input[data-v-7c6b69f2]{height:100%;width:100%;display:block;color:inherit;border:none;background-color:transparent;padding:8px}.textfield input[data-v-7c6b69f2]::placeholder{color:var(--primary);opacity:.54}
-.btn[data-v-085cb2c0]{color:inherit;border:none;background:transparent;padding:8px}
-.titlebar .control[data-v-0801fb02]{border-bottom:1px solid var(--primary);display:flex;height:2.5rem}.titlebar .control .textfield[data-v-0801fb02]{flex:1}.titlebar .control .btn[data-v-0801fb02]{border-left:1px solid var(--primary);width:2.5rem;height:2.5rem}.titlebar .tabs[data-v-0801fb02]{height:2.5rem;display:flex;border-bottom:1px solid var(--primary)}.titlebar .tabs .tab[data-v-0801fb02]{flex:1;display:flex;align-items:center;justify-content:center;text-decoration:none;color:inherit}.titlebar .tabs .tab[data-v-0801fb02]:not(:last-child){border-right:1px solid var(--primary)}.titlebar .tabs .tab[selected][data-v-0801fb02]{background-color:var(--primary);color:var(--on-primary)}
-*{box-sizing:border-box}html,body,#app{width:100%;height:100%}#app{font-family:"Fira Code",monospace;margin:0 auto}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -354,5 +350,8 @@ template {
 }
 
 #app.light{--primary: #000000;--on-primary: #ffffff}#app.light.surface,#app.light .surface{background-color:#ffffff}#app.dark{--primary: #ffd740;--on-primary: #000000}#app.dark.surface,#app.dark .surface{background-color:#000000}.surface{color:var(--primary)}
+.btn[data-v-085cb2c0]{color:inherit;border:none;background:transparent;padding:8px}
+.search[data-v-261edf33]{width:100%}.search input[data-v-261edf33]{height:100%;width:100%;display:block;color:inherit;border:none;background-color:transparent;padding:.5rem}.search input[data-v-261edf33]::placeholder{color:var(--primary);opacity:.54}
+*{box-sizing:border-box}html,body,#app{width:100%;height:100%}#app{font-family:"Fira Code",monospace;margin:0 auto}#app .titlebar .control{border-bottom:1px solid var(--primary);display:flex;height:2.5rem}#app .titlebar .control .btn{width:2.5rem;height:2.5rem}#app .titlebar .control .theme{border-left:1px solid var(--primary)}#app .titlebar .tabs{height:2.5rem;display:flex;border-bottom:1px solid var(--primary)}#app .titlebar .tabs .tab{flex:1;display:flex;align-items:center;justify-content:center;text-decoration:none;color:inherit;padding:.5rem}#app .titlebar .tabs .tab:not(:last-child){border-right:1px solid var(--primary)}#app .titlebar .tabs .tab[selected]{background-color:var(--primary);color:var(--on-primary)}#app main{padding:.5rem}
 
 /*# sourceMappingURL=main.css.map*/
