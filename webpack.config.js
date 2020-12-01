@@ -3,6 +3,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -12,6 +14,9 @@ module.exports = {
     mode: PROD ? 'production' : 'development',
     entry: path.resolve(__dirname, './src/app.js'),
     devtool: 'source-map',
+    devServer: {
+        quiet: true,
+    },
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, './dist'),
@@ -76,12 +81,17 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-            'process.env.PUBLIC_PATH': JSON.stringify(PUBLIC_PATH),
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin(),
+        new ESLintPlugin(),
+        new FriendlyErrorsPlugin({
+            compilationSuccessInfo: {
+                messages: ['You application is running here: http://localhost:8080/'],
+            },
+        }),
     ],
 };

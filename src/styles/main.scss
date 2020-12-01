@@ -1,0 +1,56 @@
+@use 'sass:map';
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+// Theming
+$themes: (
+    'light': (
+        'colors': (
+            'primary': #000000,
+        ),
+        'surfaces': (
+            '0': (
+                'background-color': #ffffff,
+            ),
+        ),
+    ),
+    'dark': (
+        'colors': (
+            'primary': #ffd740,
+        ),
+        'surfaces': (
+            '0': (
+                'background-color': #000000,
+            ),
+        ),
+    ),
+);
+
+@each $theme, $props in $themes {
+    #app.#{$theme} {
+        // Colors
+        @each $name, $color in map.get($props, 'colors') {
+            --#{$name}: #{$color};
+        }
+
+        // Elevations
+        @each $elevation, $surface in map.get($props, 'surfaces') {
+            @if $elevation == '0' {
+                &.surface, .surface {
+                    @each $key, $value in $surface {
+                        #{$key}: #{$value};
+                    }
+                }
+            } @else {
+                &.surface-#{$elevation}, .surface-#{$elevation} {
+                    @each $key, $value in $surface {
+                        #{$key}: #{$value};
+                    }
+                }
+            }
+        }
+    }
+}
+
+.surface {
+    color: var(--primary);
+}
