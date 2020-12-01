@@ -1,24 +1,32 @@
 <template>
     <div id="app" class="surface" :class="theme">
+        <title-bar></title-bar>
         <h1>Hallo Welt</h1>
+        <p>Lorem ipsum dolor sit amet</p>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
+import TitleBar from 'src/modules/TitleBar.vue';
+
 export default {
-    data: () => ({
-        dark: false,
-    }),
+    components: {
+        TitleBar,
+    },
     computed: {
         theme() {
-            return this.dark ? 'dark' : 'light';
+            return this.$store.state.theme;
         },
     },
 };
 </script>
 
 <style lang="scss">
+* {
+    box-sizing: border-box;
+}
+
 html,
 body,
 #app {
@@ -28,9 +36,6 @@ body,
 
 #app {
     font-family: 'Fira Code', monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 0 auto;
 }
 </style>
