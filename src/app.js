@@ -13,11 +13,15 @@ Vue.use(VueRouter);
 const store = new Vuex.Store({
     strict: true,
     state: {
-        theme: 'light',
+        theme:
+            window.localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') ||
+            'light',
     },
     mutations: {
         changeTheme(state, theme) {
             state.theme = theme;
+            window.localStorage.setItem('theme', theme);
         },
     },
     actions: {
