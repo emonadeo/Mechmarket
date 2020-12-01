@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const PUBLIC_PATH = PROD ? '/Mechmarket' : '/';
@@ -86,6 +85,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
         }),
+        new HtmlWebpackPlugin({
+            filename: '404.html',
+            template: path.resolve(__dirname, './src/index.html'),
+        }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin(),
         new ESLintPlugin(),
@@ -94,6 +97,5 @@ module.exports = {
                 messages: ['You application is running here: http://localhost:8080/'],
             },
         }),
-        new CopyPlugin({ patterns: [{ from: 'public', to: '' }] }),
     ],
 };
