@@ -25,6 +25,7 @@ export default {
 
 .search {
     width: 100%;
+    display: flex;
 
     input {
         height: 100%;
@@ -33,12 +34,17 @@ export default {
         color: inherit;
         border: none;
         background-color: transparent;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        flex: 1;
 
         &::placeholder {
             color: var(--primary);
             opacity: 0.54;
         }
+    }
+
+    .btn {
+        width: 2.5rem;
     }
 }
 </style>

@@ -9,21 +9,21 @@
             <nav class="tabs">
                 <router-link
                     class="tab"
-                    :to="{ name: 'home', params: { flair: 'selling' }, query: { q: $store.state.query } }"
+                    :to="{ name: 'home', params: { flair: 'selling' }, query: { q: $route.query.q } }"
                     :selected="$route.params.flair === 'selling'"
                 >
                     Selling
                 </router-link>
                 <router-link
                     class="tab"
-                    :to="{ name: 'home', params: { flair: 'buying' }, query: { q: $store.state.query } }"
+                    :to="{ name: 'home', params: { flair: 'buying' }, query: { q: $route.query.q } }"
                     :selected="$route.params.flair === 'buying'"
                 >
                     Buying
                 </router-link>
                 <router-link
                     class="tab"
-                    :to="{ name: 'home', params: { flair: 'trading' }, query: { q: $store.state.query } }"
+                    :to="{ name: 'home', params: { flair: 'trading' }, query: { q: $route.query.q } }"
                     :selected="$route.params.flair === 'trading'"
                 >
                     Trading
@@ -31,13 +31,13 @@
             </nav>
         </div>
         <main class="surface">
-            <p v-if="loading">...</p>
+            <div class="loading" v-show="loading"><div class="surface">> loading...</div></div>
             <div class="post" v-for="post in posts">
                 <div class="overline">
                     <h2>{{ post.region }}</h2>
                     <hr />
                 </div>
-                <h1>{{ post.title }}</h1>
+                <h1 v-html="post.title"></h1>
                 <div class="gallery">
                     <div
                         class="img"
@@ -113,29 +113,23 @@ async function pictures(post) {
     return pictures;
 }
 
-async function update(flair) {
-    console.log(flair);
-    switch (flair) {
-        case 'selling':
-            this.loading = true;
-            let res = await fetch(
-                'https://www.reddit.com/r/mechmarket/search/.json?q=flair:selling&restrict_sr=on&sort=new'
-            );
-            let json = await res.json();
-            let posts = json.data.children;
-            this.posts = await Promise.all(
-                posts.map(async (post) => ({
-                    region: /\[\w+(-\w+)?]/.exec(post.data.title)[0],
-                    title: post.data.title.split('[H]')[1].split('[W]')[0].trim(),
-                    pictures: await pictures(post.data),
-                }))
-            );
-            this.loading = false;
-            break;
-        default:
-            this.posts = [];
-            break;
-    }
+async function update(options) {
+    this.loading = true;
+    let q = Object.entries(options)
+        .filter((entry) => entry[1])
+        .map((entry) => entry.join(':'))
+        .join(' ');
+    let res = await fetch(`https://www.reddit.com/r/mechmarket/search/.json?q=${q}&restrict_sr=on&sort=new`);
+    let json = await res.json();
+    let posts = json.data.children;
+    this.posts = await Promise.all(
+        posts.map(async (post) => ({
+            region: /\[\w+(-\w+)?]/.exec(post.data.title)[0],
+            title: post.data.title.split('[H]')[1].split('[W]')[options.flair === 'buying' ? 1 : 0].trim(),
+            pictures: options.flair !== 'buying' ? await pictures(post.data) : [],
+        }))
+    );
+    this.loading = false;
 }
 
 export default {
@@ -160,11 +154,11 @@ export default {
     },
     watch: {
         flair(flair) {
-            update.bind(this)(flair);
+            update.bind(this)({ flair, title: this.query });
         },
     },
     created() {
-        update.bind(this)(this.flair);
+        update.bind(this)({ flair: this.flair, title: this.query });
     },
 };
 </script>
@@ -198,7 +192,12 @@ body,
             display: flex;
             height: $width;
 
-            .btn {
+            .search {
+                flex: 1;
+                height: $width;
+            }
+
+            > .btn {
                 border-left: $border;
                 width: $width;
                 height: $width;
@@ -234,6 +233,23 @@ body,
     main {
         flex: 1;
         overflow-y: auto;
+        position: relative;
+
+        .loading {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            > div {
+                padding: 0.5rem 1rem;
+                border: $border;
+            }
+        }
 
         .post {
             padding: 1rem;
