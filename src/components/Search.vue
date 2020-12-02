@@ -1,13 +1,7 @@
 <template>
     <form class="search">
-        <input
-            name="q"
-            type="text"
-            placeholder="Search"
-            @input="search"
-            :value="$store.state.query"
-            aria-label="Search"
-        />
+        <input name="q" type="text" placeholder="Search" @input="search" :value="$route.query.q" aria-label="Search" />
+        <btn>-></btn>
     </form>
 </template>
 

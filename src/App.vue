@@ -33,14 +33,22 @@
         <main class="surface">
             <p v-if="loading">...</p>
             <div class="post" v-for="post in posts">
-                <h1>{{ post.text }}</h1>
+                <div class="overline">
+                    <h2>{{ post.region }}</h2>
+                    <hr />
+                </div>
+                <h1>{{ post.title }}</h1>
                 <div class="gallery">
                     <div
                         class="img"
-                        v-for="picture in post.pictures"
+                        v-for="picture in post.pictures.slice(0, 4)"
                         :style="{ 'background-image': `url(${picture}` }"
                     ></div>
                 </div>
+                <!-- show hint if more than 4 images -->
+                <p class="gallery-hint" v-if="post.pictures.length > 4">
+                    + {{ post.pictures.length - 4 }} more image{{ post.pictures.length !== 5 ? 's' : '' }}
+                </p>
             </div>
         </main>
     </div>
@@ -50,17 +58,19 @@
 import Search from 'src/components/Search.vue';
 import Btn from 'src/components/Btn.vue';
 
-import store from 'src/services/store';
-
 async function pictures(post) {
     if (!post.selftext) return [];
 
-    // get links in post
+    // get links in post and avoid duplicates
     let pictures = [
-        ...post.selftext.matchAll(
-            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]*\.[a-zA-Z0-9]*\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/g
+        ...new Set(
+            [
+                ...post.selftext.matchAll(
+                    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]*\.[a-zA-Z0-9]*\b([-a-zA-Z0-9@:%_+.~#/]*)/g
+                ),
+            ].map((res) => res[0])
         ),
-    ].map((res) => res[0]);
+    ];
 
     // cancel if no pictures
     if (!pictures) return {};
@@ -87,15 +97,16 @@ async function pictures(post) {
                 });
                 let jsonImages = await resImages.json();
                 return jsonImages.data.images.map((img) => img.link);
+            } else if (/\/\/imgur\.com\/[A-Za-z0-9]*$/.test(t)) {
+                // timestamp is imgur photo
+                t = `https://i.imgur.com/${t.split('/').pop()}.jpg`;
             }
             return t;
         })
     );
 
-    pictures = pictures.flat();
-
-    // remove non-images
-    pictures = pictures.filter((t) => {
+    // flatten and remove non-images
+    pictures = pictures.flat().filter((t) => {
         return /\.(png|jpg|jpeg|gif|webp)\/?$/.test(t);
     });
 
@@ -114,7 +125,8 @@ async function update(flair) {
             let posts = json.data.children;
             this.posts = await Promise.all(
                 posts.map(async (post) => ({
-                    text: post.data.title,
+                    region: /\[\w+(-\w+)?]/.exec(post.data.title)[0],
+                    title: post.data.title.split('[H]')[1].split('[W]')[0].trim(),
                     pictures: await pictures(post.data),
                 }))
             );
@@ -142,6 +154,9 @@ export default {
         theme() {
             return this.$store.state.theme;
         },
+        query() {
+            return this.$route.query.q;
+        },
     },
     watch: {
         flair(flair) {
@@ -151,18 +166,13 @@ export default {
     created() {
         update.bind(this)(this.flair);
     },
-    beforeRouteEnter(to, from, next) {
-        if (to.query.q !== store.state.query) {
-            store.commit('updateQuery', to.query.q);
-        }
-        next();
-    },
 };
 </script>
 
 <style lang="scss">
 $width: 2.5rem;
 $border: 1px solid var(--primary);
+$border-secondary: 2px solid var(--secondary);
 
 * {
     box-sizing: border-box;
@@ -228,8 +238,27 @@ body,
         .post {
             padding: 1rem;
 
-            &:not(:last-child) {
-                border-bottom: 1rem solid var(--secondary);
+            .overline {
+                display: flex;
+                margin: 0 0 0.5rem 0;
+                align-items: center;
+
+                h2 {
+                    font-size: 0.75rem;
+                    margin: 0;
+                    font-weight: 500;
+                }
+
+                hr {
+                    flex: 1;
+                    margin: 0.375rem 0 0 0.75rem;
+                    border-left: none;
+                    border-bottom: none;
+                    border-top: $border-secondary;
+                    border-right: $border-secondary;
+                    height: 0.375rem;
+                    box-sizing: content-box;
+                }
             }
 
             h1 {
@@ -248,8 +277,15 @@ body,
                     background-size: cover;
                     background-position: center;
                     padding-bottom: 100%;
-                    border: $border;
+                    border: $border-secondary;
                 }
+            }
+
+            .gallery-hint {
+                margin: 0.5rem 0 0 0;
+                font-size: 0.75rem;
+                text-align: right;
+                font-weight: 500;
             }
         }
     }
