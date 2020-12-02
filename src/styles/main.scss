@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:map';
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
@@ -7,10 +8,14 @@ $themes: (
         'colors': (
             'primary': #000000,
             'on-primary': #ffffff,
+            'secondary': color.mix(#ffffff, #000000, 90%),
         ),
         'surfaces': (
             '0': (
                 'background-color': #ffffff,
+            ),
+            '1': (
+                'background-color': color.mix(#ffffff, #000000, 90%),
             ),
         ),
     ),
@@ -18,10 +23,14 @@ $themes: (
         'colors': (
             'primary': #ffd740,
             'on-primary': #000000,
+            'secondary': color.mix(#000000, #ffd740, 75%),
         ),
         'surfaces': (
             '0': (
                 'background-color': #000000,
+            ),
+            '1': (
+                'background-color': color.mix(#000000, #ffd740, 75%),
             ),
         ),
     ),
@@ -37,13 +46,15 @@ $themes: (
         // Elevations
         @each $elevation, $surface in map.get($props, 'surfaces') {
             @if $elevation == '0' {
-                &.surface, .surface {
+                &.surface,
+                .surface {
                     @each $key, $value in $surface {
                         #{$key}: #{$value};
                     }
                 }
             } @else {
-                &.surface-#{$elevation}, .surface-#{$elevation} {
+                &.surface-#{$elevation},
+                .surface-#{$elevation} {
                     @each $key, $value in $surface {
                         #{$key}: #{$value};
                     }

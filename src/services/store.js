@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-console.log('Use Store!');
-
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
