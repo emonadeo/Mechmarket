@@ -6,39 +6,9 @@
                     <search></search>
                     <region-picker></region-picker>
                 </form>
-                <btn class="theme" @click="$store.dispatch('toggleTheme')">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 6.3499998 6.35">
-                        <g transform="translate(0,-290.64998)">
-                            <path
-                                d="m 4.3466476,291.17915 a 2.8163548,2.8163548 0 0 1 0.3476437,1.34877 2.8163548,2.8163548 0 0 1 -2.8163547,2.81635 2.8163548,2.8163548 0 0 1 -1.34216911,-0.34104 2.8163548,2.8163548 0 0 0 2.46871101,1.46758 2.8163548,2.8163548 0 0 0 2.8163548,-2.81635 2.8163548,2.8163548 0 0 0 -1.4741857,-2.47531 z"
-                            />
-                        </g>
-                    </svg>
-                </btn>
+                <theme-picker></theme-picker>
             </div>
-            <nav class="tabs">
-                <router-link
-                    class="tab"
-                    :to="{ name: 'home', params: { flair: 'selling' }, query: $route.query }"
-                    :selected="$route.params.flair === 'selling'"
-                >
-                    Selling
-                </router-link>
-                <router-link
-                    class="tab"
-                    :to="{ name: 'home', params: { flair: 'buying' }, query: $route.query }"
-                    :selected="$route.params.flair === 'buying'"
-                >
-                    Buying
-                </router-link>
-                <router-link
-                    class="tab"
-                    :to="{ name: 'home', params: { flair: 'trading' }, query: $route.query }"
-                    :selected="$route.params.flair === 'trading'"
-                >
-                    Trading
-                </router-link>
-            </nav>
+            <tabs :tabs="['Buying', 'Selling', 'Trading']"></tabs>
         </div>
         <main class="surface">
             <div class="loading" v-show="loading"><div class="surface">> loading...</div></div>
@@ -70,9 +40,11 @@
 </template>
 
 <script>
-import Search from 'src/components/Search.vue';
 import Btn from 'src/components/Btn.vue';
 import RegionPicker from 'src/components/RegionPicker.vue';
+import Search from 'src/components/Search.vue';
+import Tabs from 'src/components/Tabs.vue';
+import ThemePicker from 'src/components/ThemePicker.vue';
 
 async function pictures(post) {
     if (!post.selftext) return [];
@@ -166,9 +138,11 @@ export default {
         flair: String,
     },
     components: {
+        Btn,
         RegionPicker,
         Search,
-        Btn,
+        Tabs,
+        ThemePicker,
     },
     data: () => ({
         loading: true,
@@ -249,35 +223,6 @@ body,
                 border-left: $border;
                 min-width: $width;
                 height: $width;
-            }
-
-            .theme svg {
-                fill: var(--primary);
-            }
-        }
-
-        .tabs {
-            height: $width;
-            display: flex;
-            border-bottom: $border;
-
-            .tab {
-                flex: 1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                color: inherit;
-                padding: 0.5rem;
-
-                &:not(:last-child) {
-                    border-right: $border;
-                }
-
-                &[selected] {
-                    font-weight: 700;
-                    background-color: var(--secondary);
-                }
             }
         }
     }

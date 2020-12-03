@@ -1,5 +1,5 @@
 <template>
-    <div class="region-picker" v-unclick="unedit">
+    <div class="region-picker">
         <!-- button -->
         <btn v-show="!editing" @click="edit" type="button" :class="{ square: global }">
             <template v-for="(region, i) in regions">
@@ -16,7 +16,13 @@
         </btn>
         <!-- input -->
         <div class="form" v-show="editing">
-            <textfield id="textfield" name="region" placeholder="US-NJ" :value="region"></textfield>
+            <textfield
+                id="textfield"
+                name="region"
+                placeholder="US-NJ"
+                :value="region"
+                @blur.native="unedit"
+            ></textfield>
             <btn>-></btn>
         </div>
     </div>
@@ -54,7 +60,7 @@ export default {
             this.$nextTick(() => document.getElementById('textfield').focus());
         },
         unedit() {
-            this.editing = false;
+            setTimeout(() => (this.editing = false), 1);
         },
     },
 };
