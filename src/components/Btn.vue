@@ -16,5 +16,6 @@ export default {
     border: none;
     background: transparent;
     padding: 0.5rem;
+    outline: none;
 }
 </style>

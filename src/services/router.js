@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import App from 'src/App.vue';
+import Gallery from 'src/views/Gallery.vue';
 
 Vue.use(VueRouter);
 
@@ -16,9 +16,13 @@ const router = new VueRouter({
         },
         {
             path: '/:flair',
-            name: 'home',
-            component: App,
+            name: 'gallery',
+            component: Gallery,
             props: true,
+        },
+        {
+            path: '/:flair/:post',
+            name: 'post',
         },
     ],
 });

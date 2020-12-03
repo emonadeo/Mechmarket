@@ -24,6 +24,7 @@ input {
     border: none;
     background-color: transparent;
     padding: 0.5rem;
+    outline: none;
 
     &::placeholder {
         color: var(--primary);

@@ -1,43 +1,11 @@
 @use 'sass:color';
 @use 'sass:map';
+@use 'themes';
+
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
-// Theming
-$themes: (
-    'light': (
-        'colors': (
-            'primary': #000000,
-            'on-primary': #ffffff,
-            'secondary': color.mix(#ffffff, #000000, 90%),
-        ),
-        'surfaces': (
-            '0': (
-                'background-color': #ffffff,
-            ),
-            '1': (
-                'background-color': color.mix(#ffffff, #000000, 90%),
-            ),
-        ),
-    ),
-    'dark': (
-        'colors': (
-            'primary': #ffd740,
-            'on-primary': #000000,
-            'secondary': color.mix(#000000, #ffd740, 75%),
-        ),
-        'surfaces': (
-            '0': (
-                'background-color': #000000,
-            ),
-            '1': (
-                'background-color': color.mix(#000000, #ffd740, 75%),
-            ),
-        ),
-    ),
-);
-
-@each $theme, $props in $themes {
-    #app.#{$theme} {
+@each $theme, $props in themes.$themes {
+    .#{$theme} {
         // Colors
         @each $name, $color in map.get($props, 'colors') {
             --#{$name}: #{$color};

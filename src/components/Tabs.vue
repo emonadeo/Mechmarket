@@ -3,7 +3,8 @@
         <router-link
             v-for="tab in tabs"
             class="tab"
-            :to="{ name: 'home', params: { flair: tab.toLowerCase() }, query: $route.query }"
+            :key="tab"
+            :to="{ name: to, params: { flair: tab.toLowerCase() }, query: $route.query }"
             :selected="$route.params.flair === tab.toLowerCase()"
         >
             {{ tab }}
@@ -14,15 +15,17 @@
 <script>
 export default {
     props: {
+        to: String,
         tabs: Array[String],
     },
 };
 </script>
 
 <style lang="scss" scoped>
+@use "src/styles/constants" as c;
+
 .tabs {
     display: flex;
-    border-bottom: 1px solid var(--primary);
 
     .tab {
         flex: 1;
@@ -32,9 +35,10 @@ export default {
         text-decoration: none;
         color: inherit;
         padding: 0.5rem;
+        height: c.$height;
 
         &:not(:last-child) {
-            border-right: 1px solid var(--primary);
+            border-right: c.$border;
         }
 
         &[selected] {

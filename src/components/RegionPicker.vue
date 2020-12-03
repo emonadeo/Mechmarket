@@ -88,6 +88,7 @@ export default {
     .form {
         width: clamp(10rem, 50vw, 20rem);
         display: flex;
+        transition: max-width 2s ease-in-out;
 
         .textfield {
             flex: 1;

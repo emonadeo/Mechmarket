@@ -6,9 +6,11 @@ import './styles/main.scss';
 import store from './services/store';
 import router from './services/router';
 
+import App from 'src/App.vue';
+
 new Vue({
     el: '#app',
     store,
     router,
-    render: (h) => h('router-view'),
+    render: (h) => h(App),
 });

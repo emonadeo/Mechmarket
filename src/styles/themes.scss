@@ -1,0 +1,34 @@
+@use "sass:color";
+
+$themes: (
+    'light': (
+        'colors': (
+            'primary': #000000,
+            'on-primary': #ffffff,
+            'secondary': color.mix(#ffffff, #000000, 90%),
+        ),
+        'surfaces': (
+            '0': (
+                'background-color': #ffffff,
+            ),
+            '1': (
+                'background-color': color.mix(#ffffff, #000000, 90%),
+            ),
+        ),
+    ),
+    'dark': (
+        'colors': (
+            'primary': #ffd740,
+            'on-primary': #000000,
+            'secondary': color.mix(#000000, #ffd740, 75%),
+        ),
+        'surfaces': (
+            '0': (
+                'background-color': #000000,
+            ),
+            '1': (
+                'background-color': color.mix(#000000, #ffd740, 75%),
+            ),
+        ),
+    ),
+);
