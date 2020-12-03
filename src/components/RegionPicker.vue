@@ -16,7 +16,7 @@
         </btn>
         <!-- input -->
         <div class="form" v-show="editing">
-            <textfield id="textfield" name="region" :value="region"></textfield>
+            <textfield id="textfield" name="region" placeholder="US-NJ" :value="region"></textfield>
             <btn>-></btn>
         </div>
     </div>
