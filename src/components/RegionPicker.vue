@@ -85,6 +85,11 @@ export default {
 
         .textfield {
             flex: 1;
+
+            &::placeholder {
+                color: var(--primary);
+                opacity: 0.54;
+            }
         }
     }
 }
