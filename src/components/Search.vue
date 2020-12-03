@@ -1,22 +1,30 @@
 <template>
-    <form class="search">
-        <input name="q" type="text" placeholder="Search" @input="search" :value="$route.query.q" aria-label="Search" />
-        <btn>-></btn>
-    </form>
+    <div class="search">
+        <textfield
+            name="q"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+            :value="$route.query.q"
+            @focus.native="editing = true"
+            @blur.native="editing = false"
+        />
+        <btn v-show="editing">-></btn>
+    </div>
 </template>
 
 <script>
 import Btn from 'src/components/Btn.vue';
+import Textfield from 'src/components/Textfield.vue';
 
 export default {
     components: {
         Btn,
+        Textfield,
     },
-    methods: {
-        search(q) {
-            this.$store.commit('updateQuery', q.target.value);
-        },
-    },
+    data: () => ({
+        editing: false,
+    }),
 };
 </script>
 
@@ -27,14 +35,9 @@ export default {
     width: 100%;
     display: flex;
 
-    input {
+    .textfield {
         height: 100%;
-        width: 100%;
-        display: block;
-        color: inherit;
-        border: none;
-        background-color: transparent;
-        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        padding-left: 1rem;
         flex: 1;
 
         &::placeholder {
