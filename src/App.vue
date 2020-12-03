@@ -93,7 +93,7 @@ async function pictures(post) {
 
     pictures = await Promise.all(
         pictures.map(async (t) => {
-            if (/\/\/imgur\.com\/a\//.test(t)) {
+            if (/imgur\.com\/a\//.test(t)) {
                 // timestamp is imgur album
                 let hash = t.split('/').pop();
                 let resImages = await fetch(`https://api.imgur.com/3/album/${hash}/images`, {
@@ -101,9 +101,13 @@ async function pictures(post) {
                         Authorization: 'Client-ID 18506a441ae08ca',
                     },
                 });
+                if (!resImages.ok) {
+                    console.warn(`Invalid Imgur album! Cannot resolve ${t}`);
+                    return [];
+                }
                 let jsonImages = await resImages.json();
                 return jsonImages.data.map((img) => img.link);
-            } else if (/\/\/imgur\.com\/gallery\//.test(t)) {
+            } else if (/imgur\.com\/gallery\//.test(t)) {
                 // timestamp is imgur gallery
                 let hash = t.split('/').pop();
                 let resImages = await fetch(`https://api.imgur.com/3/gallery/${hash}`, {
@@ -111,9 +115,13 @@ async function pictures(post) {
                         Authorization: 'Client-ID 18506a441ae08ca',
                     },
                 });
+                if (!resImages.ok) {
+                    console.warn(`Invalid Imgur gallery! Cannot resolve ${t}`);
+                    return [];
+                }
                 let jsonImages = await resImages.json();
                 return jsonImages.data.images.map((img) => img.link);
-            } else if (/\/\/imgur\.com\/[A-Za-z0-9]*$/.test(t)) {
+            } else if (/imgur\.com\/[A-Za-z0-9]*$/.test(t)) {
                 // timestamp is imgur photo
                 t = `https://i.imgur.com/${t.split('/').pop()}.jpg`;
             }
