@@ -1,7 +1,11 @@
 import analyser from 'src/util/analyser';
 
+/**
+ * Represents a mechmarket entry
+ */
 export default class Post {
     /**
+     * @param id {string}
      * @param category {string}
      * @param author {string}
      * @param region {string}
@@ -10,7 +14,8 @@ export default class Post {
      * @param href {string}
      * @param pictures {string[]}
      */
-    constructor(category, author, region, have, want, href, pictures) {
+    constructor(id, category, author, region, have, want, href, pictures) {
+        this.id = id;
         this.category = category;
         this.author = author;
         this.region = region;
@@ -61,6 +66,7 @@ export default class Post {
         }
 
         return new Post(
+            post.id,
             post.link_flair_text,
             post.author,
             extractRegion(post.title),

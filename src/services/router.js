@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Gallery from 'src/views/Gallery.vue';
+import Post from 'src/views/Post.vue';
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,8 @@ const router = new VueRouter({
         {
             path: '/:category/:post',
             name: 'post',
+            component: Post,
+            props: true,
         },
     ],
 });

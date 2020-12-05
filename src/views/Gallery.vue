@@ -9,7 +9,7 @@
         <tabs to="gallery" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main class="surface">
             <div class="loading" v-show="loading"><div class="surface">> loading...</div></div>
-            <a class="post" v-for="post in posts" :href="post.href">
+            <div class="post" v-for="post in posts">
                 <div class="overline">
                     <h2>
                         <template v-for="(region, i) in post.region.split('-')">
@@ -19,7 +19,9 @@
                     </h2>
                     <hr />
                 </div>
-                <h1 v-html="post.title"></h1>
+                <router-link :to="{ name: 'post', params: { post: post.id } }">
+                    <h1 v-html="post.title"></h1>
+                </router-link>
                 <div class="gallery">
                     <div
                         class="img"
@@ -31,7 +33,7 @@
                 <p class="gallery-hint" v-if="post.pictures.length > 4">
                     + {{ post.pictures.length - 4 }} more image{{ post.pictures.length !== 5 ? 's' : '' }}
                 </p>
-            </a>
+            </div>
         </main>
     </div>
 </template>
