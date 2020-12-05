@@ -11,12 +11,14 @@
             <div class="loading" v-show="loading"><div class="surface">> loading...</div></div>
             <div class="post" v-for="post in posts">
                 <div class="overline">
-                    <h2>
-                        <template v-for="(region, i) in post.region.split('-')">
-                            <span>{{ region }}</span>
-                            <span class="sub" v-if="i + 1 < post.region.split('-').length"> &not; </span>
-                        </template>
-                    </h2>
+                    <router-link :to="{ name: 'gallery', query: { region: post.region } }">
+                        <h2>
+                            <template v-for="(region, i) in post.region.split('-')">
+                                <span>{{ region }}</span>
+                                <span class="sub" v-if="i + 1 < post.region.split('-').length"> &not; </span>
+                            </template>
+                        </h2>
+                    </router-link>
                     <hr />
                 </div>
                 <router-link :to="{ name: 'post', params: { post: post.id } }">
@@ -73,12 +75,14 @@ export default {
         },
     },
     watch: {
-        category(category) {
-            this.loadPosts.bind(this)(category, this.region, this.query);
+        $route: function (route) {
+            console.log(route.params.category);
+            this.loadPosts(route.params.category, this.region, this.query);
         },
     },
     created() {
-        this.loadPosts.bind(this)(this.category, this.region, this.query);
+        console.log(this.category);
+        this.loadPosts(this.category, this.region, this.query);
     },
     methods: {
         loadPosts: async function (category, region, query) {

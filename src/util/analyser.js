@@ -30,7 +30,11 @@ async function getPictures(text) {
                     return [];
                 }
                 let jsonImages = await resImages.json();
-                return jsonImages.data.map((img) => img.link);
+                let images = jsonImages.data;
+                if (images.constructor !== Array) {
+                    images = images.images;
+                }
+                return images.map((img) => img.link);
             } else if (/imgur\.com\/gallery\//.test(t)) {
                 // timestamp is imgur gallery
                 let hash = t.split('/').pop();
