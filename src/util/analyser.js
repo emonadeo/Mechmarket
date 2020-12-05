@@ -5,7 +5,9 @@ async function getPictures(text) {
     let pictures = [
         ...new Set(
             [
-                ...text.matchAll(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]*\.[a-zA-Z0-9]*\b([-a-zA-Z0-9@:%_+.~#/]*)/g),
+                ...text.matchAll(
+                    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]*\.[a-zA-Z0-9]*\b((.?[-a-zA-Z0-9@%_+~#\/])*)/g
+                ),
             ].map((res) => res[0])
         ),
     ];

@@ -12,9 +12,9 @@
             <a class="post" v-for="post in posts" :href="post.href">
                 <div class="overline">
                     <h2>
-                        <template v-for="(region, i) in post.regions">
+                        <template v-for="(region, i) in post.region.split('-')">
                             <span>{{ region }}</span>
-                            <span class="sub" v-if="i + 1 < post.regions.length"> &not; </span>
+                            <span class="sub" v-if="i + 1 < post.region.split('-').length"> &not; </span>
                         </template>
                     </h2>
                     <hr />
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import analyser from 'src/util/analyser';
+import reddit from 'src/util/reddit';
 
 import Btn from 'src/components/Btn.vue';
 import RegionPicker from 'src/components/RegionPicker.vue';
@@ -48,7 +48,7 @@ import ThemePicker from 'src/components/ThemePicker.vue';
 
 export default {
     props: {
-        flair: String,
+        category: String,
     },
     components: {
         Btn,
@@ -67,41 +67,21 @@ export default {
             return this.$route.query.q;
         },
         region() {
-            return this.$route.query.region ? `[${this.$route.query.region.toUpperCase()}` : '';
+            return this.$route.query.region;
         },
     },
     watch: {
-        flair(flair) {
-            this.loadPosts.bind(this)({ flair, title: this.region, content: this.query });
+        category(category) {
+            this.loadPosts.bind(this)(category, this.region, this.query);
         },
     },
     created() {
-        this.loadPosts.bind(this)({ flair: this.flair, title: this.region, content: this.query });
+        this.loadPosts.bind(this)(this.category, this.region, this.query);
     },
     methods: {
-        loadPosts: async function (options) {
+        loadPosts: async function (category, region, query) {
             this.loading = true;
-            let q = Object.entries(options)
-                .filter((entry) => entry[1] && entry[0] !== 'content')
-                .map((entry) => entry.join(':'))
-                .join(' ');
-            let url = [
-                'https://www.reddit.com/r/mechmarket/search/.json?q=',
-                q || '',
-                options.content ? ' ' + options.content : '',
-                '&restrict_sr=on&sort=new',
-            ].join('');
-            let res = await fetch(url);
-            let json = await res.json();
-            let posts = json.data.children;
-            this.posts = await Promise.all(
-                posts.map(async (post) => ({
-                    regions: /\[\w+(-\w+)?]/.exec(post.data.title)[0].slice(1, -1).split('-'),
-                    title: post.data.title.split('[H]')[1].split('[W]')[options.flair === 'buying' ? 1 : 0].trim(),
-                    pictures: options.flair !== 'buying' ? await analyser.getPictures(post.data.selftext) : [],
-                    href: post.data.url,
-                }))
-            );
+            this.posts = await reddit.fetchPosts(category, region, query);
             this.loading = false;
         },
     },

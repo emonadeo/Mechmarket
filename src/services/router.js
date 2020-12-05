@@ -15,13 +15,13 @@ const router = new VueRouter({
             redirect: '/selling',
         },
         {
-            path: '/:flair',
+            path: '/:category',
             name: 'gallery',
             component: Gallery,
             props: true,
         },
         {
-            path: '/:flair/:post',
+            path: '/:category/:post',
             name: 'post',
         },
     ],

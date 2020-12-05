@@ -4,8 +4,8 @@
             v-for="tab in tabs"
             class="tab"
             :key="tab"
-            :to="{ name: to, params: { flair: tab.toLowerCase() }, query: $route.query }"
-            :selected="$route.params.flair === tab.toLowerCase()"
+            :to="{ name: to, params: { category: tab.toLowerCase() }, query: $route.query }"
+            :selected="$route.params.category === tab.toLowerCase()"
         >
             {{ tab }}
         </router-link>
