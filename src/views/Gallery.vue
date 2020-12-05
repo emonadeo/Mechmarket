@@ -76,12 +76,10 @@ export default {
     },
     watch: {
         $route: function (route) {
-            console.log(route.params.category);
             this.loadPosts(route.params.category, this.region, this.query);
         },
     },
     created() {
-        console.log(this.category);
         this.loadPosts(this.category, this.region, this.query);
     },
     methods: {
