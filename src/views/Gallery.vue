@@ -9,17 +9,14 @@
         <tabs to="gallery" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main class="surface">
             <div class="post" v-for="post in posts">
-                <div class="overline">
+                <overline>
                     <router-link :to="{ name: 'gallery', query: { region: post.region } }">
-                        <h2>
-                            <template v-for="(region, i) in post.region.split('-')">
-                                <span>{{ region }}</span>
-                                <span class="sub" v-if="i + 1 < post.region.split('-').length"> &not; </span>
-                            </template>
-                        </h2>
+                        <template v-for="(region, i) in post.region.split('-')">
+                            <span>{{ region }}</span>
+                            <span class="sub" v-if="i + 1 < post.region.split('-').length"> &not; </span>
+                        </template>
                     </router-link>
-                    <hr />
-                </div>
+                </overline>
                 <router-link :to="{ name: 'post', params: { id: post.id } }">
                     <h1 v-html="post.title"></h1>
                 </router-link>
@@ -43,6 +40,7 @@
 import reddit from 'src/util/reddit';
 
 import Btn from 'src/components/Btn.vue';
+import Overline from 'src/components/Overline.vue';
 import RegionPicker from 'src/components/RegionPicker.vue';
 import Search from 'src/components/Search.vue';
 import Tabs from 'src/components/Tabs.vue';
@@ -55,6 +53,7 @@ export default {
     },
     components: {
         Btn,
+        Overline,
         RegionPicker,
         Search,
         Tabs,
@@ -131,29 +130,6 @@ export default {
         .post {
             display: block;
             margin: 1.5rem 1rem;
-
-            .overline {
-                display: flex;
-                margin: 0 0 0.5rem 0;
-                align-items: center;
-
-                h2 {
-                    font-size: 0.75rem;
-                    margin: 0;
-                    font-weight: 500;
-                }
-
-                hr {
-                    flex: 1;
-                    margin: 0.375rem 0 0 0.75rem;
-                    border-left: none;
-                    border-bottom: none;
-                    border-top: c.$border-secondary;
-                    border-right: c.$border-secondary;
-                    height: 0.375rem;
-                    box-sizing: content-box;
-                }
-            }
 
             .gallery {
                 display: grid;

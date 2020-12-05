@@ -1,42 +1,40 @@
 <template>
     <div class="post">
         <title-bar>
-            <btn @click="$router.go(-1)"><-</btn>
+            <btn @click="$router.back()"><-</btn>
         </title-bar>
         <loading v-show="loading"></loading>
         <main v-show="!loading">
             <h1>{{ post.title }}</h1>
             <div class="have">
-                <h2>Has</h2>
-                <ul>
-                    <li v-for="product in post.have">{{ product }}</li>
-                </ul>
+                <overline>Has</overline>
+                <div>{{ post.have.join(', ') }}</div>
             </div>
             <div class="want">
-                <h2>Wants</h2>
-                <ul>
-                    <li v-for="product in post.want">{{ product }}</li>
-                </ul>
+                <overline>Wants</overline>
+                <div>{{ post.want.join(', ') }}</div>
             </div>
         </main>
     </div>
 </template>
 
 <script>
-import TitleBar from 'src/components/TitleBar.vue';
 import Btn from 'src/components/Btn.vue';
+import Loading from 'src/components/Loading.vue';
+import Overline from 'src/components/Overline.vue';
+import TitleBar from 'src/components/TitleBar.vue';
 
 import reddit from 'src/util/reddit';
-import Loading from 'src/components/Loading.vue';
 
 export default {
     props: {
         id: String,
     },
     components: {
-        Loading,
-        TitleBar,
         Btn,
+        Loading,
+        Overline,
+        TitleBar,
     },
     data: () => ({
         loading: true,
@@ -52,5 +50,9 @@ export default {
 <style lang="scss" scoped>
 main {
     padding: 1rem;
+
+    > div {
+        margin-bottom: 0.5rem;
+    }
 }
 </style>
