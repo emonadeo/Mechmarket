@@ -62,7 +62,8 @@ export default class Post {
                 .split('[H]')[1]
                 .split('[W]')
                 [have ? 0 : 1].split(',')
-                .map((s) => s.trim());
+                .map((s) => s.trim())
+                .filter((s) => s.length !== 0);
         }
 
         return new Post(

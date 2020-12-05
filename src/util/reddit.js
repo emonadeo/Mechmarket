@@ -5,7 +5,7 @@ export default {
      * @param {string} [category] buying | selling | trading
      * @param {string} [region]
      * @param {string} [query]
-     * @return {Post[]}
+     * @return {Promise<Post[]>}
      */
     async fetchPosts(category, region, query) {
         const filters = [];
@@ -23,5 +23,17 @@ export default {
         const posts = json.data.children.map((thread) => thread.data);
 
         return await Promise.all(posts.map(Post.fromRedditPost));
+    },
+
+    /**
+     *
+     * @param {string} id
+     * @return {Promise<Post>}
+     */
+    async fetchPost(id) {
+        const url = `https://www.reddit.com/r/mechmarket/comments/${id}/.json`;
+        const res = await fetch(url);
+        const json = await res.json();
+        return Post.fromRedditPost(json[0].data.children[0].data);
     },
 };

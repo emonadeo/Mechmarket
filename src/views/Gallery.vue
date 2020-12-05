@@ -8,7 +8,6 @@
         </title-bar>
         <tabs to="gallery" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main class="surface">
-            <div class="loading" v-show="loading"><div class="surface">> loading...</div></div>
             <div class="post" v-for="post in posts">
                 <div class="overline">
                     <router-link :to="{ name: 'gallery', query: { region: post.region } }">
@@ -21,7 +20,7 @@
                     </router-link>
                     <hr />
                 </div>
-                <router-link :to="{ name: 'post', params: { post: post.id } }">
+                <router-link :to="{ name: 'post', params: { id: post.id } }">
                     <h1 v-html="post.title"></h1>
                 </router-link>
                 <div class="gallery">
@@ -96,11 +95,9 @@ export default {
 @use 'src/styles/constants' as c;
 
 .gallery {
-    font-family: 'Fira Code', monospace;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    line-height: 1.5;
     height: 100%;
 
     .titlebar {
@@ -119,7 +116,6 @@ export default {
         .region-picker {
             border-left: c.$border;
             min-width: c.$height;
-            height: c.$height;
         }
     }
 
@@ -131,22 +127,6 @@ export default {
         flex: 1;
         overflow-y: auto;
         position: relative;
-
-        .loading {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            > div {
-                padding: 0.5rem 1rem;
-                border: c.$border;
-            }
-        }
 
         .post {
             display: block;
@@ -173,12 +153,6 @@ export default {
                     height: 0.375rem;
                     box-sizing: content-box;
                 }
-            }
-
-            h1 {
-                margin: 0 0 0.5rem 0;
-                font-size: 1rem;
-                font-weight: 400;
             }
 
             .gallery {

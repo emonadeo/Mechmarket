@@ -27,6 +27,10 @@ export default {
 
     .slot {
         flex: 1;
+
+        > * {
+            height: c.$height;
+        }
     }
 
     .theme-picker {
