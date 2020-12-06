@@ -12,7 +12,7 @@ const PUBLIC_PATH = PROD ? '/Mechmarket' : '/';
 
 module.exports = {
     mode: PROD ? 'production' : 'development',
-    entry: ['@babel/polyfill', path.resolve(__dirname, './src/app.js')],
+    entry: [path.resolve(__dirname, './src/app.js')],
     devtool: 'source-map',
     devServer: {
         historyApiFallback: true,
