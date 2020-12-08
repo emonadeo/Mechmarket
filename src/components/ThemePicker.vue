@@ -1,5 +1,5 @@
 <template>
-    <btn class="theme-picker" @click="$store.dispatch('toggleTheme')">
+    <btn class="theme-picker icon-button" @click="$store.dispatch('toggleTheme')">
         <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 6.3499998 6.35">
             <g transform="translate(0,-290.64998)">
                 <path

@@ -1,7 +1,7 @@
 <template>
-    <button class="btn" @click="$emit('click')" :type="type">
+    <a class="btn" @click="$emit('click')" :type="type">
         <slot></slot>
-    </button>
+    </a>
 </template>
 
 <script>
@@ -12,10 +12,15 @@ export default {
 
 <style lang="scss" scoped>
 .btn {
+    display: block;
     color: inherit;
     border: none;
     background: transparent;
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     outline: none;
+
+    &.icon-button {
+        padding: 0.5rem;
+    }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <div class="overline">
-        <h2>
+        <span>
             <slot></slot>
-        </h2>
+        </span>
         <hr />
     </div>
 </template>
@@ -14,12 +14,8 @@
     display: flex;
     margin: 0 0 0.5rem 0;
     align-items: center;
-
-    h2 {
-        font-size: 0.75rem;
-        margin: 0;
-        font-weight: 500;
-    }
+    font-size: 0.75rem;
+    font-weight: 500;
 
     hr {
         flex: 1;

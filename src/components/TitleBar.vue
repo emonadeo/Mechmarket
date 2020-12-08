@@ -27,6 +27,7 @@ export default {
 
     .slot {
         flex: 1;
+        display: flex;
 
         > * {
             height: c.$height;

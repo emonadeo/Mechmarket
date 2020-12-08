@@ -1,7 +1,7 @@
 <template>
     <div class="region-picker">
         <!-- button -->
-        <btn v-show="!editing" @click="edit" type="button" :class="{ square: global }">
+        <btn v-show="!editing" @click="edit" type="button" class="icon-button" :class="{ square: global }">
             <template v-for="(region, i) in regions">
                 <span>{{ region }}</span>
                 <span v-if="i + 1 < regions.length"> &not; </span>

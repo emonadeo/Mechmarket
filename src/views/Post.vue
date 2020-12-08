@@ -1,27 +1,67 @@
 <template>
     <div class="post">
         <title-bar>
-            <btn @click="$router.back()"><-</btn>
+            <btn class="icon-button back" @click="$router.back()"><-</btn>
+            <btn :href="post.href" class="view-on-reddit">View</btn>
         </title-bar>
         <loading v-if="loading"></loading>
         <main v-if="!loading">
-            <h1>{{ post.title }}</h1>
-            <div class="have">
-                <overline>Has</overline>
-                <div>{{ post.have.join(', ') }}</div>
-            </div>
-            <div class="want">
-                <overline>Wants</overline>
-                <div>{{ post.want.join(', ') }}</div>
-            </div>
-
-            <!-- TODO: Extract Payment Methods -->
-            <payment-method method="paypal"></payment-method>
-            <payment-method method="zelle"></payment-method>
-            <payment-method method="venmo"></payment-method>
-            <payment-method method="google pay"></payment-method>
-            <payment-method method="bitcoin"></payment-method>
-            <payment-method method="bank"></payment-method>
+            <h1>u/{{ post.author }}</h1>
+            <!-- Selling -->
+            <template v-if="post.selling">
+                <section>
+                    <overline>Selling</overline>
+                    <div>{{ post.have.join(', ') }}</div>
+                </section>
+                <section class="payment-methods">
+                    <overline>Accepting</overline>
+                    <div>
+                        <payment-method
+                            v-for="method in post.getPaymentMethods(false)"
+                            :method="method"
+                        ></payment-method>
+                    </div>
+                </section>
+            </template>
+            <!-- Buying -->
+            <template v-if="post.buying">
+                <section>
+                    <overline>Buying</overline>
+                    <div>{{ post.want.join(', ') }}</div>
+                </section>
+                <section class="payment-methods">
+                    <overline>Offering</overline>
+                    <div>
+                        <payment-method
+                            v-for="method in post.getPaymentMethods(true)"
+                            :method="method"
+                        ></payment-method>
+                    </div>
+                </section>
+            </template>
+            <!-- Trading -->
+            <template v-if="post.trading">
+                <section class="have">
+                    <overline>Has</overline>
+                    <div>{{ post.getProducts(true).join(', ') }}</div>
+                    <div class="payment-methods">
+                        <payment-method
+                            v-for="method in post.getPaymentMethods(true)"
+                            :method="method"
+                        ></payment-method>
+                    </div>
+                </section>
+                <section class="want">
+                    <overline>Wants</overline>
+                    <div>{{ post.getProducts(false).join(', ') }}</div>
+                    <div class="payment-methods">
+                        <payment-method
+                            v-for="method in post.getPaymentMethods(false)"
+                            :method="method"
+                        ></payment-method>
+                    </div>
+                </section>
+            </template>
         </main>
     </div>
 </template>
@@ -58,11 +98,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.titlebar {
+    .back {
+        margin-left: 0.5rem;
+    }
+    .view-on-reddit {
+        margin-left: auto;
+        border-left: 1px solid var(--primary);
+    }
+}
+
 main {
     padding: 1rem;
 
-    > div {
-        margin-bottom: 0.5rem;
+    > section {
+        margin: 1.5rem 0;
     }
 
     img {
