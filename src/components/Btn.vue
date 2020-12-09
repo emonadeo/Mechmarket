@@ -18,6 +18,7 @@ export default {
     background: transparent;
     padding: 0.5rem 0.75rem;
     outline: none;
+    cursor: pointer;
 
     &.icon-button {
         padding: 0.5rem;

@@ -38,10 +38,7 @@
             <section class="pictures" v-if="post.pictures.length > 0">
                 <h1 class="title surface">Pictures</h1>
                 <div class="grid">
-                    <div class="img-container surface" v-for="picture in post.pictures" :key="picture" :ref="picture">
-                        <btn v-show="viewing === picture" class="icon-button" @click="close(picture)"><-</btn>
-                        <img alt="picture" :src="picture" @click="view(picture)" />
-                    </div>
+                    <photo v-for="picture in post.pictures" :key="picture" :src="picture"></photo>
                 </div>
             </section>
         </main>
@@ -53,6 +50,7 @@ import Btn from 'src/components/Btn.vue';
 import Loading from 'src/components/Loading.vue';
 import Overline from 'src/components/Overline.vue';
 import PaymentMethod from 'src/components/PaymentMethod.vue';
+import Photo from 'src/components/Photo.vue';
 import TitleBar from 'src/components/TitleBar.vue';
 
 import reddit from 'src/util/reddit';
@@ -66,28 +64,16 @@ export default {
         Loading,
         Overline,
         PaymentMethod,
+        Photo,
         TitleBar,
     },
     data: () => ({
         loading: true,
         post: {},
-        viewing: '',
     }),
     async created() {
         this.post = await reddit.fetchPost(this.id);
         this.loading = false;
-    },
-    methods: {
-        view(ref) {
-            if (this.viewing !== '') return;
-            this.$refs[ref][0].classList.add('fullscreen');
-            this.viewing = ref;
-        },
-        close(ref) {
-            if (this.viewing === '') return;
-            this.$refs[ref][0].classList.remove('fullscreen');
-            this.viewing = '';
-        },
     },
 };
 </script>
@@ -148,38 +134,19 @@ main {
         }
     }
 
-    .pictures .grid {
-        column-count: 2;
-        column-gap: 1rem;
+    .pictures {
+        padding-bottom: 0;
 
-        .img-container {
-            border: 2px solid var(--secondary);
-            position: relative;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        .grid {
+            column-count: 2;
+            column-gap: 1rem;
 
-            &:not(:last-child) {
-                margin-bottom: 1rem;
-            }
+            .photo {
+                border: 2px solid var(--secondary);
 
-            &.fullscreen {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin-bottom: 0;
-                z-index: 100;
-            }
-
-            img {
-                display: block;
-                width: 100%;
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
             }
         }
     }
