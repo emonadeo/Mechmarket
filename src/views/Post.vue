@@ -131,6 +131,11 @@ main {
 
         .payment-methods {
             display: flex;
+            flex-wrap: wrap;
+
+            .payment-method:not(:last-child) {
+                margin-right: 0.5rem;
+            }
         }
     }
 
