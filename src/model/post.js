@@ -23,17 +23,12 @@ export default class Post {
         this.region = region;
         this.have = have;
         this.want = want;
-        this.href = href;
         this.pictures = pictures;
-    }
-
-    /**
-     * @param {boolean} have
-     * @return {string[]}
-     */
-    getProducts(have) {
-        let list = have ? this.have : this.want;
-        return list.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) === -1);
+        this.href = href;
+        this.haveProducts = this.have.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) === -1);
+        this.wantProducts = this.want.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) === -1);
+        this.havePaymentMethods = this.have.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) !== -1);
+        this.wantPaymentMethods = this.want.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) !== -1);
     }
 
     get title() {
@@ -60,15 +55,6 @@ export default class Post {
 
     get trading() {
         return this.category === 'trading';
-    }
-
-    /**
-     * @param offering boolean
-     * @return {string[]}
-     */
-    getPaymentMethods(offering) {
-        const list = offering ? this.have : this.want;
-        return list.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) !== -1);
     }
 
     /**
