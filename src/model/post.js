@@ -1,6 +1,8 @@
 import analyser from 'src/util/analyser';
 
-const paymentMethods = ['bank', 'bitcoin', 'google pay', 'paypal', 'venmo', 'zelle'];
+import { methods } from 'src/components/PaymentMethod.vue';
+
+const paymentMethods = Object.keys(methods);
 
 /**
  * Represents a mechmarket entry
@@ -25,10 +27,10 @@ export default class Post {
         this.want = want;
         this.pictures = pictures;
         this.href = href;
-        this.haveProducts = this.have.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) === -1);
-        this.wantProducts = this.want.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) === -1);
-        this.havePaymentMethods = this.have.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) !== -1);
-        this.wantPaymentMethods = this.want.map((m) => m.toLowerCase()).filter((m) => paymentMethods.indexOf(m) !== -1);
+        this.haveProducts = this.have.filter((m) => paymentMethods.indexOf(m.toLowerCase()) === -1);
+        this.wantProducts = this.want.filter((m) => paymentMethods.indexOf(m.toLowerCase()) === -1);
+        this.havePaymentMethods = this.have.filter((m) => paymentMethods.indexOf(m.toLowerCase()) !== -1);
+        this.wantPaymentMethods = this.want.filter((m) => paymentMethods.indexOf(m.toLowerCase()) !== -1);
     }
 
     get title() {

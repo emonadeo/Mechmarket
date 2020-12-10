@@ -21,7 +21,7 @@
                     <h1 v-html="post.title"></h1>
                 </router-link>
                 <div class="gallery">
-                    <photo v-for="picture in post.pictures.slice(0, 4)" crop="1" :key="picture" :src="picture"></photo>
+                    <photo v-for="picture in post.pictures.slice(0, 4)" :crop="1" :key="picture" :src="picture"></photo>
                 </div>
                 <!-- show hint if more than 4 images -->
                 <p class="gallery-hint" v-if="post.pictures.length > 4">

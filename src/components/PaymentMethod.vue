@@ -10,26 +10,22 @@ import paypal from 'src/assets/payment-methods/paypal.svg';
 import venmo from 'src/assets/payment-methods/venmo.svg';
 import zelle from 'src/assets/payment-methods/zelle.svg';
 
+export const methods = {
+    bank,
+    bitcoin,
+    'google pay': googlePay,
+    paypal,
+    venmo,
+    zelle,
+};
+
 export default {
     props: {
         method: String,
     },
     computed: {
         src() {
-            switch (this.method) {
-                case 'bank':
-                    return bank;
-                case 'bitcoin':
-                    return bitcoin;
-                case 'google pay':
-                    return googlePay;
-                case 'paypal':
-                    return paypal;
-                case 'venmo':
-                    return venmo;
-                case 'zelle':
-                    return zelle;
-            }
+            return methods[this.method.toLowerCase()] ?? 'Error';
         },
     },
 };
