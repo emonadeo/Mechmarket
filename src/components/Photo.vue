@@ -10,8 +10,12 @@
                 </svg>
             </btn>
         </title-bar>
-        <div class="img-container">
-            <img alt="picture" :src="src" @click="view(src)" />
+        <div
+            class="img-container"
+            :style="crop ? { backgroundImage: `url(${src})`, paddingBottom: `${crop * 100}%` } : {}"
+            @click="view(src)"
+        >
+            <img v-if="!crop" alt="picture" :src="src" />
         </div>
     </div>
 </template>
@@ -23,6 +27,7 @@ import TitleBar from 'src/components/TitleBar.vue';
 export default {
     props: {
         src: String,
+        crop: Number,
     },
     components: {
         Btn,
@@ -47,9 +52,13 @@ export default {
 </script>
 
 <style lang="scss">
+@use "src/styles/constants" as c;
+
 .photo {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
     position: relative;
+    border: 2px solid var(--secondary);
     top: 0;
     left: 0;
     right: 0;
@@ -68,6 +77,10 @@ export default {
         margin: 0 !important;
         padding: 0 !important;
         border: none !important;
+
+        .img-container {
+            background-size: contain;
+        }
     }
 
     .titlebar {
@@ -84,6 +97,9 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
 
         img {
             display: block;

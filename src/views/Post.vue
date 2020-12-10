@@ -147,11 +147,7 @@ main {
             column-gap: 1rem;
 
             .photo {
-                border: 2px solid var(--secondary);
-
-                &:not(:last-child) {
-                    margin-bottom: 1rem;
-                }
+                margin-bottom: 1rem;
             }
         }
     }

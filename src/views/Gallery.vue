@@ -21,11 +21,7 @@
                     <h1 v-html="post.title"></h1>
                 </router-link>
                 <div class="gallery">
-                    <div
-                        class="img"
-                        v-for="picture in post.pictures.slice(0, 4)"
-                        :style="{ 'background-image': `url(${picture}` }"
-                    ></div>
+                    <photo v-for="picture in post.pictures.slice(0, 4)" crop="1" :key="picture" :src="picture"></photo>
                 </div>
                 <!-- show hint if more than 4 images -->
                 <p class="gallery-hint" v-if="post.pictures.length > 4">
@@ -41,6 +37,7 @@ import reddit from 'src/util/reddit';
 
 import Btn from 'src/components/Btn.vue';
 import Overline from 'src/components/Overline.vue';
+import Photo from 'src/components/Photo.vue';
 import RegionPicker from 'src/components/RegionPicker.vue';
 import Search from 'src/components/Search.vue';
 import Tabs from 'src/components/Tabs.vue';
@@ -54,6 +51,7 @@ export default {
     components: {
         Btn,
         Overline,
+        Photo,
         RegionPicker,
         Search,
         Tabs,
@@ -136,13 +134,6 @@ export default {
                 grid-template-columns: repeat(auto-fit, minmax(calc(50% - 0.5rem), 1fr));
                 grid-auto-rows: auto;
                 grid-gap: 1rem;
-
-                .img {
-                    background-size: cover;
-                    background-position: center;
-                    padding-bottom: 100%;
-                    border: c.$border-secondary;
-                }
             }
 
             .gallery-hint {
