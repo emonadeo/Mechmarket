@@ -8,6 +8,7 @@ import './styles/main.scss';
 
 import store from './services/store';
 import router from './services/router';
+import plugins from './services/plugins';
 
 import App from 'src/App.vue';
 

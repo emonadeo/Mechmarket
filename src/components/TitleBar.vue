@@ -1,10 +1,10 @@
 <template>
-    <div class="titlebar">
+    <form class="title-bar">
         <div class="slot">
             <slot></slot>
         </div>
         <theme-picker></theme-picker>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -17,13 +17,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use 'src/styles/constants' as c;
 
-.titlebar {
+.title-bar {
     border-bottom: c.$border;
     display: flex;
     height: c.$height;
+
+    svg {
+        fill: var(--primary);
+    }
 
     .slot {
         flex: 1;

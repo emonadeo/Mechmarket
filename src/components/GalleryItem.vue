@@ -1,5 +1,5 @@
 <template>
-    <div class="photo surface" :ref="src">
+    <div class="gallery-item surface" :ref="src">
         <title-bar v-show="viewing === src">
             <btn class="icon-button" @click="close(src)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1.5rem" height="1.5rem">
@@ -10,12 +10,8 @@
                 </svg>
             </btn>
         </title-bar>
-        <div
-            class="img-container"
-            :style="crop ? { backgroundImage: `url(${src})`, paddingBottom: `${crop * 100}%` } : {}"
-            @click="view(src)"
-        >
-            <img v-if="!crop" alt="picture" :src="src" />
+        <div class="img-container">
+            <img alt="picture" :src="src" @click="view(src)" />
         </div>
     </div>
 </template>
@@ -27,7 +23,6 @@ import TitleBar from 'src/components/TitleBar.vue';
 export default {
     props: {
         src: String,
-        crop: Number,
     },
     components: {
         Btn,
@@ -54,15 +49,8 @@ export default {
 <style lang="scss">
 @use "src/styles/constants" as c;
 
-.photo {
-    display: inline-flex;
-    flex-direction: column;
-    position: relative;
+.gallery-item {
     border: 2px solid var(--secondary);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
 
     &.fullscreen {
         display: flex;
@@ -77,13 +65,9 @@ export default {
         margin: 0 !important;
         padding: 0 !important;
         border: none !important;
-
-        .img-container {
-            background-size: contain;
-        }
     }
 
-    .titlebar {
+    .title-bar {
         display: flex;
         border-bottom: 1px solid var(--primary);
 
@@ -92,19 +76,9 @@ export default {
         }
     }
 
-    .img-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-
-        img {
-            display: block;
-            width: 100%;
-        }
+    img {
+        display: block;
+        width: 100%;
     }
 }
 </style>

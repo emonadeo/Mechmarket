@@ -1,7 +1,11 @@
 <template>
     <div class="post">
         <title-bar>
-            <btn class="icon-button back" @click="$router.back()"><-</btn>
+            <btn class="icon-button back" @click="$router.back()">
+                <svg viewBox="0 0 24 24" width="24px" height="24px">
+                    <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21v-2z" />
+                </svg>
+            </btn>
             <btn :href="post.href" class="view-on-reddit">View</btn>
         </title-bar>
         <loading v-if="loading"></loading>
@@ -37,9 +41,11 @@
             </section>
             <section class="pictures" v-if="post.pictures.length > 0">
                 <h1 class="title surface">Pictures</h1>
-                <div class="grid">
-                    <photo v-for="picture in post.pictures" :key="picture" :src="picture"></photo>
-                </div>
+                <gallery :pictures="post.pictures"></gallery>
+            </section>
+            <section class="description">
+                <h1 class="title surface">Description</h1>
+                <p v-html="post.description"></p>
             </section>
         </main>
     </div>
@@ -47,10 +53,10 @@
 
 <script>
 import Btn from 'src/components/Btn.vue';
+import Gallery from 'src/components/Gallery.vue';
 import Loading from 'src/components/Loading.vue';
 import Overline from 'src/components/Overline.vue';
 import PaymentMethod from 'src/components/PaymentMethod.vue';
-import Photo from 'src/components/Photo.vue';
 import TitleBar from 'src/components/TitleBar.vue';
 
 import reddit from 'src/util/reddit';
@@ -61,10 +67,10 @@ export default {
     },
     components: {
         Btn,
+        Gallery,
         Loading,
         Overline,
         PaymentMethod,
-        Photo,
         TitleBar,
     },
     data: () => ({
@@ -85,10 +91,7 @@ export default {
     height: 100%;
 }
 
-.titlebar {
-    .back {
-        margin-left: 0.5rem;
-    }
+.title-bar {
     .view-on-reddit {
         margin-left: auto;
         border-left: 1px solid var(--primary);
@@ -135,19 +138,6 @@ main {
 
             .payment-method:not(:last-child) {
                 margin-right: 0.5rem;
-            }
-        }
-    }
-
-    .pictures {
-        padding-bottom: 0;
-
-        .grid {
-            column-count: 2;
-            column-gap: 1rem;
-
-            .photo {
-                margin-bottom: 1rem;
             }
         }
     }

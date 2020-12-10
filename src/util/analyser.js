@@ -3,14 +3,8 @@ async function getPictures(text) {
 
     // get links in post and avoid duplicates
     let pictures = [
-        ...new Set(
-            [
-                ...text.matchAll(
-                    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]*\.[a-zA-Z0-9]*\b((.?[-a-zA-Z0-9@%_+~#\/])*)/g
-                ),
-            ].map((res) => res[0])
-        ),
-    ];
+        ...text.matchAll(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]*\.[a-zA-Z0-9]*\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/g),
+    ].map((res) => res[0]);
 
     // cancel if no pictures
     if (!pictures) return {};
@@ -62,7 +56,7 @@ async function getPictures(text) {
         return /\.(png|jpg|jpeg|gif|webp)\/?$/.test(t);
     });
 
-    return pictures;
+    return [...new Set(pictures)];
 }
 
 export default { getPictures };

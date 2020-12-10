@@ -1,7 +1,8 @@
+import MarkdownIt from 'markdown-it';
 import analyser from 'src/util/analyser';
-
 import { methods } from 'src/components/PaymentMethod.vue';
 
+const md = new MarkdownIt();
 const paymentMethods = Object.keys(methods);
 
 /**
@@ -9,20 +10,22 @@ const paymentMethods = Object.keys(methods);
  */
 export default class Post {
     /**
-     * @param id {string}
-     * @param category {string}
-     * @param author {string}
-     * @param region {string}
-     * @param have {string[]}
-     * @param want {string[]}
-     * @param href {string}
-     * @param pictures {string[]}
+     * @param {string} id
+     * @param {string} category
+     * @param {string} author
+     * @param {string} region
+     * @param {string} description
+     * @param {string[]} have
+     * @param {string[]} want
+     * @param {string} href
+     * @param {string[]} pictures
      */
-    constructor(id, category, author, region, have, want, href, pictures) {
+    constructor(id, category, author, region, description, have, want, href, pictures) {
         this.id = id;
         this.category = category;
         this.author = author;
         this.region = region;
+        this.description = md.render(description);
         this.have = have;
         this.want = want;
         this.pictures = pictures;
@@ -91,6 +94,7 @@ export default class Post {
             post.link_flair_text.toLowerCase(),
             post.author,
             extractRegion(post.title),
+            post.selftext,
             extractProducts(post.title, true),
             extractProducts(post.title, false),
             post.url,
