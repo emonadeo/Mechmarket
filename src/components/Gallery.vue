@@ -26,7 +26,7 @@
             <masonry :cols="this.breakpoints" :gutter="'1rem'">
                 <img
                     class="gallery-item"
-                    v-for="(picture, index) in pictures"
+                    v-for="(picture, index) in pictures.slice(0, limit)"
                     :key="picture"
                     :src="picture"
                     :alt="picture"
@@ -36,7 +36,7 @@
         </div>
         <!-- show hint if more than 4 images -->
         <p class="hint" v-if="pictures.length > limit">
-            + {{ post.pictures.length - limit }} more image{{ post.pictures.length !== limit + 1 ? 's' : '' }}
+            + {{ pictures.length - limit }} more image{{ pictures.length !== limit + 1 ? 's' : '' }}
         </p>
     </div>
 </template>
@@ -50,7 +50,10 @@ export default {
     },
     props: {
         pictures: Array,
-        limit: Number,
+        limit: {
+            type: Number,
+            default: -1,
+        },
     },
     data: (ctx) => ({
         fullscreen: false,
@@ -146,6 +149,12 @@ export default {
                 margin-bottom: 1rem;
             }
         }
+    }
+
+    .hint {
+        margin-top: 0.5rem;
+        text-align: right;
+        font-size: 0.75rem;
     }
 }
 </style>

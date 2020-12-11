@@ -23,7 +23,11 @@
                 :value="region"
                 @blur.native="unedit"
             ></textfield>
-            <btn>-></btn>
+            <btn class="icon-button" type="submit">
+                <svg viewBox="0 0 24 24" width="24px" height="24px">
+                    <path d="M15,5l-1.41,1.41L18.17,11H2V13h16.17l-4.59,4.59L15,19l7-7L15,5z" />
+                </svg>
+            </btn>
         </div>
     </div>
 </template>

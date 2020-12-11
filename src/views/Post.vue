@@ -3,7 +3,7 @@
         <title-bar>
             <btn class="icon-button back" @click="$router.back()">
                 <svg viewBox="0 0 24 24" width="24px" height="24px">
-                    <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21v-2z" />
+                    <path d="M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z" />
                 </svg>
             </btn>
             <btn :href="post.href" class="view-on-reddit">View</btn>

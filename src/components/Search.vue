@@ -9,9 +9,9 @@
             @focus.native="editing = true"
             @blur.native="editing = false"
         />
-        <btn v-show="editing">
+        <btn v-show="editing" class="icon-button" type="submit">
             <svg viewBox="0 0 24 24" width="24px" height="24px">
-                <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21v-2z" />
+                <path d="M15,5l-1.41,1.41L18.17,11H2V13h16.17l-4.59,4.59L15,19l7-7L15,5z" />
             </svg>
         </btn>
     </div>
@@ -48,10 +48,6 @@ export default {
             color: var(--primary);
             opacity: 0.54;
         }
-    }
-
-    .btn {
-        width: 2.5rem;
     }
 }
 </style>

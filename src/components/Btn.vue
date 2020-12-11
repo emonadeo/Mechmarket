@@ -1,12 +1,21 @@
 <template>
-    <a class="btn" @click="$emit('click')" :type="type">
+    <a v-if="href" class="btn" :href="href">
         <slot></slot>
     </a>
+    <button v-else class="btn" @click="$emit('click')" :type="type">
+        <slot></slot>
+    </button>
 </template>
 
 <script>
 export default {
-    props: ['type'],
+    props: {
+        href: String,
+        type: {
+            type: String,
+            default: 'button',
+        },
+    },
 };
 </script>
 

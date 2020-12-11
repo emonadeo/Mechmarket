@@ -18,7 +18,7 @@
                 <router-link :to="{ name: 'post', params: { id: post.id } }">
                     <h1 v-html="post.title"></h1>
                 </router-link>
-                <gallery :pictures="post.pictures"></gallery>
+                <gallery :pictures="post.pictures" :limit="4"></gallery>
             </div>
         </main>
     </div>
