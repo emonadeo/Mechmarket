@@ -15,18 +15,6 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-    box-sizing: border-box;
-}
-
-a,
-a:active,
-a:focus,
-a:visited {
-    color: unset;
-    text-decoration: unset;
-}
-
 html,
 body,
 #app {

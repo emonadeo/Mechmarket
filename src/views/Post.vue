@@ -45,7 +45,7 @@
             </section>
             <section class="description">
                 <h1 class="title surface">Description</h1>
-                <p v-html="post.description"></p>
+                <div class="markdown" v-html="post.description"></div>
             </section>
         </main>
     </div>
@@ -139,6 +139,19 @@ main {
             .payment-method:not(:last-child) {
                 margin-right: 0.5rem;
             }
+        }
+    }
+
+    .description {
+        padding: 0;
+
+        h1 {
+            left: 1rem;
+        }
+
+        .markdown {
+            padding: 1.25rem 1rem 1rem 1rem;
+            overflow-y: auto;
         }
     }
 }

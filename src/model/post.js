@@ -2,7 +2,11 @@ import MarkdownIt from 'markdown-it';
 import analyser from 'src/util/analyser';
 import { methods } from 'src/components/PaymentMethod.vue';
 
-const md = new MarkdownIt();
+const md = new MarkdownIt({
+    html: true,
+    linkify: true,
+    typographer: true,
+});
 const paymentMethods = Object.keys(methods);
 
 /**
