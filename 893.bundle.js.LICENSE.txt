@@ -5,6 +5,12 @@
  */
 
 /*!
+ * vue-masonry-css v1.0.3
+ * https://github.com/paulcollett/vue-masonry-css
+ * Released under the MIT License.
+ */
+
+/*!
  * vuex v3.6.0
  * (c) 2020 Evan You
  * @license MIT
