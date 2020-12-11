@@ -35,7 +35,7 @@
             </masonry>
         </div>
         <!-- show hint if more than 4 images -->
-        <p class="hint" v-if="pictures.length > limit">
+        <p class="hint" v-if="limit >= 0 && pictures.length > limit">
             + {{ pictures.length - limit }} more image{{ pictures.length !== limit + 1 ? 's' : '' }}
         </p>
     </div>
