@@ -26,7 +26,7 @@
             <masonry :cols="this.breakpoints" :gutter="'1rem'">
                 <img
                     class="gallery-item"
-                    v-for="(picture, index) in limit ? pictures.slice(0, limit) : pictures"
+                    v-for="(picture, index) in limit !== 0 ? pictures.slice(0, limit) : pictures"
                     :key="picture"
                     :src="picture"
                     :alt="picture"
