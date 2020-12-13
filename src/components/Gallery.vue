@@ -12,7 +12,7 @@
                     </svg>
                 </btn>
             </div>
-            <div class="slider" ref="slider">
+            <div class="slider surface" ref="slider">
                 <img v-for="picture in pictures" :src="picture" :alt="picture" />
             </div>
             <div class="footer">
@@ -54,7 +54,7 @@ export default {
     },
     data: (ctx) => ({
         fullscreen: false,
-        position: -1,
+        position: 0,
         breakpoints: {
             default: ctx.cols(3),
             640: ctx.cols(2),
@@ -119,7 +119,9 @@ export default {
 
             img {
                 scroll-snap-align: center;
+                object-fit: contain;
                 width: 100%;
+                height: 100%;
             }
         }
 

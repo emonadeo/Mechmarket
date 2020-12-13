@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use 'themes';
 @use 'markdown';
+@use 'responsive' as r;
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
@@ -35,4 +36,16 @@
 
 .surface {
     color: var(--primary);
+
+    @include r.lg {
+        scrollbar-color: var(--secondary) transparent;
+
+        &::-webkit-scrollbar {
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--secondary);
+        }
+    }
 }

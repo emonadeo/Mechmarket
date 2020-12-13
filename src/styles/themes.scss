@@ -1,4 +1,5 @@
 @use "sass:color";
+@use "constants" as c;
 
 $themes: (
     'light': (
@@ -56,4 +57,12 @@ p, h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 1rem;
     font-weight: 400;
+}
+
+hr {
+    border-left: none;
+    border-bottom: none;
+    border-top: c.$border-secondary;
+    border-right: none;
+    margin: 1rem 0;
 }

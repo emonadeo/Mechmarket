@@ -20,12 +20,14 @@ const router = new VueRouter({
             name: 'posts',
             component: Posts,
             props: true,
-        },
-        {
-            path: '/:category/:id',
-            name: 'post',
-            component: Post,
-            props: true,
+            children: [
+                {
+                    path: ':id',
+                    name: 'post',
+                    component: Post,
+                    props: true,
+                },
+            ],
         },
     ],
 });

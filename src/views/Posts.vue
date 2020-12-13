@@ -1,12 +1,13 @@
 <template>
     <div class="posts surface">
+        <div class="corner"></div>
         <title-bar>
             <search></search>
             <region-picker></region-picker>
         </title-bar>
         <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main class="surface">
-            <div class="post" v-for="post in posts">
+            <div class="posting" v-for="post in posts">
                 <overline>
                     <router-link :to="{ name: 'posts', query: { region: post.region } }">
                         <template v-for="(region, i) in post.region.split('-')">
@@ -21,6 +22,7 @@
                 <gallery :pictures="post.pictures" :limit="4"></gallery>
             </div>
         </main>
+        <router-view class="post"></router-view>
     </div>
 </template>
 
@@ -82,6 +84,7 @@ export default {
 
 <style lang="scss" scoped>
 @use 'src/styles/constants' as c;
+@use "src/styles/responsive" as r;
 
 .posts {
     margin: 0 auto;
@@ -89,16 +92,36 @@ export default {
     flex-direction: column;
     height: 100%;
 
+    @include r.xl {
+        display: grid;
+        grid-template-columns: minmax(max-content, 10vw) 1fr 1fr;
+        grid-template-rows: 2.5rem 1fr;
+    }
+
+    .corner {
+        display: none;
+
+        @include r.xl {
+            display: block;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            border-right: c.$border;
+        }
+    }
+
     .title-bar {
+        @include r.xl {
+            grid-column: 2 / 4;
+            grid-row: 1 / 2;
+        }
+
         form {
             flex: 1;
             display: flex;
-            height: c.$height;
         }
 
         .search {
             flex: 1;
-            height: c.$height;
         }
 
         .btn,
@@ -109,6 +132,12 @@ export default {
     }
 
     .tabs {
+        @include r.xl {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            border-right: c.$border;
+        }
+
         border-bottom: c.$border;
     }
 
@@ -117,12 +146,32 @@ export default {
         overflow-y: auto;
         position: relative;
 
-        .post {
+        @include r.xl {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            border-right: c.$border;
+        }
+
+        .posting {
             margin: 1.5rem 1rem;
 
             h1 {
                 margin: 0.5rem 0;
             }
+        }
+    }
+
+    .post {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+
+        @include r.xl {
+            position: static;
+            grid-column: 3 / 4;
+            overflow-y: hidden;
         }
     }
 }

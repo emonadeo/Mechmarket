@@ -6,8 +6,8 @@
             placeholder="Search"
             aria-label="Search"
             :value="$route.query.q"
-            @focus.native="editing = true"
-            @blur.native="editing = false"
+            @focus.native="edit"
+            @blur.native="unedit"
         />
         <btn v-show="editing" class="icon-button" type="submit">
             <svg viewBox="0 0 24 24" width="24px" height="24px">
@@ -28,7 +28,17 @@ export default {
     },
     data: () => ({
         editing: false,
+        timeout: 0,
     }),
+    methods: {
+        edit() {
+            clearTimeout(this.timeout);
+            this.editing = true;
+        },
+        unedit() {
+            this.timeout = setTimeout(() => (this.editing = false), 1000);
+        },
+    },
 };
 </script>
 

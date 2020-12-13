@@ -23,9 +23,14 @@ export default {
 
 <style lang="scss" scoped>
 @use "src/styles/constants" as c;
+@use "src/styles/responsive" as r;
 
 .tabs {
     display: flex;
+
+    @include r.xl {
+        display: block;
+    }
 
     .tab {
         flex: 1;
@@ -34,16 +39,26 @@ export default {
         justify-content: center;
         text-decoration: none;
         color: inherit;
-        padding: 0.5rem;
+        padding: 0 0.5rem;
         height: c.$height;
+
+        @include r.xl {
+            flex: 0;
+            border-left: 4px solid transparent !important;
+            border-right: 4px solid transparent !important;
+        }
 
         &:not(:last-child) {
             border-right: c.$border;
+
+            @include r.xl {
+                border-right: none;
+            }
         }
 
         &[selected] {
-            font-weight: 700;
             background-color: var(--secondary);
+            border-right-color: var(--primary) !important;
         }
     }
 }
