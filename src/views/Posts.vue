@@ -1,5 +1,5 @@
 <template>
-    <div class="posts surface">
+    <div class="posts surface" :class="{ 'viewing-post': viewingPost }">
         <div class="corner"></div>
         <title-bar>
             <search></search>
@@ -63,6 +63,9 @@ export default {
         region() {
             return this.$route.query.region;
         },
+        viewingPost() {
+            return this.$route.name === 'post';
+        },
     },
     watch: {
         $route: function (route) {
@@ -92,16 +95,27 @@ export default {
     flex-direction: column;
     height: 100%;
 
-    @include r.xl {
+    @include r.md {
         display: grid;
-        grid-template-columns: minmax(max-content, 10vw) 1fr 1fr;
+        grid-template-columns: 12rem 1fr;
         grid-template-rows: 2.5rem 1fr;
+    }
+
+    @include r.lg {
+        display: grid;
+        grid-template-columns: 16rem 1fr;
+    }
+
+    @include r.xxl {
+        &.viewing-post {
+            grid-template-columns: 16rem 1fr minmax(32rem, 1fr);
+        }
     }
 
     .corner {
         display: none;
 
-        @include r.xl {
+        @include r.md {
             display: block;
             grid-column: 1 / 2;
             grid-row: 1 / 2;
@@ -110,7 +124,7 @@ export default {
     }
 
     .title-bar {
-        @include r.xl {
+        @include r.md {
             grid-column: 2 / 4;
             grid-row: 1 / 2;
         }
@@ -132,7 +146,7 @@ export default {
     }
 
     .tabs {
-        @include r.xl {
+        @include r.md {
             grid-column: 1 / 2;
             grid-row: 2 / 3;
             border-right: c.$border;
@@ -146,14 +160,13 @@ export default {
         overflow-y: auto;
         position: relative;
 
-        @include r.xl {
+        @include r.lg {
             grid-column: 2 / 3;
             grid-row: 2 / 3;
-            border-right: c.$border;
         }
 
         .posting {
-            margin: 1.5rem 1rem;
+            margin: 1rem 1rem 1.5rem 1rem;
 
             h1 {
                 margin: 0.5rem 0;
@@ -167,11 +180,25 @@ export default {
         right: 0;
         left: 0;
         bottom: 0;
+        overflow-y: hidden;
 
-        @include r.xl {
+        @include r.md {
             position: static;
+        }
+
+        @include r.lg {
+            position: absolute;
+            top: c.$height;
+            left: auto;
+            height: auto;
+            width: max(calc(48rem + 1px), 60vw);
+            border-left: c.$border;
+        }
+
+        @include r.xxl {
+            position: static;
+            width: auto;
             grid-column: 3 / 4;
-            overflow-y: hidden;
         }
     }
 }

@@ -3,9 +3,11 @@
         <loading v-if="loading"></loading>
         <main v-if="!loading" class="surface">
             <div class="actions">
-                <btn class="icon-button back" @click="$router.back()">
-                    <svg viewBox="0 0 24 24" width="24px" height="24px">
-                        <path d="M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z" />
+                <btn class="icon-button outline back" :to="{ name: 'posts', query: this.$route.query }">
+                    <svg viewBox="0 0 24 24" width="1.5rem" height="1.5rem">
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+                        />
                     </svg>
                 </btn>
                 <h1 class="author">u/{{ post.author }}</h1>
@@ -99,7 +101,6 @@ export default {
 .post {
     display: flex;
     flex-direction: column;
-    height: 100%;
 
     main {
         flex: 1;
@@ -109,14 +110,14 @@ export default {
             display: flex;
             align-items: center;
             height: c.$height;
-            margin: 1rem;
+            margin: 1rem 1rem 1.5rem 1rem;
 
             svg {
                 fill: var(--primary);
             }
 
             .author {
-                margin: 0 0.5rem;
+                margin: 0 1rem;
                 display: flex;
                 align-items: center;
             }

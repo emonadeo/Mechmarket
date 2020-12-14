@@ -13,3 +13,7 @@
 @mixin xl {
     @media (min-width: 1280px) { @content }
 }
+
+@mixin xxl {
+    @media (min-width: 1536px) { @content }
+}

@@ -28,7 +28,7 @@ export default {
 .tabs {
     display: flex;
 
-    @include r.xl {
+    @include r.md {
         display: block;
     }
 
@@ -42,8 +42,9 @@ export default {
         padding: 0 0.5rem;
         height: c.$height;
 
-        @include r.xl {
-            flex: 0;
+        @include r.md {
+            justify-content: flex-start;
+            padding: 0 0.5rem 0 2.5rem;
             border-left: 4px solid transparent !important;
             border-right: 4px solid transparent !important;
         }
@@ -51,7 +52,7 @@ export default {
         &:not(:last-child) {
             border-right: c.$border;
 
-            @include r.xl {
+            @include r.md {
                 border-right: none;
             }
         }
