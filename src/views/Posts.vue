@@ -1,5 +1,5 @@
 <template>
-    <div class="posts surface" :class="{ 'viewing-post': viewingPost }">
+    <div class="posts surface" :class="{ 'viewing-post': id }">
         <div class="corner"></div>
         <title-bar>
             <search></search>
@@ -16,13 +16,19 @@
                         </template>
                     </router-link>
                 </overline>
-                <router-link :to="{ name: 'post', params: { id: post.id } }">
+                <router-link :to="{ name: 'posts', params: { id: post.id } }">
                     <h1 v-html="post.title"></h1>
                 </router-link>
                 <gallery :pictures="post.pictures" :limit="4"></gallery>
             </div>
         </main>
-        <router-view class="post"></router-view>
+        <post
+            v-if="this.id"
+            class="post"
+            :key="$route.name + ($route.params.id || '')"
+            :post="post"
+            :id="this.id"
+        ></post>
     </div>
 </template>
 
@@ -38,9 +44,12 @@ import Tabs from 'src/components/Tabs.vue';
 import TitleBar from 'src/components/TitleBar.vue';
 import ThemePicker from 'src/components/ThemePicker.vue';
 
+import Post from 'src/views/Post.vue';
+
 export default {
     props: {
         category: String,
+        id: String,
     },
     components: {
         Btn,
@@ -51,6 +60,7 @@ export default {
         Tabs,
         TitleBar,
         ThemePicker,
+        Post,
     },
     data: () => ({
         loading: true,
@@ -63,12 +73,12 @@ export default {
         region() {
             return this.$route.query.region;
         },
-        viewingPost() {
-            return this.$route.name === 'post';
+        post() {
+            return this.posts.find((p) => p.id === this.id);
         },
     },
     watch: {
-        $route: function (route) {
+        '$route.params.category': function (route) {
             this.loadPosts(route.params.category, this.region, this.query);
         },
     },

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Posts from 'src/views/Posts.vue';
-import Post from 'src/views/Post.vue';
 
 Vue.use(VueRouter);
 
@@ -16,18 +15,10 @@ const router = new VueRouter({
             redirect: '/selling',
         },
         {
-            path: '/:category',
+            path: '/:category/:id?',
             name: 'posts',
             component: Posts,
             props: true,
-            children: [
-                {
-                    path: ':id',
-                    name: 'post',
-                    component: Post,
-                    props: true,
-                },
-            ],
         },
     ],
 });
