@@ -32,14 +32,11 @@ export default {
     .slot {
         flex: 1;
         display: flex;
-
-        > * {
-            height: c.$height;
-        }
     }
 
     .theme-picker {
         border-left: c.$border;
+        width: c.$height;
     }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="region-picker">
         <!-- button -->
-        <btn v-show="!editing" @click="edit" type="button" class="icon-button" :class="{ square: global }">
+        <btn v-show="!editing" @click="edit" type="button" :class="{ 'icon-button': global }">
             <template v-for="(region, i) in regions">
                 <span>{{ region }}</span>
                 <span v-if="i + 1 < regions.length"> &not; </span>
@@ -43,6 +43,7 @@ export default {
     },
     data: () => ({
         editing: false,
+        timeout: 0,
     }),
     computed: {
         region() {
@@ -60,11 +61,12 @@ export default {
     },
     methods: {
         edit() {
+            clearTimeout(this.timeout);
             this.editing = true;
             this.$nextTick(() => document.getElementById('textfield').focus());
         },
         unedit() {
-            setTimeout(() => (this.editing = false), 1);
+            this.timeout = setTimeout(() => (this.editing = false), 1000);
         },
     },
 };
@@ -78,12 +80,11 @@ export default {
         height: 100%;
     }
 
-    .btn {
-        &:not(.square) {
-            padding-left: 0.75rem;
-            padding-right: 0.75rem;
-        }
+    > .icon-button {
+        width: 100%;
+    }
 
+    .btn {
         svg {
             fill: var(--primary);
         }

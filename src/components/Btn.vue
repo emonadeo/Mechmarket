@@ -2,6 +2,9 @@
     <a v-if="href" class="btn" :href="href">
         <slot></slot>
     </a>
+    <router-link v-else-if="to" :to="to" class="btn">
+        <slot></slot>
+    </router-link>
     <button v-else class="btn" @click="$emit('click')" :type="type">
         <slot></slot>
     </button>
@@ -11,6 +14,7 @@
 export default {
     props: {
         href: String,
+        to: Object,
         type: {
             type: String,
             default: 'button',
@@ -20,17 +24,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "src/styles/constants" as c;
+
 .btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: inherit;
     border: none;
     background: transparent;
-    padding: 0.5rem 0.75rem;
+    padding: 0 1rem;
     outline: none;
     cursor: pointer;
+    min-height: 2.25rem;
+
+    &:hover {
+        background-color: var(--secondary);
+    }
 
     &.icon-button {
-        padding: 0.5rem;
+        padding: 0;
+        min-width: 2.25rem;
+    }
+
+    &.outline {
+        border: c.$border;
     }
 }
 </style>
