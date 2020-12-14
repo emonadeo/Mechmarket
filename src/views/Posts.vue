@@ -7,6 +7,7 @@
         </title-bar>
         <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main class="surface">
+            <loading v-if="loading"></loading>
             <div class="posting" v-for="post in posts">
                 <overline>
                     <router-link :to="{ name: 'posts', query: { region: post.region } }">
@@ -36,6 +37,7 @@
 import reddit from 'src/util/reddit';
 
 import Btn from 'src/components/Btn.vue';
+import Loading from 'src/components/Loading.vue';
 import Overline from 'src/components/Overline.vue';
 import Gallery from 'src/components/Gallery.vue';
 import RegionPicker from 'src/components/RegionPicker.vue';
@@ -53,6 +55,7 @@ export default {
     },
     components: {
         Btn,
+        Loading,
         Overline,
         Gallery,
         RegionPicker,
@@ -78,8 +81,8 @@ export default {
         },
     },
     watch: {
-        '$route.params.category': function (route) {
-            this.loadPosts(route.params.category, this.region, this.query);
+        category: function (category) {
+            this.loadPosts(category, this.region, this.query);
         },
     },
     created() {
