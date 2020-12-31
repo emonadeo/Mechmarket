@@ -8,16 +8,16 @@
         <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main class="surface">
             <loading v-if="loading"></loading>
-            <div class="posting" v-for="post in posts">
+            <div v-show="!loading" class="posting" v-for="post in posts">
                 <overline>
-                    <router-link :to="{ name: 'posts', query: { region: post.region } }">
+                    <router-link :to="{ name: 'posts', query: { ...$route.query, region: post.region } }">
                         <template v-for="(region, i) in post.region.split('-')">
                             <span>{{ region }}</span>
                             <span class="sub" v-if="i + 1 < post.region.split('-').length"> &not; </span>
                         </template>
                     </router-link>
                 </overline>
-                <router-link :to="{ name: 'posts', params: { id: post.id } }">
+                <router-link :to="{ name: 'posts', params: { id: post.id }, query: $route.query }">
                     <h1 v-html="post.title"></h1>
                 </router-link>
                 <gallery :pictures="post.pictures" :limit="4"></gallery>
@@ -84,6 +84,12 @@ export default {
         category: function (category) {
             this.loadPosts(category, this.region, this.query);
         },
+        region: function (region) {
+            this.loadPosts(this.category, region, this.query);
+        },
+        query: function (q) {
+            this.loadPosts(this.category, this.region, q);
+        },
     },
     created() {
         this.loadPosts(this.category, this.region, this.query);
@@ -137,6 +143,27 @@ export default {
     }
 
     .title-bar {
+        background: radial-gradient(
+                circle,
+                transparent 20%,
+                var(--on-primary) 20%,
+                var(--on-primary) 80%,
+                transparent 80%,
+                transparent
+            ),
+            radial-gradient(
+                    circle,
+                    transparent 20%,
+                    var(--on-primary) 20%,
+                    var(--on-primary) 80%,
+                    transparent 80%,
+                    transparent
+                )
+                50px 50px,
+            linear-gradient(var(--primary) 0.8px, transparent 0.8px) 0 -0.4px,
+            linear-gradient(90deg, var(--primary) 0.8px, var(--on-primary) 0.8px) -0.4px 0;
+        background-size: 20px 20px, 20px 20px, 10px 10px, 10px 10px;
+
         @include r.md {
             grid-column: 2 / 4;
             grid-row: 1 / 2;
@@ -149,6 +176,13 @@ export default {
 
         .search {
             flex: 1;
+
+            @include r.lg {
+                flex: initial;
+                width: 30rem;
+                margin-right: auto;
+                border-right: c.$border;
+            }
         }
 
         .btn,
