@@ -1,9 +1,6 @@
 <template>
     <form class="title-bar">
-        <div class="slot">
-            <slot></slot>
-        </div>
-        <theme-picker></theme-picker>
+        <slot></slot>
     </form>
 </template>
 
@@ -20,10 +17,5 @@ export default {
 <style lang="scss">
 .title-bar {
     display: flex;
-
-    .slot {
-        flex: 1;
-        display: flex;
-    }
 }
 </style>

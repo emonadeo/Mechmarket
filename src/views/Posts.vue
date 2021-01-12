@@ -3,7 +3,9 @@
         <div class="corner"></div>
         <title-bar>
             <search></search>
+            <size-picker v-model="size"></size-picker>
             <region-picker></region-picker>
+            <theme-picker></theme-picker>
         </title-bar>
         <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main>
@@ -42,6 +44,7 @@ import Overline from 'src/components/Overline.vue';
 import Gallery from 'src/components/Gallery.vue';
 import RegionPicker from 'src/components/RegionPicker.vue';
 import Search from 'src/components/Search.vue';
+import SizePicker from 'src/components/SizePicker.vue';
 import Tabs from 'src/components/Tabs.vue';
 import TitleBar from 'src/components/TitleBar.vue';
 import ThemePicker from 'src/components/ThemePicker.vue';
@@ -60,6 +63,7 @@ export default {
         Gallery,
         RegionPicker,
         Search,
+        SizePicker,
         Tabs,
         TitleBar,
         ThemePicker,
@@ -68,6 +72,7 @@ export default {
     data: () => ({
         loading: true,
         posts: [],
+        size: 0,
     }),
     computed: {
         query() {
