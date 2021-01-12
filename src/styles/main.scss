@@ -2,14 +2,10 @@
 @use 'typography';
 @use 'color';
 
-$radius: 8px;
+$radius: 6px;
 
 * {
     box-sizing: border-box;
-}
-
-svg {
-    fill: color.$primary;
 }
 
 // build typography classes
@@ -26,5 +22,15 @@ svg {
     .#{$color} {
         background-color: list.nth($values, 1);
         color: list.nth($values, 2);
+
+        svg {
+            fill: list.nth($values, 2);
+        }
     }
+}
+
+// build shape classes
+.elevated {
+    padding: $radius;
+    border-radius: $radius;
 }

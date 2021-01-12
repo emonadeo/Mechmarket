@@ -1,5 +1,13 @@
 import Post from 'src/model/post';
 
+/**
+ * @param {Object} post raw fetched reddit post
+ * @return {boolean}
+ */
+function validate(post) {
+    return /\[H].+\[W].+$/.test(post.title);
+}
+
 export default {
     /**
      * @param {string} [category] buying | selling | trading
@@ -22,7 +30,7 @@ export default {
         const json = await res.json();
         const posts = json.data.children.map((thread) => thread.data);
 
-        return await Promise.all(posts.map(Post.fromRedditPost));
+        return await Promise.all(posts.filter(validate).map(Post.fromRedditPost));
     },
 
     /**

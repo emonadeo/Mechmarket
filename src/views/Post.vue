@@ -1,5 +1,5 @@
 <template>
-    <div class="post">
+    <div id="post">
         <loading v-if="!postData || loading"></loading>
         <main v-if="postData">
             <div class="actions">
@@ -59,7 +59,6 @@ import Gallery from 'src/components/Gallery.vue';
 import Loading from 'src/components/Loading.vue';
 import Overline from 'src/components/Overline.vue';
 import PaymentMethod from 'src/components/PaymentMethod.vue';
-import TitleBar from 'src/components/TitleBar.vue';
 
 import reddit from 'src/util/reddit';
 
@@ -74,7 +73,6 @@ export default {
         Loading,
         Overline,
         PaymentMethod,
-        TitleBar,
     },
     data: (ctx) => ({
         loading: false,
@@ -97,7 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.post {
+#post {
     display: flex;
     flex-direction: column;
 

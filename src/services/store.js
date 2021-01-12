@@ -10,16 +10,24 @@ const store = new Vuex.Store({
             window.localStorage.getItem('theme') ||
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') ||
             'light',
+        size: window.localStorage.getItem('size') || 1,
     },
     mutations: {
         updateTheme(state, theme) {
             state.theme = theme;
             window.localStorage.setItem('theme', theme);
         },
+        updateSize(state, size) {
+            state.size = size;
+            window.localStorage.setItem('size', size);
+        },
     },
     actions: {
         setTheme({ commit }, theme) {
             commit('updateTheme', theme);
+        },
+        setSize({ commit }, size) {
+            commit('updateSize', size);
         },
     },
 });

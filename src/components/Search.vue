@@ -55,15 +55,5 @@ export default {
 .search {
     width: 100%;
     display: flex;
-
-    .textfield {
-        height: 100%;
-        padding-left: 1rem;
-        flex: 1;
-
-        &::placeholder {
-            opacity: 0.54;
-        }
-    }
 }
 </style>

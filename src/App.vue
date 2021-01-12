@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="background" :theme="theme">
+    <div id="app" class="background type-body1" :theme="theme">
         <router-view></router-view>
     </div>
 </template>
@@ -20,7 +20,6 @@ body,
 #app {
     width: 100%;
     height: 100%;
-    font-family: 'Fira Code', monospace;
     line-height: 1.5;
 }
 </style>

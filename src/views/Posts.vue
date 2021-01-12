@@ -1,37 +1,17 @@
 <template>
-    <div class="posts" :class="{ 'viewing-post': id }">
-        <div class="corner"></div>
-        <title-bar>
-            <search></search>
-            <size-picker v-model="size"></size-picker>
-            <region-picker></region-picker>
+    <div id="posts" :class="{ 'viewing-post': id }">
+        <div class="corner">
             <theme-picker></theme-picker>
-        </title-bar>
+            <size-picker></size-picker>
+        </div>
+        <form class="title-bar">
+            <search></search>
+            <region-picker></region-picker>
+        </form>
         <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
         <main>
-            <loading v-if="loading"></loading>
-            <div v-show="!loading" class="posting" v-for="post in posts">
-                <overline>
-                    <router-link :to="{ name: 'posts', query: { ...$route.query, region: post.region } }">
-                        <template v-for="(region, i) in post.region.split('-')">
-                            <span>{{ region }}</span>
-                            <span class="sub" v-if="i + 1 < post.region.split('-').length"> &not; </span>
-                        </template>
-                    </router-link>
-                </overline>
-                <router-link :to="{ name: 'posts', params: { id: post.id }, query: $route.query }">
-                    <h1 v-html="post.title"></h1>
-                </router-link>
-                <gallery :pictures="post.pictures" :limit="4"></gallery>
-            </div>
+            <posts :posts="posts" :loading="loading"></posts>
         </main>
-        <post
-            v-if="this.id"
-            class="post"
-            :key="$route.name + ($route.params.id || '')"
-            :post="post"
-            :id="this.id"
-        ></post>
     </div>
 </template>
 
@@ -39,17 +19,12 @@
 import reddit from 'src/util/reddit';
 
 import Btn from 'src/components/Btn.vue';
-import Loading from 'src/components/Loading.vue';
-import Overline from 'src/components/Overline.vue';
-import Gallery from 'src/components/Gallery.vue';
+import Posts from 'src/components/Posts.vue';
 import RegionPicker from 'src/components/RegionPicker.vue';
 import Search from 'src/components/Search.vue';
 import SizePicker from 'src/components/SizePicker.vue';
 import Tabs from 'src/components/Tabs.vue';
-import TitleBar from 'src/components/TitleBar.vue';
 import ThemePicker from 'src/components/ThemePicker.vue';
-
-import Post from 'src/views/Post.vue';
 
 export default {
     props: {
@@ -58,21 +33,16 @@ export default {
     },
     components: {
         Btn,
-        Loading,
-        Overline,
-        Gallery,
+        Posts,
         RegionPicker,
         Search,
         SizePicker,
         Tabs,
-        TitleBar,
         ThemePicker,
-        Post,
     },
     data: () => ({
         loading: true,
         posts: [],
-        size: 0,
     }),
     computed: {
         query() {
@@ -112,7 +82,7 @@ export default {
 <style lang="scss" scoped>
 @use "src/styles/responsive" as r;
 
-.posts {
+#posts {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -147,31 +117,15 @@ export default {
     }
 
     .title-bar {
+        display: flex;
+
         @include r.md {
             grid-column: 2 / 4;
             grid-row: 1 / 2;
         }
 
-        form {
-            flex: 1;
-            display: flex;
-        }
-
         .search {
             flex: 1;
-
-            @include r.lg {
-                flex: initial;
-                width: 30rem;
-                margin-right: auto;
-                border-right: none;
-            }
-        }
-
-        .btn,
-        .region-picker {
-            border-left: none;
-            min-width: 2.5rem;
         }
     }
 
@@ -188,48 +142,6 @@ export default {
     main {
         flex: 1;
         overflow-y: auto;
-        position: relative;
-
-        @include r.lg {
-            grid-column: 2 / 3;
-            grid-row: 2 / 3;
-        }
-
-        .posting {
-            margin: 1rem 1rem 1.5rem 1rem;
-
-            h1 {
-                margin: 0.5rem 0;
-            }
-        }
-    }
-
-    .post {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        overflow-y: hidden;
-
-        @include r.md {
-            position: static;
-        }
-
-        @include r.lg {
-            position: absolute;
-            top: 2.5rem;
-            left: auto;
-            height: auto;
-            width: max(calc(48rem + 1px), 60vw);
-            border-left: none;
-        }
-
-        @include r.xxl {
-            position: static;
-            width: auto;
-            grid-column: 3 / 4;
-        }
     }
 }
 </style>

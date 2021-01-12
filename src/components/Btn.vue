@@ -2,10 +2,10 @@
     <a v-if="href" class="btn" :href="href">
         <slot></slot>
     </a>
-    <router-link v-else-if="to" :to="to" class="btn">
+    <router-link v-else-if="to" class="btn" :to="to">
         <slot></slot>
     </router-link>
-    <button v-else class="btn" @click="$emit('click')" :type="type">
+    <button v-else class="btn" :type="type" @click="$emit('click')">
         <slot></slot>
     </button>
 </template>
@@ -35,17 +35,34 @@ export default {
     outline: none;
     cursor: pointer;
     min-height: 2.25rem;
+    text-decoration: none;
 
     &:hover {
         background-color: unset;
     }
 
-    &.icon-button {
+    &[icon] {
         padding: 0;
-        min-width: 2.25rem;
+        width: 2.25em;
+        height: 2.25em;
+
+        svg {
+            height: 1.5em;
+            width: 1.5em;
+        }
     }
 
-    &.outline {
+    &[inline] {
+        display: inline;
+        padding: 0;
+        min-height: 0;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &[outline] {
         border: none;
     }
 }

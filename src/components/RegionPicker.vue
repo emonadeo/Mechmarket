@@ -1,7 +1,7 @@
 <template>
     <div class="region-picker">
         <!-- button -->
-        <btn v-show="!editing" @click="edit" type="button" :class="{ 'icon-button': global }">
+        <btn v-show="!editing" type="button" @click="edit" :icon="global">
             <div class="region-container">
                 <template v-for="(region, i) in regions">
                     <span>{{ region }}</span>
@@ -86,16 +86,6 @@ export default {
 
 <style lang="scss" scoped>
 .region-picker {
-    .btn,
-    .form,
-    .textfield {
-        height: 100%;
-    }
-
-    > .icon-button {
-        width: 100%;
-    }
-
     .btn {
         .region-container {
             display: block;
@@ -106,14 +96,6 @@ export default {
         width: clamp(10rem, 50vw, 20rem);
         display: flex;
         transition: max-width 2s ease-in-out;
-
-        .textfield {
-            flex: 1;
-
-            &::placeholder {
-                opacity: 0.54;
-            }
-        }
     }
 }
 </style>
