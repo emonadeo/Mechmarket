@@ -1,7 +1,7 @@
 <template>
     <div class="gallery">
         <!-- fullscreen -->
-        <div class="fullscreen surface" v-show="fullscreen">
+        <div class="fullscreen" v-show="fullscreen">
             <div class="actions">
                 <btn class="icon-button" @click="close()">
                     <svg viewBox="0 0 24 24" width="1.5rem" height="1.5rem">
@@ -11,7 +11,7 @@
                     </svg>
                 </btn>
             </div>
-            <div class="slider surface" ref="slider">
+            <div class="slider" ref="slider">
                 <img v-for="picture in pictures" :src="picture" :alt="picture" />
             </div>
             <div class="footer">
@@ -97,10 +97,6 @@ export default {
         flex-direction: column;
         z-index: 100;
 
-        svg {
-            fill: var(--primary);
-        }
-
         .actions,
         .footer {
             height: 2.5rem;
@@ -128,7 +124,7 @@ export default {
             padding: 0.5rem;
 
             .slash {
-                color: var(--secondary);
+                color: unset;
             }
 
             span:not(:last-child) {
@@ -139,7 +135,6 @@ export default {
 
     .grid {
         .gallery-item {
-            border: 2px solid var(--secondary);
             display: block;
             width: 100%;
 

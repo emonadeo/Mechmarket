@@ -1,12 +1,12 @@
 <template>
-    <div class="posts surface" :class="{ 'viewing-post': id }">
+    <div class="posts" :class="{ 'viewing-post': id }">
         <div class="corner"></div>
         <title-bar>
             <search></search>
             <region-picker></region-picker>
         </title-bar>
         <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
-        <main class="surface">
+        <main>
             <loading v-if="loading"></loading>
             <div v-show="!loading" class="posting" v-for="post in posts">
                 <overline>
@@ -142,27 +142,6 @@ export default {
     }
 
     .title-bar {
-        background: radial-gradient(
-                circle,
-                transparent 20%,
-                var(--on-primary) 20%,
-                var(--on-primary) 80%,
-                transparent 80%,
-                transparent
-            ),
-            radial-gradient(
-                    circle,
-                    transparent 20%,
-                    var(--on-primary) 20%,
-                    var(--on-primary) 80%,
-                    transparent 80%,
-                    transparent
-                )
-                50px 50px,
-            linear-gradient(var(--primary) 0.8px, transparent 0.8px) 0 -0.4px,
-            linear-gradient(90deg, var(--primary) 0.8px, var(--on-primary) 0.8px) -0.4px 0;
-        background-size: 20px 20px, 20px 20px, 10px 10px, 10px 10px;
-
         @include r.md {
             grid-column: 2 / 4;
             grid-row: 1 / 2;

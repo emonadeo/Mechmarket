@@ -22,7 +22,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "src/styles/constants" as c;
 @use "src/styles/responsive" as r;
 
 .tabs {
@@ -40,7 +39,7 @@ export default {
         text-decoration: none;
         color: inherit;
         padding: 0 0.5rem;
-        height: c.$height;
+        height: 2.5rem;
 
         @include r.md {
             justify-content: flex-start;
@@ -50,7 +49,7 @@ export default {
         }
 
         &:not(:last-child) {
-            border-right: c.$border;
+            border-right: none;
 
             @include r.md {
                 border-right: none;
@@ -58,8 +57,6 @@ export default {
         }
 
         &[selected] {
-            background-color: var(--secondary);
-            border-right-color: var(--primary) !important;
         }
     }
 }

@@ -1,0 +1,15 @@
+$primary: var(--primary);
+$on-primary: var(--on-primary);
+$secondary: var(--secondary);
+$on-secondary: var(--on-secondary);
+$background: var(--background);
+$on-background: var(--on-background);
+$surface: var(--surface);
+$on-surface: var(--on-surface);
+
+$map: (
+    primary: ($primary, $on-primary),
+    secondary: ($secondary, $on-secondary),
+    background: ($background, $on-background),
+    surface: ($surface, $on-surface),
+);

@@ -24,8 +24,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "src/styles/constants" as c;
-
 .btn {
     display: flex;
     align-items: center;
@@ -39,7 +37,7 @@ export default {
     min-height: 2.25rem;
 
     &:hover {
-        background-color: var(--secondary);
+        background-color: unset;
     }
 
     &.icon-button {
@@ -48,7 +46,7 @@ export default {
     }
 
     &.outline {
-        border: c.$border;
+        border: none;
     }
 }
 </style>

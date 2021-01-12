@@ -1,10 +1,8 @@
 <template>
-    <div class="loading"><div class="surface">> loading...</div></div>
+    <div class="loading"><div>> loading...</div></div>
 </template>
 
 <style lang="scss" scoped>
-@use "src/styles/constants" as c;
-
 .loading {
     position: absolute;
     top: 0;
@@ -17,7 +15,6 @@
 
     > div {
         padding: 0.5rem 1rem;
-        border: c.$border;
     }
 }
 </style>

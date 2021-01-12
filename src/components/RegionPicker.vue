@@ -1,5 +1,5 @@
 <template>
-    <div class="region-picker surface">
+    <div class="region-picker">
         <!-- button -->
         <btn v-show="!editing" @click="edit" type="button" :class="{ 'icon-button': global }">
             <div class="region-container">
@@ -85,8 +85,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "src/styles/constants" as c;
-
 .region-picker {
     .btn,
     .form,
@@ -102,10 +100,6 @@ export default {
         .region-container {
             display: block;
         }
-
-        svg {
-            fill: var(--primary);
-        }
     }
 
     .form {
@@ -117,14 +111,8 @@ export default {
             flex: 1;
 
             &::placeholder {
-                color: var(--primary);
                 opacity: 0.54;
             }
-        }
-
-        .btn {
-            width: c.$height;
-            border-left: c.$border-secondary;
         }
     }
 }

@@ -18,25 +18,12 @@ export default {
 </script>
 
 <style lang="scss">
-@use 'src/styles/constants' as c;
-
 .title-bar {
-    border-bottom: c.$border;
     display: flex;
-    height: c.$height;
-
-    svg {
-        fill: var(--primary);
-    }
 
     .slot {
         flex: 1;
         display: flex;
-    }
-
-    .theme-picker {
-        border-left: c.$border;
-        width: c.$height;
     }
 }
 </style>

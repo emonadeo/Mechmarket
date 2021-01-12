@@ -27,7 +27,6 @@ input {
     outline: none;
 
     &::placeholder {
-        color: var(--primary);
         opacity: 0.54;
     }
 }

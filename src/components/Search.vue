@@ -1,5 +1,5 @@
 <template>
-    <div class="search surface">
+    <div class="search">
         <textfield
             name="q"
             type="text"
@@ -51,16 +51,10 @@ export default {
 
 <style lang="scss" scoped>
 @use 'sass:color';
-@use 'src/styles/constants' as c;
 
 .search {
     width: 100%;
     display: flex;
-
-    .btn {
-        width: c.$height;
-        border-left: c.$border-secondary;
-    }
 
     .textfield {
         height: 100%;
@@ -68,7 +62,6 @@ export default {
         flex: 1;
 
         &::placeholder {
-            color: var(--primary);
             opacity: 0.54;
         }
     }

@@ -1,7 +1,7 @@
 <template>
-    <div class="post surface">
+    <div class="post">
         <loading v-if="!postData || loading"></loading>
-        <main v-if="postData" class="surface">
+        <main v-if="postData">
             <div class="actions">
                 <btn class="icon-button outline back" :to="{ name: 'posts', query: this.$route.query }">
                     <svg viewBox="0 0 24 24" width="1.5rem" height="1.5rem">
@@ -14,7 +14,7 @@
                 <btn :href="postData.href" class="outline view-on-reddit">View</btn>
             </div>
             <section class="have">
-                <h1 class="title surface">Has</h1>
+                <h1 class="title">Has</h1>
                 <p v-if="postData.haveProducts.length > 0">{{ postData.haveProducts.join(', ') }}</p>
                 <div v-if="postData.havePaymentMethods.length > 0">
                     <overline v-if="postData.haveProducts.length > 0">Offering Payment Methods</overline>
@@ -28,7 +28,7 @@
                 </div>
             </section>
             <section class="want">
-                <h1 class="title surface">Wants</h1>
+                <h1 class="title">Wants</h1>
                 <p v-if="postData.wantProducts.length > 0">{{ postData.wantProducts.join(', ') }}</p>
                 <div v-if="postData.wantPaymentMethods.length > 0">
                     <overline v-if="postData.wantProducts.length > 0">Accepting Payment Methods</overline>
@@ -42,11 +42,11 @@
                 </div>
             </section>
             <section class="description">
-                <h1 class="title surface">Description</h1>
-                <div class="markdown surface" v-html="postData.description"></div>
+                <h1 class="title">Description</h1>
+                <div class="markdown" v-html="postData.description"></div>
             </section>
             <section class="pictures" v-if="postData.pictures.length > 0">
-                <h1 class="title surface">Pictures</h1>
+                <h1 class="title">Pictures</h1>
                 <gallery :pictures="postData.pictures"></gallery>
             </section>
         </main>
@@ -110,10 +110,6 @@ export default {
             align-items: center;
             height: 2.5rem;
             margin: 1rem 1rem 1.5rem 1rem;
-
-            svg {
-                fill: var(--primary);
-            }
 
             .author {
                 margin: 0 1rem;

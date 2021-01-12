@@ -1,11 +1,15 @@
-@use 'sass:map';
-@use 'markdown';
+@use 'sass:list';
 @use 'typography';
+@use 'color';
 
 $radius: 8px;
 
 * {
     box-sizing: border-box;
+}
+
+svg {
+    fill: color.$primary;
 }
 
 // build typography classes
@@ -14,5 +18,13 @@ $radius: 8px;
         @each $prop, $value in $props {
             #{$prop}: #{$value};
         }
+    }
+}
+
+// build color classes
+@each $color, $values in color.$map {
+    .#{$color} {
+        background-color: list.nth($values, 1);
+        color: list.nth($values, 2);
     }
 }
