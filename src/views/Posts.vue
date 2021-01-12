@@ -105,7 +105,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use 'src/styles/constants' as c;
 @use "src/styles/responsive" as r;
 
 .posts {
@@ -138,7 +137,7 @@ export default {
             display: block;
             grid-column: 1 / 2;
             grid-row: 1 / 2;
-            border-right: c.$border;
+            border-right: none;
         }
     }
 
@@ -181,14 +180,14 @@ export default {
                 flex: initial;
                 width: 30rem;
                 margin-right: auto;
-                border-right: c.$border;
+                border-right: none;
             }
         }
 
         .btn,
         .region-picker {
-            border-left: c.$border;
-            min-width: c.$height;
+            border-left: none;
+            min-width: 2.5rem;
         }
     }
 
@@ -196,10 +195,10 @@ export default {
         @include r.md {
             grid-column: 1 / 2;
             grid-row: 2 / 3;
-            border-right: c.$border;
+            border-right: none;
         }
 
-        border-bottom: c.$border;
+        border-bottom: none;
     }
 
     main {
@@ -235,11 +234,11 @@ export default {
 
         @include r.lg {
             position: absolute;
-            top: c.$height;
+            top: 2.5rem;
             left: auto;
             height: auto;
             width: max(calc(48rem + 1px), 60vw);
-            border-left: c.$border;
+            border-left: none;
         }
 
         @include r.xxl {

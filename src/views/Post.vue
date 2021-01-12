@@ -97,8 +97,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "src/styles/constants" as c;
-
 .post {
     display: flex;
     flex-direction: column;
@@ -110,7 +108,7 @@ export default {
         .actions {
             display: flex;
             align-items: center;
-            height: c.$height;
+            height: 2.5rem;
             margin: 1rem 1rem 1.5rem 1rem;
 
             svg {
@@ -130,7 +128,7 @@ export default {
 
         section {
             margin: 0 1rem 1.5rem 1rem;
-            border: c.$border-secondary;
+            border: none;
             padding: 1.25rem 1rem 1rem 1rem;
             position: relative;
 

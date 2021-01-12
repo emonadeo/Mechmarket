@@ -1,51 +1,18 @@
-@use 'sass:color';
 @use 'sass:map';
-@use 'themes';
 @use 'markdown';
-@use 'responsive' as r;
+@use 'typography';
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+$radius: 8px;
 
-@each $theme, $props in themes.$themes {
-    .#{$theme} {
-        // Colors
-        @each $name, $color in map.get($props, 'colors') {
-            --#{$name}: #{$color};
-        }
-
-        // Elevations
-        @each $elevation, $surface in map.get($props, 'surfaces') {
-            @if $elevation == '0' {
-                &.surface,
-                .surface {
-                    @each $key, $value in $surface {
-                        #{$key}: #{$value};
-                    }
-                }
-            } @else {
-                &.surface-#{$elevation},
-                .surface-#{$elevation} {
-                    @each $key, $value in $surface {
-                        #{$key}: #{$value};
-                    }
-                }
-            }
-        }
-    }
+* {
+    box-sizing: border-box;
 }
 
-.surface {
-    color: var(--primary);
-
-    @include r.lg {
-        scrollbar-color: var(--secondary) transparent;
-
-        &::-webkit-scrollbar {
-            background-color: transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: var(--secondary);
+// build typography classes
+@each $type, $props in typography.$typography {
+    .type-#{$type} {
+        @each $prop, $value in $props {
+            #{$prop}: #{$value};
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="surface" :class="theme">
+    <div id="app" :theme="theme">
         <router-view></router-view>
     </div>
 </template>

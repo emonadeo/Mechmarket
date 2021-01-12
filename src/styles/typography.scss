@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mirza:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+$family-roboto-mono: 'Roboto Mono', ui-monospace, monospace;
+$family-mirza: 'Mirza', ui-serif, serif;
+$family-overpass: 'Overpass', ui-sans-serif, system-ui, sans-serif;
+
+$typography: (
+    h1: (
+        font-family: $family-roboto-mono,
+        font-size: 96px,
+    ),
+    h2: (
+        font-family: $family-roboto-mono,
+        font-size: 60px,
+    ),
+    h3: (
+        font-family: $family-roboto-mono,
+        font-size: 48px,
+    ),
+    h4: (
+        font-family: $family-roboto-mono,
+        font-size: 34px,
+    ),
+    h5: (
+        font-family: $family-roboto-mono,
+        font-size: 24px,
+    ),
+    h6: (
+        font-family: $family-roboto-mono,
+        font-size: 20px,
+    ),
+    body1: (
+        font-family: $family-overpass,
+        font-size: 16px,
+    ),
+    body2: (
+        font-family: $family-overpass,
+        font-size: 14px,
+    ),
+    subtitle1: (
+        font-family: $family-mirza,
+        font-size: 16px,
+    ),
+    subtitle2: (
+        font-family: $family-mirza,
+        font-size: 14px,
+    ),
+    button: (
+        font-family: $family-overpass,
+        font-size: 16px,
+        text-transform: uppercase,
+    ),
+    caption: (
+        font-family: $family-overpass,
+        font-size: 12px,
+    ),
+    overline: (
+        font-family: $family-overpass,
+        font-size: 10px,
+        text-transform: uppercase,
+    ),
+);

@@ -18,8 +18,8 @@ const store = new Vuex.Store({
         },
     },
     actions: {
-        toggleTheme(context) {
-            this.commit('updateTheme', context.state.theme !== 'dark' ? 'dark' : 'light');
+        setTheme({ commit }, theme) {
+            commit('updateTheme', theme);
         },
     },
 });

@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const ThemePlugin = require('./src/util/theme-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const PUBLIC_PATH = PROD ? '/Mechmarket' : '/';
@@ -26,7 +27,7 @@ module.exports = {
     resolve: {
         alias: {
             src: path.resolve(__dirname, './src'),
-            public: path.resolve(__dirname, './public'),
+            themes: path.resolve(__dirname, './src/themes'),
         },
     },
     module: {
@@ -83,6 +84,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
         }),
+        new ThemePlugin(path.resolve(__dirname, './src/themes')),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
         }),
