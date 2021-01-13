@@ -8,6 +8,11 @@ const { DOMParser, XMLSerializer } = require('xmldom');
 const name = 'ThemePlugin';
 const expr = /([\w-_]*).js$/;
 
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`;
+}
+
 module.exports = class ThemePlugin {
     constructor(directory) {
         this.source = '';
@@ -15,7 +20,9 @@ module.exports = class ThemePlugin {
             const theme = require(path.join(directory, file));
             const props = Object.entries(theme)
                 .map((color) => {
-                    return `    --${color[0].replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase()}: ${color[1]}`;
+                    return `    --${color[0]
+                        .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
+                        .toLowerCase()}: ${hexToRgb(color[1])}`;
                 })
                 .join(';\n');
 

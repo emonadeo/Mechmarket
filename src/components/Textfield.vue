@@ -17,6 +17,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "src/styles/color";
+
 input {
     width: 100%;
     display: block;
@@ -25,9 +27,21 @@ input {
     background-color: transparent;
     padding: 0.5rem;
     outline: none;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    opacity: 0.54;
+
+    &:focus {
+        border-color: color.$primary;
+        opacity: 1;
+
+        &::placeholder {
+            opacity: 0.54;
+        }
+    }
 
     &::placeholder {
-        opacity: 0.54;
+        color: inherit;
     }
 }
 </style>

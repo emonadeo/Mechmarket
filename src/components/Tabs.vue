@@ -20,9 +20,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "src/styles/color";
+@use "src/styles/shape";
 @use "src/styles/responsive" as r;
 
-.tabs {
+.tabs ul {
     display: flex;
 
     @include r.md {
@@ -31,30 +33,42 @@ export default {
 
     .tab {
         flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        color: inherit;
-        padding: 0 0.5rem;
-        height: 2.5rem;
-
-        @include r.md {
-            justify-content: flex-start;
-            padding: 0 0.5rem 0 2.5rem;
-            border-left: 4px solid transparent !important;
-            border-right: 4px solid transparent !important;
-        }
+        border-radius: shape.$radius;
 
         &:not(:last-child) {
-            border-right: none;
+            margin: 0 0.5rem 0 0;
+        }
 
-            @include r.md {
-                border-right: none;
-            }
+        &:hover,
+        &:focus {
+            background-color: rgba(var(--primary), 0.15);
         }
 
         &[selected] {
+            background-color: color.$primary;
+            color: color.$on-primary;
+        }
+
+        @include r.md {
+            justify-content: flex-start;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+
+            &:not(:last-child) {
+                margin: 0 0 0.25rem 0;
+            }
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            height: 2.5rem;
+
+            @include r.md {
+                padding: 0 0.5rem 0 2.5rem;
+            }
         }
     }
 }

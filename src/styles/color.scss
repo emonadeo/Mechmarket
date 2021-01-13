@@ -1,11 +1,11 @@
-$primary: var(--primary);
-$on-primary: var(--on-primary);
-$secondary: var(--secondary);
-$on-secondary: var(--on-secondary);
-$background: var(--background);
-$on-background: var(--on-background);
-$surface: var(--surface);
-$on-surface: var(--on-surface);
+$primary: rgb(var(--primary));
+$on-primary: rgb(var(--on-primary));
+$secondary: rgb(var(--secondary));
+$on-secondary: rgb(var(--on-secondary));
+$background: rgb(var(--background));
+$on-background: rgb(var(--on-background));
+$surface: rgb(var(--surface));
+$on-surface: rgb(var(--on-surface));
 
 $map: (
     background: ($background, $on-background),

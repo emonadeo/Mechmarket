@@ -48,7 +48,6 @@
     "url-loader": "^4.1.1",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.6",
-    "vue-masonry-css": "^1.0.3",
     "vue-router": "^3.4.9",
     "vue-template-compiler": "^2.6.12",
     "vuex": "^3.6.0",

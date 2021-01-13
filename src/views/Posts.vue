@@ -1,18 +1,19 @@
 <template>
     <div id="posts" :class="{ 'viewing-post': id }">
-        <div class="corner">
-            <theme-picker></theme-picker>
-            <size-picker></size-picker>
-        </div>
-        <form class="title-bar">
+        <div class="corner"></div>
+        <form class="title-bar background">
             <search></search>
             <region-picker></region-picker>
         </form>
         <aside>
             <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
+            <div class="options">
+                <size-picker></size-picker>
+                <theme-picker></theme-picker>
+            </div>
             <ul class="socials">
                 <li>
-                    <btn icon href="https://github.com/Emonadeo/Mechmarket">
+                    <btn icon inline href="https://github.com/Emonadeo/Mechmarket">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <title>GitHub icon</title>
                             <path
@@ -95,6 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "src/styles/responsive" as r;
+@use "src/styles/color";
 
 #posts {
     margin: 0 auto;
@@ -104,19 +106,14 @@ export default {
 
     @include r.md {
         display: grid;
+        grid-column-gap: 1rem;
         grid-template-columns: 12rem 1fr;
-        grid-template-rows: 2.5rem 1fr;
+        grid-template-rows: min-content 1fr;
     }
 
     @include r.lg {
         display: grid;
         grid-template-columns: 16rem 1fr;
-    }
-
-    @include r.xxl {
-        &.viewing-post {
-            grid-template-columns: 16rem 1fr minmax(32rem, 1fr);
-        }
     }
 
     .corner {
@@ -131,10 +128,26 @@ export default {
     }
 
     .title-bar {
+        padding: 1rem 1rem 0 0;
         display: flex;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            left: -0%;
+            top: 100%;
+            z-index: 10;
+            display: block;
+            height: 1rem;
+            background-size: 1rem 100%;
+            background-image: linear-gradient(color.$background 25%, transparent 100%);
+            background-position: 0 0;
+        }
 
         @include r.md {
-            grid-column: 2 / 4;
+            grid-column: 2 / 3;
             grid-row: 1 / 2;
         }
 
@@ -144,18 +157,49 @@ export default {
     }
 
     aside {
+        margin: 1rem 0 2.5rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
         @include r.md {
             grid-column: 1 / 2;
             grid-row: 2 / 3;
-            border-right: none;
         }
 
-        border-bottom: none;
+        > *:not(:last-child) {
+            margin-bottom: 2.5rem;
+        }
+
+        .tabs {
+            width: 100%;
+            margin-bottom: auto;
+        }
+
+        .options,
+        .socials {
+            margin-left: 2.5rem;
+        }
+
+        .options > *:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+
+        .socials {
+            display: flex;
+        }
     }
 
     main {
         flex: 1;
         overflow-y: auto;
+        padding: 1rem 1rem 1rem 0;
+    }
+
+    main,
+    .title-bar {
+        margin-left: -4px;
+        padding-left: 4px;
     }
 }
 </style>

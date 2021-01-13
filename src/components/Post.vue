@@ -2,7 +2,7 @@
     <router-link class="post surface elevated" :to="{ name: 'posts', params: { id: post.id } }">
         <region class="type-overline" :region="post.region"></region>
         <h6 class="type-h6" v-html="post.title"></h6>
-        <gallery :pictures="post.pictures" :limit="2"></gallery>
+        <gallery :pictures="post.pictures" :limit="2" :min="2"></gallery>
         <div class="type-overline">
             {{
                 post.date.toLocaleString(undefined, {
@@ -36,13 +36,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@use 'src/styles/color';
+@use 'src/styles/mixins';
 
 .post {
     display: flex;
     padding: 1rem;
     flex-direction: column;
     align-items: flex-start;
+
+    @include mixins.interactive;
 
     > *:not(:last-child) {
         margin-bottom: 0.5em;

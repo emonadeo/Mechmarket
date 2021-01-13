@@ -2,6 +2,7 @@
 @use 'typography';
 @use 'color';
 @use 'reset';
+@use 'shape';
 
 * {
     box-sizing: border-box;
@@ -29,25 +30,5 @@
         svg {
             fill: $fg;
         }
-    }
-}
-
-// build shape classes
-.surface {
-    border: 2px solid color.$primary;
-    box-shadow: 2px 2px 0 0 color.$primary;
-    transition-property: box-shadow, transform;
-    transition-duration: 100ms;
-    transition-timing-function: ease-in-out;
-    border-radius: 4px;
-
-    &:hover {
-        transform: translate(-2px, -2px);
-        box-shadow: 4px 4px 0 0 color.$primary;
-    }
-
-    &:active {
-        transform: translate(2px, 2px);
-        box-shadow: none;
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="posts" :size="size">
         <loading v-if="loading"></loading>
-        <post class="posting" v-for="post in posts" :post="post"></post>
+        <post class="posting" v-for="post in posts" :key="post.id" :post="post"></post>
     </div>
 </template>
 

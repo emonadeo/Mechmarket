@@ -1,0 +1,22 @@
+@use "shape";
+@use "color";
+
+@mixin interactive {
+    border: shape.$border;
+    box-shadow: 2px 2px 0 0 color.$primary;
+    transition-property: box-shadow, transform;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+    border-radius: shape.$radius;
+
+    &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0 0 color.$primary;
+    }
+
+    &:active,
+    &[selected] {
+        transform: translate(2px, 2px);
+        box-shadow: none;
+    }
+}

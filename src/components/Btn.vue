@@ -1,11 +1,11 @@
 <template>
-    <a v-if="href" class="btn" :href="href">
+    <a v-if="href" class="btn" :href="href" :selected="selected">
         <slot></slot>
     </a>
-    <router-link v-else-if="to" class="btn" :to="to">
+    <router-link v-else-if="to" class="btn" :to="to" :selected="selected">
         <slot></slot>
     </router-link>
-    <button v-else class="btn" :type="type" @click="$emit('click')">
+    <button v-else class="btn" :type="type" :selected="selected" @click="$emit('click')">
         <slot></slot>
     </button>
 </template>
@@ -19,12 +19,14 @@ export default {
             type: String,
             default: 'button',
         },
+        selected: Boolean,
     },
 };
 </script>
 
 <style lang="scss" scoped>
 @use "src/styles/color";
+@use "src/styles/mixins";
 
 .btn {
     display: flex;
@@ -39,14 +41,22 @@ export default {
     min-height: 2.25rem;
     text-decoration: none;
 
-    &:hover {
-        background-color: unset;
+    &:hover:not([outline]) {
+        color: color.$primary;
+
+        svg {
+            fill: color.$primary;
+        }
     }
 
+    // icon variant
     &[icon] {
         padding: 0;
-        width: 2.25em;
-        height: 2.25em;
+
+        &:not([inline]) {
+            width: 2.25em;
+            height: 2.25em;
+        }
 
         svg {
             height: 1.5em;
@@ -54,18 +64,28 @@ export default {
         }
     }
 
+    // inline variant
     &[inline] {
-        display: inline;
         padding: 0;
         min-height: 0;
 
-        &:hover {
+        &:not([icon]) {
+            display: inline;
+        }
+
+        &:hover:not([icon]) {
             border-bottom: 1px solid;
         }
     }
 
+    // outlined variant
     &[outline] {
-        border: none;
+        @include mixins.interactive;
+        background-color: color.$surface;
+    }
+
+    &[selected]:not([outline]) {
+        background-color: rgba(var(--primary), 0.2);
     }
 }
 </style>

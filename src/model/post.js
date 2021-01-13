@@ -95,6 +95,15 @@ export default class Post {
                 .filter((s) => s.length !== 0);
         }
 
+        let pictures = [];
+
+        try {
+            pictures = await imgur.getPictures(post.selftext);
+        } catch (e) {
+            // Likely 423 Too many Requests.
+            // CORS fails because the preflight OPTIONS request is also turned down with 423.
+        }
+
         return new Post(
             post.id,
             post.link_flair_text.toLowerCase(),
@@ -105,7 +114,7 @@ export default class Post {
             extractProducts(post.title, true),
             extractProducts(post.title, false),
             post.url,
-            await imgur.getPictures(post.selftext)
+            pictures
         );
     }
 }
