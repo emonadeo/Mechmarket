@@ -1,14 +1,12 @@
 <template>
     <nav class="tabs">
-        <router-link
-            v-for="tab in tabs"
-            class="tab"
-            :key="tab"
-            :to="{ name: to, params: { category: tab.toLowerCase() }, query: $route.query }"
-            :selected="$route.params.category === tab.toLowerCase()"
-        >
-            {{ tab }}
-        </router-link>
+        <ul>
+            <li v-for="tab in tabs" class="tab" :selected="$route.params.category === tab.toLowerCase()" :key="tab">
+                <router-link :to="{ name: to, params: { category: tab.toLowerCase() }, query: $route.query }">
+                    {{ tab }}
+                </router-link>
+            </li>
+        </ul>
     </nav>
 </template>
 

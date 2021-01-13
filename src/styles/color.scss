@@ -8,8 +8,8 @@ $surface: var(--surface);
 $on-surface: var(--on-surface);
 
 $map: (
-    primary: ($primary, $on-primary),
-    secondary: ($secondary, $on-secondary),
     background: ($background, $on-background),
     surface: ($surface, $on-surface),
+    primary: ($primary, $on-primary),
+    secondary: ($secondary, $on-secondary),
 );

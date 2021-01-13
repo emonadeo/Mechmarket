@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "src/styles/color";
+
 .btn {
     display: flex;
     align-items: center;
@@ -58,7 +60,7 @@ export default {
         min-height: 0;
 
         &:hover {
-            text-decoration: underline;
+            border-bottom: 1px solid;
         }
     }
 

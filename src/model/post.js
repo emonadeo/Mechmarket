@@ -1,5 +1,5 @@
 import MarkdownIt from 'markdown-it';
-import analyser from 'src/util/analyser';
+import imgur from 'src/util/imgur.js';
 import { methods } from 'src/components/PaymentMethod.vue';
 
 const md = new MarkdownIt({
@@ -17,6 +17,7 @@ export default class Post {
      * @param {string} id
      * @param {string} category
      * @param {string} author
+     * @param {Date} date
      * @param {string} region
      * @param {string} description
      * @param {string[]} have
@@ -24,10 +25,11 @@ export default class Post {
      * @param {string} href
      * @param {string[]} pictures
      */
-    constructor(id, category, author, region, description, have, want, href, pictures) {
+    constructor(id, category, author, date, region, description, have, want, href, pictures) {
         this.id = id;
         this.category = category;
         this.author = author;
+        this.date = date;
         this.region = region;
         this.description = md.render(description);
         this.have = have;
@@ -97,12 +99,13 @@ export default class Post {
             post.id,
             post.link_flair_text.toLowerCase(),
             post.author,
+            new Date(post.created_utc * 1000),
             extractRegion(post.title),
             post.selftext,
             extractProducts(post.title, true),
             extractProducts(post.title, false),
             post.url,
-            await analyser.getPictures(post.selftext)
+            await imgur.getPictures(post.selftext)
         );
     }
 }

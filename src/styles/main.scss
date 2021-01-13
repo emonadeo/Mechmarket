@@ -1,8 +1,7 @@
 @use 'sass:list';
 @use 'typography';
 @use 'color';
-
-$radius: 6px;
+@use 'reset';
 
 * {
     box-sizing: border-box;
@@ -20,17 +19,35 @@ $radius: 6px;
 // build color classes
 @each $color, $values in color.$map {
     .#{$color} {
-        background-color: list.nth($values, 1);
-        color: list.nth($values, 2);
+        $bg: list.nth($values, 1);
+        $fg: list.nth($values, 2);
+
+        background-color: $bg;
+        color: $fg;
+        border-color: $fg;
 
         svg {
-            fill: list.nth($values, 2);
+            fill: $fg;
         }
     }
 }
 
 // build shape classes
-.elevated {
-    padding: $radius;
-    border-radius: $radius;
+.surface {
+    border: 2px solid color.$primary;
+    box-shadow: 2px 2px 0 0 color.$primary;
+    transition-property: box-shadow, transform;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+    border-radius: 4px;
+
+    &:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 4px 4px 0 0 color.$primary;
+    }
+
+    &:active {
+        transform: translate(2px, 2px);
+        box-shadow: none;
+    }
 }

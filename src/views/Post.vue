@@ -55,7 +55,7 @@
 
 <script>
 import Btn from 'src/components/Btn.vue';
-import Gallery from 'src/components/Gallery.vue';
+import Gallery from 'src/components/GalleryLegacy.vue';
 import Loading from 'src/components/Loading.vue';
 import Overline from 'src/components/Overline.vue';
 import PaymentMethod from 'src/components/PaymentMethod.vue';

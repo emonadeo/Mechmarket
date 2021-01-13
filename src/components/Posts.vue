@@ -1,7 +1,7 @@
 <template>
     <div class="posts" :size="size">
         <loading v-if="loading"></loading>
-        <post v-show="!loading" class="posting" v-for="post in posts" :post="post"></post>
+        <post class="posting" v-for="post in posts" :post="post"></post>
     </div>
 </template>
 
@@ -31,13 +31,14 @@ export default {
 .posts {
     display: grid;
     grid-gap: 1rem;
+    overflow: visible;
 
     &[size='1'] {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     &[size='2'] {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 </style>

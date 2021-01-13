@@ -3,7 +3,7 @@ async function getPictures(text) {
 
     // get links in post and avoid duplicates
     let pictures = [
-        ...text.matchAll(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]*\.[a-zA-Z0-9]*\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/g),
+        ...text.matchAll(/(?:https?:)?\/\/(?:www\.)?[-a-zA-Z0-9_+~#=]*\.?imgur.com\/[-a-zA-Z0-9@:%_+.~#?&\/=]+/g),
     ].map((res) => res[0]);
 
     // cancel if no pictures
@@ -45,7 +45,7 @@ async function getPictures(text) {
                 return jsonImages.data.images.map((img) => img.link);
             } else if (/imgur\.com\/[A-Za-z0-9]*$/.test(t)) {
                 // timestamp is imgur photo
-                t = `https://i.imgur.com/${t.split('/').pop()}.jpg`;
+                return `https://i.imgur.com/${t.split('/').pop()}.jpg`;
             }
             return t;
         })
@@ -57,6 +57,14 @@ async function getPictures(text) {
     });
 
     return [...new Set(pictures)];
+}
+
+/**
+ * @param {string} picture source of picture
+ * @param {string} [size=m] s|m|l
+ */
+export function resize(picture, size = 'm') {
+    return picture.split(/(?=\.(?:png|jpg|jpeg|gif|webp)\/?$)/).join(size);
 }
 
 export default { getPictures };
