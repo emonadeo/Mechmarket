@@ -47,7 +47,7 @@
             </section>
             <section class="pictures" v-if="postData.pictures.length > 0">
                 <h1 class="title">Pictures</h1>
-                <gallery :pictures="postData.pictures"></gallery>
+                <!--gallery :pictures="postData.pictures"></gallery-->
             </section>
         </main>
     </div>
@@ -55,7 +55,6 @@
 
 <script>
 import Btn from 'src/components/Btn.vue';
-import Gallery from 'src/components/GalleryLegacy.vue';
 import Loading from 'src/components/Loading.vue';
 import Overline from 'src/components/Overline.vue';
 import PaymentMethod from 'src/components/PaymentMethod.vue';
@@ -69,7 +68,6 @@ export default {
     },
     components: {
         Btn,
-        Gallery,
         Loading,
         Overline,
         PaymentMethod,
