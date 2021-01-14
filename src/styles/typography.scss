@@ -31,8 +31,12 @@ $typography: (
     ),
     h6: (
         font-family: $family-roboto-condensed,
-        font-size: 20px,
-    ),
+        font-size: 22.5055px, // cap height: 16
+        line-height: 28px, // line gap: 12
+        padding: 0.05px 0,
+        before: -0.2552em,
+        after: -0.2825em
+),
     body1: (
         font-family: $family-overpass,
         font-size: 16px,
@@ -60,8 +64,12 @@ $typography: (
     ),
     overline: (
         font-family: $family-roboto-mono,
-        font-size: 12px,
         font-weight: 600,
         text-transform: uppercase,
+        font-size: 14.0659px, // cap height: 10
+        line-height: 22px, // line gap: 12
+        padding: 0.05px 0,
+        before: -0.4631em,
+        after: -0.3972em
     ),
 );

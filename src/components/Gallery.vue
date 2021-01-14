@@ -6,7 +6,7 @@
             :src="resize(picture)"
             :alt="`Photo #${index}`"
         ></loading-picture>
-        <div class="placeholder" v-for="i in min - pictures.length"></div>
+        <div class="placeholder" v-for="i in Math.max(min - pictures.length, 0)"></div>
     </div>
 </template>
 

@@ -12,7 +12,23 @@
 @each $type, $props in typography.$typography {
     .type-#{$type} {
         @each $prop, $value in $props {
-            #{$prop}: #{$value};
+            @if $prop == 'before' {
+                &::before {
+                    content: '';
+                    margin-top: $value;
+                    display: block;
+                    height: 0;
+                }
+            } @else if $prop == 'after' {
+                &::after {
+                    content: '';
+                    margin-bottom: $value;
+                    display: block;
+                    height: 0;
+                }
+            } @else {
+                #{$prop}: #{$value};
+            }
         }
     }
 }

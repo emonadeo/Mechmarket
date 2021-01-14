@@ -1,7 +1,9 @@
 <template>
-    <router-link class="post surface elevated" :to="{ name: 'posts', params: { id: post.id } }">
+    <router-link class="post surface elevated" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
         <region class="type-overline" :region="post.region"></region>
-        <h6 class="type-h6" v-html="post.title"></h6>
+        <div class="title">
+            <h6 class="type-h6" v-html="post.title"></h6>
+        </div>
         <gallery :pictures="post.pictures" :limit="2" :min="2"></gallery>
         <div class="type-overline">
             {{
@@ -32,6 +34,11 @@ export default {
         Gallery,
         Region,
     },
+    computed: {
+        size() {
+            return this.$store.state.size;
+        },
+    },
 };
 </script>
 
@@ -47,7 +54,21 @@ export default {
     @include mixins.interactive;
 
     > *:not(:last-child) {
-        margin-bottom: 0.5em;
+        margin-bottom: 1rem;
+    }
+
+    &[size='1'],
+    &[size='2'] {
+        .title h6 {
+            box-sizing: content-box;
+            height: 2em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            padding-bottom: 0.5rem;
+            margin-bottom: -0.5rem;
+        }
     }
 }
 </style>
