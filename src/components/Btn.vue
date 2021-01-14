@@ -1,11 +1,26 @@
 <template>
-    <a v-if="href" class="btn" :href="href" :selected="selected">
+    <a v-if="href" class="btn" :class="{ 'type-button': !inline }" :inline="inline" :href="href"  :selected="selected">
         <slot></slot>
     </a>
-    <router-link v-else-if="to" class="btn" :to="to" :selected="selected">
+    <router-link
+        v-else-if="to"
+        class="btn"
+        :class="{ 'type-button': !inline }"
+        :inline="inline"
+        :to="to"
+        :selected="selected"
+    >
         <slot></slot>
     </router-link>
-    <button v-else class="btn" :type="type" :selected="selected" @click="$emit('click')">
+    <button
+        v-else
+        class="btn"
+        :type="type"
+        :class="{ 'type-button': !inline }"
+        :selected="selected"
+        :inline="inline"
+        @click="$emit('click')"
+    >
         <slot></slot>
     </button>
 </template>
@@ -20,6 +35,7 @@ export default {
             default: 'button',
         },
         selected: Boolean,
+        inline: Boolean,
     },
 };
 </script>

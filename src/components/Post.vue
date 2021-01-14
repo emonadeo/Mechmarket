@@ -4,7 +4,7 @@
         <div class="title">
             <h6 class="type-h6" v-html="post.title"></h6>
         </div>
-        <gallery :pictures="post.pictures" :limit="2" :min="2"></gallery>
+        <gallery :pictures="post.pictures" :limit="limit" :min="limit"></gallery>
         <div class="type-overline">
             {{
                 post.date.toLocaleString(undefined, {
@@ -37,6 +37,16 @@ export default {
     computed: {
         size() {
             return this.$store.state.size;
+        },
+        limit() {
+            switch (this.size) {
+                case 0:
+                    return 6;
+                case 1:
+                    return 3;
+                case 2:
+                    return 2;
+            }
         },
     },
 };

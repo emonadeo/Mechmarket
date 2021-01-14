@@ -25,7 +25,7 @@ input {
     color: inherit;
     border: none;
     background-color: transparent;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     outline: none;
     border-bottom-width: 1px;
     border-bottom-style: solid;

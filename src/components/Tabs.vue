@@ -2,7 +2,10 @@
     <nav class="tabs">
         <ul>
             <li v-for="tab in tabs" class="tab" :selected="$route.params.category === tab.toLowerCase()" :key="tab">
-                <router-link :to="{ name: to, params: { category: tab.toLowerCase() }, query: $route.query }">
+                <router-link
+                    class="type-button"
+                    :to="{ name: to, params: { category: tab.toLowerCase() }, query: $route.query }"
+                >
                     {{ tab }}
                 </router-link>
             </li>
