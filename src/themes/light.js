@@ -1,8 +1,8 @@
 module.exports = {
-    primary: '#000000',
+    primary: '#35342f',
     onPrimary: '#ffffff',
     background: '#fafafa',
-    onBackground: '#000000',
+    onBackground: '#35342f',
     surface: '#ffffff',
-    onSurface: '#000000',
+    onSurface: '#35342f',
 };

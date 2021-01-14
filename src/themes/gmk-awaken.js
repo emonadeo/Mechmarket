@@ -3,6 +3,6 @@ module.exports = {
     onPrimary: '#000000',
     background: '#000000',
     onBackground: '#FFE84A',
-    surface: '#161620',
+    surface: '#090914',
     onSurface: '#FFE84A',
 };

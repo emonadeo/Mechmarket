@@ -59,7 +59,7 @@ import Loading from 'src/components/Loading.vue';
 import Overline from 'src/components/Overline.vue';
 import PaymentMethod from 'src/components/PaymentMethod.vue';
 
-import reddit from 'src/util/reddit';
+import { fetchPost } from 'src/util/reddit';
 
 export default {
     props: {
@@ -85,7 +85,7 @@ export default {
     methods: {
         async fetchData() {
             this.loading = true;
-            this.postData = await reddit.fetchPost(this.id);
+            this.postData = await fetchPost(this.id);
             this.loading = false;
         },
     },

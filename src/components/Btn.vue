@@ -1,5 +1,5 @@
 <template>
-    <a v-if="href" class="btn" :class="{ 'type-button': !inline }" :inline="inline" :href="href"  :selected="selected">
+    <a v-if="href" class="btn" :class="{ 'type-button': !inline }" :inline="inline" :href="href" :selected="selected">
         <slot></slot>
     </a>
     <router-link
@@ -57,27 +57,12 @@ export default {
     min-height: 2.25rem;
     text-decoration: none;
 
+    transition-property: background-color;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+
     &:hover:not([outline]) {
-        color: color.$primary;
-
-        svg {
-            fill: color.$primary;
-        }
-    }
-
-    // icon variant
-    &[icon] {
-        padding: 0;
-
-        &:not([inline]) {
-            width: 2.25em;
-            height: 2.25em;
-        }
-
-        svg {
-            height: 1.5em;
-            width: 1.5em;
-        }
+        background-color: rgba(var(--primary), color.$alpha-hover);
     }
 
     // inline variant
@@ -91,6 +76,23 @@ export default {
 
         &:hover:not([icon]) {
             border-bottom: 1px solid;
+        }
+    }
+
+    // icon variant
+    &[icon] {
+        padding: 0;
+        border-radius: 50%;
+        width: 2.25em;
+        height: 2.25em;
+
+        &[inline] {
+            margin: -0.375em;
+        }
+
+        svg {
+            height: 1.5em;
+            width: 1.5em;
         }
     }
 

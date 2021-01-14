@@ -7,6 +7,9 @@ $on-background: rgb(var(--on-background));
 $surface: rgb(var(--surface));
 $on-surface: rgb(var(--on-surface));
 
+$alpha-hover: 0.1;
+$alpha-focus: 0.3;
+
 $map: (
     background: ($background, $on-background),
     surface: ($surface, $on-surface),

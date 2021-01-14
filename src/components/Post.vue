@@ -5,6 +5,7 @@
             <h6 class="type-h6" v-html="post.title"></h6>
         </div>
         <gallery :pictures="post.pictures" :limit="limit" :min="limit"></gallery>
+        <p v-show="size === 0" v-html="post.description"></p>
         <div class="type-overline">
             {{
                 post.date.toLocaleString(undefined, {
@@ -76,8 +77,8 @@ export default {
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            padding-bottom: 0.5rem;
-            margin-bottom: -0.5rem;
+            padding: 0.5rem 0;
+            margin: -0.5rem 0;
         }
     }
 }

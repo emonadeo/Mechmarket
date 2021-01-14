@@ -44,7 +44,7 @@ export default {
 
         &:hover,
         &:focus {
-            background-color: rgba(var(--primary), 0.15);
+            background-color: rgba(var(--primary), color.$alpha-hover);
         }
 
         &[selected] {

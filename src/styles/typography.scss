@@ -1,15 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
-$family-roboto: 'Roboto', ui-sans-serif, sans-serif;
+$family-roboto-condensed: 'Roboto Condensed', ui-sans-serif, system-ui, sans-serif;
 $family-roboto-mono: 'Roboto Mono', ui-monospace, monospace;
-$family-fira-code: 'Fira Code', ui-monospace, monospace;
-$family-courier-prime: 'Courier Prime', ui-monospace, monospace;
-$family-roboto-condensed: 'Roboto Condensed', ui-monospace, monospace;
 $family-overpass: 'Overpass', ui-sans-serif, system-ui, sans-serif;
 
 $typography: (
@@ -34,36 +28,44 @@ $typography: (
         font-size: 24px,
     ),
     h6: (
+        // cap height: 16
+        // line gap: 12
         font-family: $family-roboto-condensed,
         font-size: 22.5055px,
-        // cap height: 16
         line-height: 28px,
-        // line gap: 12
         padding: 0.05px 0,
         before: -0.2552em,
         after: -0.2825em,
     ),
     body1: (
-        font-family: $family-roboto,
-        font-size: 16px,
+        // cap height: 12
+        // line gap: 12
+        font-family: $family-overpass,
+        font-size: 17.1429px,
+        line-height: 24px,
+        padding: 0.05px 0,
+        before: -0.2519em,
+        after: -0.4539em,
     ),
     body2: (
-        font-family: $family-roboto,
+        font-family: $family-overpass,
         font-size: 14px,
     ),
     subtitle1: (
-        font-family: $family-fira-code,
+        font-family: $family-roboto-mono,
         font-size: 16px,
     ),
     subtitle2: (
-        font-family: $family-fira-code,
+        font-family: $family-roboto-mono,
         font-size: 14px,
     ),
     button: (
+        // cap height: 12
+        // line gap: 12
         font-family: $family-roboto-mono,
         font-weight: 500,
-        font-size: 16.8791px, // cap height: 12
-        line-height: 24px, // line height: 12
+        font-size: 16.8791px,
+        line-height: 24px,
         padding: 0.05px 0,
         before: -0.3914em,
         after: -0.3255em,
@@ -73,11 +75,13 @@ $typography: (
         font-size: 12px,
     ),
     overline: (
+        // cap height: 10
+        // line gap: 12
         font-family: $family-roboto-mono,
         font-weight: 600,
         text-transform: uppercase,
-        font-size: 14.0659px, // cap height: 10
-        line-height: 22px, // line gap: 12
+        font-size: 14.0659px,
+        line-height: 22px,
         padding: 0.05px 0,
         before: -0.4631em,
         after: -0.3972em,

@@ -7,10 +7,10 @@
                 />
             </svg>
         </div>
-        <form class="title-bar background">
+        <div class="title-bar background">
             <search></search>
             <region-picker></region-picker>
-        </form>
+        </div>
         <aside>
             <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
             <div class="options">
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import reddit from 'src/util/reddit';
+import { fetchPosts } from 'src/util/reddit';
 
 import Btn from 'src/components/Btn.vue';
 import Posts from 'src/components/Posts.vue';
@@ -93,7 +93,7 @@ export default {
     methods: {
         loadPosts: async function (category, region, query) {
             this.loading = true;
-            this.posts = await reddit.fetchPosts(category, region, query);
+            this.posts = await fetchPosts(category, region, query);
             this.loading = false;
         },
     },
@@ -194,7 +194,6 @@ export default {
             display: flex;
             margin-left: 2.5rem;
         }
-
 
         .options {
             flex-direction: column;

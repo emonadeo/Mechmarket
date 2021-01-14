@@ -8,7 +8,7 @@
 export default {
     computed: {
         theme() {
-            return this.$store.state.theme;
+            return this.$store.state.theme.replaceAll('_', '-');
         },
     },
 };

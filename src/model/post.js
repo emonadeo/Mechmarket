@@ -1,12 +1,9 @@
-import MarkdownIt from 'markdown-it';
+import showdown from 'showdown';
 import imgur from 'src/util/imgur.js';
 import { methods } from 'src/components/PaymentMethod.vue';
 
-const md = new MarkdownIt({
-    html: true,
-    linkify: true,
-    typographer: true,
-});
+const md = new showdown.Converter({ tables: true, strikethrough: true });
+
 const paymentMethods = Object.keys(methods);
 
 /**
@@ -31,7 +28,7 @@ export default class Post {
         this.author = author;
         this.date = date;
         this.region = region;
-        this.description = md.render(description);
+        this.description = md.makeHtml(description);
         this.have = have;
         this.want = want;
         this.pictures = pictures;
@@ -95,6 +92,16 @@ export default class Post {
                 .filter((s) => s.length !== 0);
         }
 
+        /**
+         * @param {string} str
+         * @return string
+         */
+        function decode(str) {
+            return str
+                .replace(/&amp;/gi, '&') // Fix special characters
+                .replace(/:-/g, ':--'); // Fix tables
+        }
+
         let pictures = [];
 
         try {
@@ -110,7 +117,7 @@ export default class Post {
             post.author,
             new Date(post.created_utc * 1000),
             extractRegion(post.title),
-            post.selftext,
+            decode(post.selftext),
             extractProducts(post.title, true),
             extractProducts(post.title, false),
             post.url,
