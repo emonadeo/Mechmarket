@@ -10,7 +10,7 @@ const store = new Vuex.Store({
             window.localStorage.getItem('theme') ||
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') ||
             'light',
-        size: parseInt(window.localStorage.getItem('size')) || 1,
+        size: window.localStorage.getItem('size') ? parseInt(window.localStorage.getItem('size')) : 1,
     },
     mutations: {
         updateTheme(state, theme) {

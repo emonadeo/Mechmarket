@@ -118,20 +118,18 @@ export default {
     }
 
     @include r.lg {
-        display: grid;
         grid-template-columns: 16rem 1fr;
     }
 
-    .corner {
-        display: none;
+    @include r.xxl {
+        grid-template-columns: 16rem 1fr 16rem;
+    }
 
-        @include r.md {
-            display: flex;
-            align-items: flex-end;
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-            border-right: none;
-        }
+    .corner {
+        display: flex;
+        align-items: flex-end;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
 
         #logo {
             height: 2rem;
@@ -143,6 +141,8 @@ export default {
         padding: 1rem 2rem 2px 0;
         display: flex;
         position: relative;
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
 
         &::after {
             content: '';
@@ -170,15 +170,12 @@ export default {
     }
 
     aside {
-        margin: 1rem 0 2.5rem 0;
         display: flex;
+        margin: 1rem 0 2.5rem 0;
         flex-direction: column;
         align-items: flex-start;
-
-        @include r.md {
-            grid-column: 1 / 2;
-            grid-row: 2 / 3;
-        }
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
 
         > *:not(:last-child) {
             margin-bottom: 2.5rem;
@@ -209,10 +206,13 @@ export default {
         flex: 1;
         overflow-y: auto;
         padding: 1rem 1rem 1rem 0;
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
     }
 
     main,
     .title-bar {
+        // avoid overflow when hovering above cards
         margin-left: -4px;
         padding-left: 4px;
     }

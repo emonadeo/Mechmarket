@@ -3,6 +3,7 @@
 @use 'color';
 @use 'reset';
 @use 'shape';
+@use 'responsive' as r;
 
 * {
     box-sizing: border-box;
@@ -45,6 +46,50 @@
 
         svg {
             fill: $fg;
+        }
+    }
+}
+
+// markdown adjustments
+.markdown {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    td {
+        overflow-wrap: break-word;
+        word-break: break-word;
+
+        @include r.lg {
+            max-width: 36rem;
+            margin: 0 auto;
+        }
+    }
+
+    table {
+        $border: 2px solid rgba(var(--on-surface), color.$alpha-focus);
+
+        border: $border;
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        overflow: auto;
+
+        td,
+        th {
+            padding: 1rem;
+            min-width: 6em;
+
+            &:not(:last-child) {
+                border-right: $border;
+            }
+        }
+
+        tr:not(:last-child) {
+            border-bottom: $border;
         }
     }
 }

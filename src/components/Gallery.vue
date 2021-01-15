@@ -1,12 +1,11 @@
 <template>
     <div class="gallery">
         <loading-picture
-            v-for="(picture, index) in pictures.slice(0, limit)"
+            v-for="(picture, index) in limit > 0 ? pictures.slice(0, limit) : pictures"
             :key="picture"
             :src="resize(picture)"
             :alt="`Photo #${index}`"
         ></loading-picture>
-        <div class="placeholder" v-for="i in Math.max(min - pictures.length, 0)"></div>
     </div>
 </template>
 
@@ -19,8 +18,10 @@ export default {
     name: 'Gallery',
     props: {
         pictures: Array,
-        min: Number,
-        limit: Number,
+        limit: {
+            type: Number,
+            default: -1,
+        },
     },
     components: {
         LoadingPicture,
@@ -33,20 +34,13 @@ export default {
 
 <style scoped lang="scss">
 @use 'src/styles/color';
+@use 'src/styles/shape';
 
 .gallery {
-    display: flex;
-
-    .loading-picture,
-    .placeholder {
+    .loading-picture {
         height: 8rem;
         width: 8rem;
-        margin-right: 1rem;
-        border-radius: 4px;
-    }
-
-    .placeholder {
-        background-color: color.$background;
+        border-radius: shape.$radius;
     }
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-    <router-link class="post surface elevated" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
+    <router-link class="post surface elevated" :has-gallery="hasGallery" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
         <region class="type-overline" :region="post.region"></region>
         <div class="title">
             <h6 class="type-h6" v-html="post.title"></h6>
         </div>
-        <gallery :pictures="post.pictures" :limit="limit" :min="limit"></gallery>
-        <p v-show="size === 0" v-html="post.description"></p>
-        <div class="type-overline">
+        <gallery :pictures="post.pictures" :limit="limit"></gallery>
+        <article v-show="size === 0" class="description markdown" v-html="post.description"></article>
+        <div class="date type-overline">
             {{
                 post.date.toLocaleString(undefined, {
                     year: 'numeric',
@@ -42,18 +42,22 @@ export default {
         limit() {
             switch (this.size) {
                 case 0:
-                    return 6;
+                    return -1;
                 case 1:
-                    return 3;
+                    return 10;
                 case 2:
-                    return 2;
+                    return 3;
             }
+        },
+        hasGallery() {
+            return this.post.pictures.length > 0;
         },
     },
 };
 </script>
 
 <style scoped lang="scss">
+@use 'src/styles/responsive' as r;
 @use 'src/styles/mixins';
 
 .post {
@@ -68,6 +72,39 @@ export default {
         margin-bottom: 1rem;
     }
 
+    &[size='0'] {
+        @include r.md {
+            padding: 2rem;
+        }
+
+        @include r.xl {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: 1fr min-content;
+            grid-auto-rows: minmax(0, min-content);
+            grid-template-areas:
+                'region gallery'
+                'title gallery'
+                'description gallery'
+                'date gallery';
+
+            > * {
+                margin-bottom: 0;
+            }
+
+            .gallery {
+                display: grid;
+                grid-template-columns: repeat(2, 8rem);
+                grid-auto-rows: 8rem;
+                grid-gap: 1rem;
+                overflow-y: auto;
+                height: 0;
+                min-height: 100%;
+            }
+        }
+    }
+
+    // clamp title to two line on linear view
     &[size='1'],
     &[size='2'] {
         .title h6 {
@@ -80,6 +117,27 @@ export default {
             padding: 0.5rem 0;
             margin: -0.5rem 0;
         }
+    }
+
+    .region {
+        grid-area: region;
+    }
+
+    .title {
+        grid-area: title;
+    }
+
+    .gallery {
+        grid-area: gallery;
+    }
+
+    .description {
+        grid-area: description;
+        overflow: hidden;
+    }
+
+    .date {
+        grid-area: date;
     }
 }
 </style>

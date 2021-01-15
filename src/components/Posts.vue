@@ -33,6 +33,10 @@ export default {
     grid-gap: 1rem;
     overflow: visible;
 
+    &[size='0'] {
+        margin: 0 auto;
+    }
+
     &[size='1'] {
         grid-template-columns: repeat(2, 1fr);
     }
