@@ -34,6 +34,8 @@ export default {
     overflow: visible;
 
     &[size='0'] {
+        display: flex;
+        flex-direction: column;
         margin: 0 auto;
     }
 

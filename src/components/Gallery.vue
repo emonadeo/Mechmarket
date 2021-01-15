@@ -41,6 +41,11 @@ export default {
         height: 8rem;
         width: 8rem;
         border-radius: shape.$radius;
+        transition: box-shadow 100ms ease-in-out;
+
+        &:hover, &:focus {
+            box-shadow: 0 0 0 2px color.$primary;
+        }
     }
 }
 </style>

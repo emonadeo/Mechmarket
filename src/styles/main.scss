@@ -1,4 +1,5 @@
 @use 'sass:list';
+@use 'sass:map';
 @use 'typography';
 @use 'color';
 @use 'reset';
@@ -10,27 +11,46 @@
 }
 
 // build typography classes
-@each $type, $props in typography.$typography {
-    .type-#{$type} {
-        @each $prop, $value in $props {
-            @if $prop == 'before' {
-                &::before {
-                    content: '';
-                    margin-top: $value;
-                    display: block;
-                    height: 0;
-                }
-            } @else if $prop == 'after' {
-                &::after {
-                    content: '';
-                    margin-bottom: $value;
-                    display: block;
-                    height: 0;
-                }
-            } @else {
-                #{$prop}: #{$value};
+@mixin type($type, $props) {
+    @each $prop, $value in $props {
+        @if $prop == 'before' {
+            &::before {
+                content: '';
+                margin-top: $value;
+                display: block;
+                height: 0;
             }
+        } @else if $prop == 'after' {
+            &::after {
+                content: '';
+                margin-bottom: $value;
+                display: block;
+                height: 0;
+            }
+        } @else {
+            #{$prop}: #{$value};
         }
+    }
+}
+
+@each $type, $props in typography.$typography {
+    @if (list.index((h1, h2, h3, h4, h5, h6), $type) != null) {
+        #{$type} {
+            @include type($type, $props);
+        }
+    }
+    @if ($type == 'body1') {
+        p,
+        .markdown li {
+            @include type($type, $props);
+        }
+
+        .markdown li {
+            margin-bottom: map.get($props, line-height) / 2;
+        }
+    }
+    .type-#{$type} {
+        @include type($type, $props);
     }
 }
 
@@ -52,6 +72,8 @@
 
 // markdown adjustments
 .markdown {
+    width: 100%;
+
     h1,
     h2,
     h3,
@@ -59,29 +81,71 @@
     h5,
     h6,
     p,
-    td {
+    td,
+    ol,
+    ul {
         overflow-wrap: break-word;
         word-break: break-word;
 
         @include r.lg {
-            max-width: 36rem;
+            max-width: typography.$max-line-width;
             margin: 0 auto;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ol,
+    ul,
+    table {
+        margin-bottom: 2rem;
+    }
+
+    ol,
+    ul {
+        padding-inline-start: 2rem;
+    }
+
+    ul {
+        list-style-type: '\2014';
+    }
+
+    li {
+        padding-left: 0.5em;
+    }
+
+    a {
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+
+        &:hover {
+            background-color: rgba(var(--primary), color.$alpha-hover);
+        }
+
+        &:focus {
+            background-color: rgba(var(--primary), color.$alpha-focus);
         }
     }
 
     table {
         $border: 2px solid rgba(var(--on-surface), color.$alpha-focus);
 
+        display: block;
         border: $border;
         width: 100%;
         border-spacing: 0;
         border-collapse: collapse;
-        overflow: auto;
+        overflow-x: auto;
 
         td,
         th {
             padding: 1rem;
-            min-width: 6em;
+            min-width: 8em;
 
             &:not(:last-child) {
                 border-right: $border;
@@ -91,5 +155,9 @@
         tr:not(:last-child) {
             border-bottom: $border;
         }
+    }
+
+    > *:last-child {
+        margin-bottom: 0;
     }
 }

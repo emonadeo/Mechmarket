@@ -20,6 +20,5 @@ body,
 #app {
     width: 100%;
     height: 100%;
-    line-height: 1.5;
 }
 </style>

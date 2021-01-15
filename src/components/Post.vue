@@ -1,5 +1,5 @@
 <template>
-    <router-link class="post surface elevated" :has-gallery="hasGallery" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
+    <router-link class="post surface elevated" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
         <region class="type-overline" :region="post.region"></region>
         <div class="title">
             <h6 class="type-h6" v-html="post.title"></h6>
@@ -49,57 +49,59 @@ export default {
                     return 3;
             }
         },
-        hasGallery() {
-            return this.post.pictures.length > 0;
-        },
     },
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use 'src/styles/responsive' as r;
 @use 'src/styles/mixins';
+@use 'src/styles/typography';
+@use "src/styles/color";
 
 .post {
     display: flex;
     padding: 1rem;
     flex-direction: column;
-    align-items: flex-start;
 
     @include mixins.interactive;
 
-    > *:not(:last-child) {
+    .region,
+    .title {
         margin-bottom: 1rem;
     }
 
+    .description {
+        margin-bottom: 2rem;
+    }
+
     &[size='0'] {
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+
+            .loading-picture {
+                margin-bottom: 1rem;
+                margin-right: 1rem;
+            }
+        }
+
         @include r.md {
             padding: 2rem;
         }
 
-        @include r.xl {
-            display: grid;
-            grid-gap: 1rem;
-            grid-template-columns: 1fr min-content;
-            grid-auto-rows: minmax(0, min-content);
-            grid-template-areas:
-                'region gallery'
-                'title gallery'
-                'description gallery'
-                'date gallery';
-
-            > * {
-                margin-bottom: 0;
+        @include r.lg {
+            .title {
+                width: typography.$max-line-width;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .gallery {
-                display: grid;
-                grid-template-columns: repeat(2, 8rem);
-                grid-auto-rows: 8rem;
-                grid-gap: 1rem;
-                overflow-y: auto;
-                height: 0;
-                min-height: 100%;
+                min-width: typography.$max-line-width;
+                align-self: center;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
             }
         }
     }
@@ -117,27 +119,6 @@ export default {
             padding: 0.5rem 0;
             margin: -0.5rem 0;
         }
-    }
-
-    .region {
-        grid-area: region;
-    }
-
-    .title {
-        grid-area: title;
-    }
-
-    .gallery {
-        grid-area: gallery;
-    }
-
-    .description {
-        grid-area: description;
-        overflow: hidden;
-    }
-
-    .date {
-        grid-area: date;
     }
 }
 </style>

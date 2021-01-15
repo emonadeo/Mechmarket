@@ -6,25 +6,27 @@ $family-roboto-condensed: 'Roboto Condensed', ui-sans-serif, system-ui, sans-ser
 $family-roboto-mono: 'Roboto Mono', ui-monospace, monospace;
 $family-overpass: 'Overpass', ui-sans-serif, system-ui, sans-serif;
 
+$max-line-width: 36rem;
+
 $typography: (
     h1: (
-        font-family: $family-roboto-mono,
+        font-family: $family-roboto-condensed,
         font-size: 96px,
     ),
     h2: (
-        font-family: $family-roboto-mono,
+        font-family: $family-roboto-condensed,
         font-size: 60px,
     ),
     h3: (
-        font-family: $family-roboto-mono,
+        font-family: $family-roboto-condensed,
         font-size: 48px,
     ),
     h4: (
-        font-family: $family-roboto-mono,
+        font-family: $family-roboto-condensed,
         font-size: 34px,
     ),
     h5: (
-        font-family: $family-roboto-mono,
+        font-family: $family-roboto-condensed,
         font-size: 24px,
     ),
     h6: (

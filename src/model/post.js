@@ -2,7 +2,7 @@ import showdown from 'showdown';
 import imgur from 'src/util/imgur.js';
 import { methods } from 'src/components/PaymentMethod.vue';
 
-const md = new showdown.Converter({ tables: true, strikethrough: true });
+const md = new showdown.Converter({ tables: true, strikethrough: true, simplifiedAutoLink: true });
 
 const paymentMethods = Object.keys(methods);
 
@@ -99,6 +99,7 @@ export default class Post {
         function decode(str) {
             return str
                 .replace(/&amp;/gi, '&') // Fix special characters
+                .replace(/&#x200B;/gi, '') // Remove extra whitespace
                 .replace(/:-/g, ':--'); // Fix tables
         }
 
