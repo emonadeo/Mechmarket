@@ -10,26 +10,36 @@ $max-line-width: 36rem;
 
 $typography: (
     h1: (
+        // cap height: 22
+        // line gap: 18
         font-family: $family-roboto-condensed,
-        font-size: 96px,
+        font-size: 30.9451px,
+        line-height: 40px,
+        padding: 0.05px 0,
+        before: -0.2788em,
+        after: -0.3061em,
     ),
     h2: (
+        // cap height: 20
+        // line gap: 16
         font-family: $family-roboto-condensed,
-        font-size: 60px,
+        font-size: 28.1319px,
+        line-height: 36px,
+        padding: 0.05px 0,
+        before: -0.2725em,
+        after: -0.2998em,
     ),
     h3: (
+        // cap height: 18
+        // line gap: 14
         font-family: $family-roboto-condensed,
-        font-size: 48px,
+        font-size: 25.3187px,
+        line-height: 32px,
+        padding: 0.05px 0,
+        before: -0.2648em,
+        after: -0.2921em,
     ),
     h4: (
-        font-family: $family-roboto-condensed,
-        font-size: 34px,
-    ),
-    h5: (
-        font-family: $family-roboto-condensed,
-        font-size: 24px,
-    ),
-    h6: (
         // cap height: 16
         // line gap: 12
         font-family: $family-roboto-condensed,
@@ -38,6 +48,26 @@ $typography: (
         padding: 0.05px 0,
         before: -0.2552em,
         after: -0.2825em,
+    ),
+    h5: (
+        // cap height: 14
+        // line gap: 12
+        font-family: $family-roboto-condensed,
+        font-size: 19.6923px,
+        line-height: 26px,
+        padding: 0.05px 0,
+        before: -0.2936em,
+        after: -0.3209em,
+    ),
+    h6: (
+        // cap height: 12
+        // line gap: 12
+        font-family: $family-roboto-condensed,
+        font-size: 16.8791px,
+        line-height: 24px,
+        padding: 0.05px 0,
+        before: -0.3448em,
+        after: -0.3721em,
     ),
     body1: (
         // cap height: 12
@@ -49,18 +79,6 @@ $typography: (
         before: -0.2519em,
         after: -0.4539em,
     ),
-    body2: (
-        font-family: $family-overpass,
-        font-size: 14px,
-    ),
-    subtitle1: (
-        font-family: $family-roboto-mono,
-        font-size: 16px,
-    ),
-    subtitle2: (
-        font-family: $family-roboto-mono,
-        font-size: 14px,
-    ),
     button: (
         // cap height: 12
         // line gap: 12
@@ -71,10 +89,6 @@ $typography: (
         padding: 0.05px 0,
         before: -0.3914em,
         after: -0.3255em,
-    ),
-    caption: (
-        font-family: $family-overpass,
-        font-size: 12px,
     ),
     overline: (
         // cap height: 10

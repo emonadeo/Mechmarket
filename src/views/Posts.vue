@@ -46,6 +46,7 @@ import Search from 'src/components/Search.vue';
 import SizePicker from 'src/components/SizePicker.vue';
 import Tabs from 'src/components/Tabs.vue';
 import ThemePicker from 'src/components/ThemePicker.vue';
+import Post from 'src/model/post.js';
 
 export default {
     props: {

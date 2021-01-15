@@ -35,7 +35,7 @@
 
 @each $type, $props in typography.$typography {
     @if (list.index((h1, h2, h3, h4, h5, h6), $type) != null) {
-        #{$type} {
+        .markdown #{$type} {
             @include type($type, $props);
         }
     }
@@ -130,6 +130,14 @@
         &:focus {
             background-color: rgba(var(--primary), color.$alpha-focus);
         }
+    }
+
+    hr {
+        margin: 2rem 0;
+        border-right: none;
+        border-left: none;
+        border-bottom: none;
+        border-top-style: solid;
     }
 
     table {

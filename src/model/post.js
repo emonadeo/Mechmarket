@@ -99,7 +99,7 @@ export default class Post {
         function decode(str) {
             return str
                 .replace(/&amp;/gi, '&') // Fix special characters
-                .replace(/&#x200B;/gi, '') // Remove extra whitespace
+                .replace(/&(#x200B|nbsp);/gi, '') // Remove extra whitespace
                 .replace(/:-/g, ':--'); // Fix tables
         }
 

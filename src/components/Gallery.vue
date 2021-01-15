@@ -43,7 +43,8 @@ export default {
         border-radius: shape.$radius;
         transition: box-shadow 100ms ease-in-out;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             box-shadow: 0 0 0 2px color.$primary;
         }
     }

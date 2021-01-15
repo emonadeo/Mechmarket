@@ -2,9 +2,9 @@
     <router-link class="post surface elevated" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
         <region class="type-overline" :region="post.region"></region>
         <div class="title">
-            <h6 class="type-h6" v-html="post.title"></h6>
+            <h1 :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }" v-html="post.title"></h1>
         </div>
-        <gallery :pictures="post.pictures" :limit="limit"></gallery>
+        <gallery :pictures="post.pictures"></gallery>
         <article v-show="size === 0" class="description markdown" v-html="post.description"></article>
         <div class="date type-overline">
             {{
@@ -109,7 +109,9 @@ export default {
     // clamp title to two line on linear view
     &[size='1'],
     &[size='2'] {
-        .title h6 {
+        overflow-x: hidden;
+
+        .title h1 {
             box-sizing: content-box;
             height: 2em;
             display: -webkit-box;
@@ -118,6 +120,37 @@ export default {
             overflow: hidden;
             padding: 0.5rem 0;
             margin: -0.5rem 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(auto-fit, 8rem);
+            overflow-x: hidden;
+            position: relative;
+            padding: 4px;
+            margin: -4px;
+            margin-bottom: 1rem;
+
+            .loading-picture {
+                grid-row: 1;
+            }
+
+            // zig zag pattern for x overflow
+            &::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 10;
+                display: block;
+                width: 20px;
+                background-size: 100% 20px;
+                background-image: linear-gradient(225deg, color.$surface 25%, transparent 25%),
+                    linear-gradient(315deg, color.$surface 25%, transparent 25%);
+                background-position: 0 0;
+            }
         }
     }
 }
