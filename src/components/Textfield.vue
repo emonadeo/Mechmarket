@@ -1,6 +1,6 @@
 <template>
     <input
-        class="textfield"
+        class="textfield type-body1"
         :name="name"
         :type="type"
         :placeholder="placeholder"
@@ -18,6 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "src/styles/color";
+@use "src/styles/typography";
 
 input {
     width: 100%;

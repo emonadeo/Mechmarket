@@ -3,6 +3,14 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+function loadSize() {
+    if (!window.matchMedia('(min-width: 768px)').matches) {
+        return 0;
+    }
+    const size = window.localStorage.getItem('size');
+    return size ? parseInt(size) : 1;
+}
+
 const store = new Vuex.Store({
     strict: true,
     state: {
@@ -10,7 +18,7 @@ const store = new Vuex.Store({
             window.localStorage.getItem('theme') ||
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') ||
             'light',
-        size: window.localStorage.getItem('size') ? parseInt(window.localStorage.getItem('size')) : 1,
+        size: loadSize(),
     },
     mutations: {
         updateTheme(state, theme) {
