@@ -1,5 +1,5 @@
 <template>
-    <router-link class="post surface elevated" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
+    <a class="post surface elevated" :href="post.href" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
         <region class="type-overline" :region="post.region"></region>
         <article>
             <section class="title">
@@ -19,7 +19,7 @@
                 })
             }}
         </div>
-    </router-link>
+    </a>
 </template>
 
 <script>
@@ -104,6 +104,9 @@ export default {
             }
 
             article {
+                display: flex;
+                flex-direction: column;
+
                 .title {
                     width: typography.$max-line-width;
                     margin-left: auto;

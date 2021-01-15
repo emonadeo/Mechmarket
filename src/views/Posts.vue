@@ -213,6 +213,7 @@ export default {
             grid-column: 2 / 3;
             grid-row: 1 / 2;
             padding-left: 0;
+            padding-top: 1rem;
         }
 
         aside {

@@ -48,7 +48,7 @@
         }
 
         .markdown li {
-            margin-bottom: map.get($props, line-height) - map.get($props, font-size);
+            margin-bottom: map.get($props, line-height) - 12px;
         }
     }
     .type-#{$type} {
