@@ -1,15 +1,11 @@
 <template>
     <div id="posts" :class="{ 'viewing-post': id }">
-        <div class="corner">
-            <svg id="logo" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+        <div class="logo">
+            <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M47.693,51.598c0.782,0.002 1.565,0.04 2.342,0.113c65.788,6.38 131.562,12.89 197.333,19.434c7.139,0.728 13.903,4.671 18.032,10.619c1.312,1.89 2.358,3.962 3.106,6.136l0.018,0.052c16.48,48.506 32.833,97.054 49.249,145.581c2.322,6.912 1.474,14.706 -2.288,20.931c-2.891,4.784 -7.436,8.549 -12.673,10.5c-2.754,1.026 -5.683,1.556 -8.638,1.571c-89.066,0.153 -178.131,-0.066 -267.196,-0.099c-5.955,-0.014 -11.873,-2.222 -16.359,-6.112c-4.171,-3.617 -7.088,-8.645 -8.154,-14.072c-0.506,-2.579 -0.598,-5.235 -0.284,-7.843c6.803,-55.011 13.705,-110.01 20.686,-164.999c0.786,-6.034 3.834,-11.72 8.403,-15.686c4.459,-3.872 10.308,-6.091 16.268,-6.126c0.051,0 0.103,0 0.155,0Zm-0.069,20c-2.381,0.014 -4.6,1.904 -4.92,4.362c-6.977,54.957 -14.243,109.88 -20.674,164.904c-0.188,1.654 0.509,3.38 1.793,4.436c0.881,0.724 2.013,1.13 3.157,1.136c89.048,0.216 178.098,0.56 267.144,0.099c1.872,-0.017 3.68,-1.166 4.482,-2.857c0.546,-1.152 0.628,-2.511 0.224,-3.727c-16.313,-48.542 -32.82,-97.019 -49.23,-145.528c-0.007,-0.02 -0.014,-0.04 -0.021,-0.059c-0.629,-1.783 -2.294,-3.123 -4.215,-3.319c-65.747,-6.542 -131.458,-13.464 -197.26,-19.427c-0.16,-0.014 -0.32,-0.021 -0.48,-0.02Z"
                 />
             </svg>
-        </div>
-        <div class="title-bar background">
-            <search></search>
-            <region-picker></region-picker>
         </div>
         <aside>
             <tabs to="posts" :tabs="['Selling', 'Buying', 'Trading']"></tabs>
@@ -30,6 +26,10 @@
                 </li>
             </ul>
         </aside>
+        <div class="title-bar background">
+            <search></search>
+            <region-picker></region-picker>
+        </div>
         <main>
             <posts :posts="posts" :loading="loading"></posts>
         </main>
@@ -111,58 +111,22 @@ export default {
     flex-direction: column;
     height: 100%;
 
-    @include r.md {
-        display: grid;
-        grid-column-gap: 1rem;
-        grid-template-columns: 11rem 1fr;
-        grid-template-rows: min-content 1fr;
-    }
-
-    @include r.lg {
-        grid-template-columns: min(17%, 16rem) 1fr;
-    }
-
-    @include r.xxl {
-        grid-template-columns: 16rem 1fr 16rem;
-    }
-
-    .corner {
+    .logo {
         display: flex;
         align-items: flex-end;
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
+        position: absolute;
+        top: 1.25rem;
+        left: 1rem;
 
-        #logo {
+        img,
+        svg {
             height: 2rem;
-            margin-left: 2.5rem;
         }
     }
 
     .title-bar {
-        padding: 1rem 2rem 2px 0;
         display: flex;
-        position: relative;
-        grid-column: 2 / 3;
-        grid-row: 1 / 2;
-
-        &::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            left: -0%;
-            top: 100%;
-            z-index: 10;
-            display: block;
-            height: 1rem;
-            background-size: 1rem 100%;
-            background-image: linear-gradient(color.$background 25%, transparent 100%);
-            background-position: 0 0;
-        }
-
-        @include r.md {
-            grid-column: 2 / 3;
-            grid-row: 1 / 2;
-        }
+        padding: 0.5rem 1rem 2px 1rem;
 
         .search {
             flex: 1;
@@ -171,53 +135,143 @@ export default {
     }
 
     aside {
-        display: flex;
-        margin: 1rem 0 2.5rem 0;
-        flex-direction: column;
-        align-items: flex-start;
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-
-        > *:not(:last-child) {
-            margin-bottom: 2.5rem;
-        }
+        display: grid;
+        padding: 1rem 1rem 0 1rem;
+        grid-template-columns: 2rem min-content 1fr min-content;
+        grid-gap: 0.5rem 1rem;
+        grid-template-areas:
+            'logo socials . options'
+            'tabs tabs tabs tabs';
 
         .tabs {
-            width: 100%;
-            margin-bottom: auto;
-        }
-
-        .options,
-        .socials {
-            display: flex;
-            margin-left: 2.5rem;
+            grid-area: tabs;
         }
 
         .options {
-            flex-direction: column;
-            align-items: flex-start;
+            grid-area: options;
 
             > *:not(:last-child) {
                 margin-bottom: 1rem;
             }
+
+            .size-picker {
+                display: none;
+            }
+        }
+
+        .socials {
+            grid-area: socials;
+            display: flex;
+            align-items: center;
+        }
+
+        .tabs {
+            grid-area: tabs;
         }
     }
 
     main {
         flex: 1;
-        overflow-y: auto;
-        padding: 1rem;
-        grid-column: 2 / 3;
-        grid-row: 2 / 3;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            left: -0%;
+            top: 0;
+            z-index: 10;
+            display: block;
+            height: 1rem;
+            background-size: 1rem 100%;
+            background-image: linear-gradient(color.$background 25%, transparent 100%);
+            background-position: 0 0;
+        }
+
+        .posts {
+            height: 100%;
+            overflow-y: auto;
+            padding: 1rem 1rem 0 1rem;
+        }
     }
 
     @include r.md {
-        main,
+        display: grid;
+        grid-column-gap: 1rem;
+        grid-template-columns: 11rem 1fr;
+        grid-template-rows: min-content 1fr;
+
+        .logo {
+            position: static;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            margin-left: 2.5rem;
+        }
+
         .title-bar {
-            // avoid overflow when hovering above cards
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            padding-left: 0;
+        }
+
+        aside {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 1rem 0 2.5rem 0;
+            padding: 0;
+
+            > *:not(:last-child) {
+                margin-bottom: 2.5rem;
+            }
+
+            .tabs {
+                width: 100%;
+                margin-bottom: auto;
+            }
+
+            .options,
+            .socials {
+                display: flex;
+                margin-left: 2.5rem;
+            }
+
+            .options {
+                flex-direction: column;
+
+                .size-picker {
+                    display: flex;
+                }
+            }
+        }
+
+        main {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            margin-left: -4px; // avoid overflow when hovering above cards
+
+            .posts {
+                padding-bottom: 1.5rem;
+                padding-left: 4px; // avoid overflow when hovering above cards
+            }
+        }
+
+        // avoid overflow when hovering above cards
+        .title-bar {
             margin-left: -4px;
             padding-left: 4px;
         }
+    }
+
+    @include r.lg {
+        grid-template-columns: min(17%, 16rem) 1fr;
+    }
+
+    @include r.xxl {
+        grid-template-columns: 16rem 1fr 16rem;
     }
 }
 </style>

@@ -34,7 +34,15 @@ export default {
 .posts {
     display: grid;
     grid-gap: 1rem;
-    overflow: visible;
+    overflow-y: auto;
+    grid-auto-rows: max-content;
+
+    // Fix bottom padding bug
+    &::after {
+        content: '';
+        height: 1px;
+        grid-column: start / end;
+    }
 
     &[size='0'] {
         display: flex;
@@ -44,12 +52,12 @@ export default {
 
     &[size='1'] {
         @include r.lg {
-            grid-template-columns: repeat(auto-fit, minmax(max(calc(50% - 1rem), 3 * 9rem), 1fr));
+            grid-template-columns: [start] repeat(auto-fit, minmax(max(calc(50% - 1rem), 3 * 9rem), 1fr)) [end];
         }
     }
 
     &[size='2'] {
-        grid-template-columns: repeat(auto-fit, minmax(min(calc(50% - 1rem), 3 * 9rem), 1fr));
+        grid-template-columns: [start] repeat(auto-fit, minmax(min(calc(50% - 1rem), 3 * 9rem), 1fr)) [end];
     }
 }
 </style>

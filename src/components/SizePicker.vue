@@ -1,5 +1,5 @@
 <template>
-    <div class="size-picker surface">
+    <div class="size-picker">
         <btn icon outline style="z-index: 1" :selected="$store.state.size === 0" @click="update(0)">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 48 48">
                 <path

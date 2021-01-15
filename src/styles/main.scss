@@ -41,12 +41,14 @@
     }
     @if ($type == 'body1') {
         p,
+        td,
+        th,
         .markdown li {
             @include type($type, $props);
         }
 
         .markdown li {
-            margin-bottom: map.get($props, line-height) / 2;
+            margin-bottom: map.get($props, line-height) - map.get($props, font-size);
         }
     }
     .type-#{$type} {
@@ -160,7 +162,7 @@
             }
         }
 
-        tr:not(:last-child) {
+        tr:not(:last-child), th {
             border-bottom: $border;
         }
     }
