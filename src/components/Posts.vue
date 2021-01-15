@@ -28,6 +28,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use "src/styles/typography";
+@use "src/styles/responsive" as r;
+
 .posts {
     display: grid;
     grid-gap: 1rem;
@@ -40,11 +43,13 @@ export default {
     }
 
     &[size='1'] {
-        grid-template-columns: repeat(2, 1fr);
+        @include r.lg {
+            grid-template-columns: repeat(auto-fit, minmax(max(calc(50% - 1rem), 3 * 9rem), 1fr));
+        }
     }
 
     &[size='2'] {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(min(calc(50% - 1rem), 3 * 9rem), 1fr));
     }
 }
 </style>

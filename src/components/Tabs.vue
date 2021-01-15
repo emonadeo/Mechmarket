@@ -36,6 +36,8 @@ export default {
 
     .tab {
         flex: 1;
+        display: flex;
+        justify-content: center;
         border-radius: shape.$radius;
 
         &:not(:last-child) {

@@ -114,12 +114,12 @@ export default {
     @include r.md {
         display: grid;
         grid-column-gap: 1rem;
-        grid-template-columns: 12rem 1fr;
+        grid-template-columns: 11rem 1fr;
         grid-template-rows: min-content 1fr;
     }
 
     @include r.lg {
-        grid-template-columns: 16rem 1fr;
+        grid-template-columns: min(17%, 16rem) 1fr;
     }
 
     @include r.xxl {
@@ -206,16 +206,18 @@ export default {
     main {
         flex: 1;
         overflow-y: auto;
-        padding: 1rem 1rem 1rem 0;
+        padding: 1rem;
         grid-column: 2 / 3;
         grid-row: 2 / 3;
     }
 
-    main,
-    .title-bar {
-        // avoid overflow when hovering above cards
-        margin-left: -4px;
-        padding-left: 4px;
+    @include r.md {
+        main,
+        .title-bar {
+            // avoid overflow when hovering above cards
+            margin-left: -4px;
+            padding-left: 4px;
+        }
     }
 }
 </style>

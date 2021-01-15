@@ -1,11 +1,13 @@
 <template>
     <router-link class="post surface elevated" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
         <region class="type-overline" :region="post.region"></region>
-        <div class="title">
-            <h1 :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }" v-html="post.title"></h1>
-        </div>
-        <gallery :pictures="post.pictures"></gallery>
-        <article v-show="size === 0" class="description markdown" v-html="post.description"></article>
+        <article>
+            <section class="title">
+                <h1 :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }" v-html="post.title"></h1>
+            </section>
+            <gallery :pictures="post.pictures"></gallery>
+            <section v-show="size === 0" class="description markdown" v-html="post.description"></section>
+        </article>
         <div class="date type-overline">
             {{
                 post.date.toLocaleString(undefined, {
@@ -71,10 +73,6 @@ export default {
         margin-bottom: 1rem;
     }
 
-    .description {
-        margin-bottom: 2rem;
-    }
-
     &[size='0'] {
         .gallery {
             display: flex;
@@ -86,22 +84,38 @@ export default {
             }
         }
 
+        .description {
+            margin-bottom: 2rem;
+        }
+
+        $padding: 2rem;
+
         @include r.md {
-            padding: 2rem;
+            padding: $padding;
         }
 
         @include r.lg {
-            .title {
-                width: typography.$max-line-width;
-                margin-left: auto;
-                margin-right: auto;
+            position: relative;
+
+            .region {
+                position: absolute;
+                top: $padding;
+                left: $padding;
             }
 
-            .gallery {
-                min-width: typography.$max-line-width;
-                align-self: center;
-                margin-top: 1rem;
-                margin-bottom: 1rem;
+            article {
+                .title {
+                    width: typography.$max-line-width;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .gallery {
+                    min-width: typography.$max-line-width;
+                    align-self: center;
+                    margin-top: 1rem;
+                    margin-bottom: 1rem;
+                }
             }
         }
     }
