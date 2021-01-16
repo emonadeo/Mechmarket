@@ -1,5 +1,5 @@
 <template>
-    <button class="post surface elevated" :href="post.href" :size="size" @click="redirect">
+    <div class="post surface elevated" :href="post.href" :size="size" @click="redirect">
         <region class="type-overline" :region="post.region"></region>
         <article>
             <section class="title">
@@ -19,7 +19,7 @@
                 })
             }}
         </div>
-    </button>
+    </div>
 </template>
 
 <script>
