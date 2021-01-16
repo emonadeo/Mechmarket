@@ -1,5 +1,5 @@
 <template>
-    <div class="loading-picture">
+    <div class="picture">
         <transition name="fade">
             <div v-show="loading" class="loading primary">Loading</div>
         </transition>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: 'LoadingPicture',
+    name: 'AsyncPicture',
     props: {
         src: String,
         alt: String,
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.loading-picture {
+.picture {
     position: relative;
     overflow: hidden;
 

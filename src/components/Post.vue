@@ -1,11 +1,11 @@
 <template>
-    <a class="post surface elevated" :href="post.href" :size="size" :to="{ name: 'posts', params: { id: post.id } }">
+    <button class="post surface elevated" :href="post.href" :size="size" @click="redirect">
         <region class="type-overline" :region="post.region"></region>
         <article>
             <section class="title">
                 <h1 :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }" v-html="post.title"></h1>
             </section>
-            <gallery :pictures="post.pictures"></gallery>
+            <gallery :pictures="post.pictures" :href="post.href"></gallery>
             <section v-show="size === 0" class="description markdown" v-html="post.description"></section>
         </article>
         <div class="date type-overline">
@@ -19,7 +19,7 @@
                 })
             }}
         </div>
-    </a>
+    </button>
 </template>
 
 <script>
@@ -41,15 +41,10 @@ export default {
         size() {
             return this.$store.state.size;
         },
-        limit() {
-            switch (this.size) {
-                case 0:
-                    return -1;
-                case 1:
-                    return 10;
-                case 2:
-                    return 3;
-            }
+    },
+    methods: {
+        redirect() {
+            window.location = this.post.href;
         },
     },
 };
@@ -74,11 +69,14 @@ export default {
     }
 
     &[size='0'] {
+        $padding: 2rem;
+        padding: $padding;
+
         .gallery {
             display: flex;
             flex-wrap: wrap;
 
-            .loading-picture {
+            .picture {
                 margin-bottom: 1rem;
                 margin-right: 1rem;
             }
@@ -86,12 +84,6 @@ export default {
 
         .description {
             margin-bottom: 2rem;
-        }
-
-        $padding: 2rem;
-
-        @include r.md {
-            padding: $padding;
         }
 
         @include r.lg {
@@ -128,45 +120,42 @@ export default {
     &[size='2'] {
         overflow-x: hidden;
 
-        .title h1 {
-            box-sizing: content-box;
-            height: 2em;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            padding: 0.5rem 0;
-            margin: -0.5rem 0;
-        }
-
         .gallery {
             display: grid;
             grid-gap: 1rem;
             grid-template-columns: repeat(auto-fit, 8rem);
-            overflow-x: hidden;
+            overflow-x: auto;
             position: relative;
-            padding: 4px;
-            margin: -4px;
-            margin-bottom: 1rem;
+            padding: 4px 4px 4px 1rem;
+            margin: -4px -1rem calc(1rem - 4px) -1rem;
 
-            .loading-picture {
-                grid-row: 1;
-            }
-
-            // zig zag pattern for x overflow
+            // Fix scroll padding bug
             &::after {
                 content: '';
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                z-index: 10;
-                display: block;
-                width: 20px;
-                background-size: 100% 20px;
-                background-image: linear-gradient(225deg, color.$surface 25%, transparent 25%),
-                    linear-gradient(315deg, color.$surface 25%, transparent 25%);
-                background-position: 0 0;
+                grid-row: 1;
+                width: 1px;
+            }
+
+            // Hide scrollbars on desktop (still scrollable in mobile)
+            &::-webkit-scrollbar {
+                height: 0;
+            }
+
+            .picture {
+                grid-row: 1;
+            }
+        }
+
+        @include r.lg {
+            .title h1 {
+                box-sizing: content-box;
+                height: 2em;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                padding: 0.5rem 0;
+                margin: -0.5rem 0;
             }
         }
     }

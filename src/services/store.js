@@ -1,33 +1,28 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-Vue.use(Vuex);
+import * as storage from 'src/util/storage.js';
 
-function loadSize() {
-    if (!window.matchMedia('(min-width: 768px)').matches) {
-        return 0;
-    }
-    const size = window.localStorage.getItem('size');
-    return size ? parseInt(size) : 1;
-}
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
     strict: true,
     state: {
-        theme:
-            window.localStorage.getItem('theme') ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') ||
-            'light',
-        size: loadSize(),
+        theme: storage.getTheme(),
+        size: storage.getSize(),
+        gallery: undefined,
     },
     mutations: {
         updateTheme(state, theme) {
             state.theme = theme;
-            window.localStorage.setItem('theme', theme);
+            storage.setTheme(theme);
         },
         updateSize(state, size) {
             state.size = size;
-            window.localStorage.setItem('size', size);
+            storage.setSize(size);
+        },
+        updateGallery(state, gallery) {
+            state.gallery = gallery;
         },
     },
     actions: {
@@ -36,6 +31,9 @@ const store = new Vuex.Store({
         },
         setSize({ commit }, size) {
             commit('updateSize', size);
+        },
+        setGallery({ commit }, gallery) {
+            commit('updateGallery', gallery);
         },
     },
 });

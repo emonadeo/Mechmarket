@@ -1,8 +1,6 @@
-import showdown from 'showdown';
+import { markdown } from 'snudown-js';
 import imgur from 'src/util/imgur.js';
 import { methods } from 'src/components/PaymentMethod.vue';
-
-const md = new showdown.Converter({ tables: true, strikethrough: true, simplifiedAutoLink: true });
 
 const paymentMethods = Object.keys(methods);
 
@@ -28,7 +26,7 @@ export default class Post {
         this.author = author;
         this.date = date;
         this.region = region;
-        this.description = md.makeHtml(description);
+        this.description = markdown(description);
         this.have = have;
         this.want = want;
         this.pictures = pictures;
@@ -99,8 +97,7 @@ export default class Post {
         function decode(str) {
             return str
                 .replace(/&amp;/gi, '&') // Fix special characters
-                .replace(/&(#x200B|nbsp);/gi, '') // Remove extra whitespace
-                .replace(/:-/g, ':--'); // Fix tables
+                .replace(/&(#x200B|nbsp);/gi, ''); // Remove extra whitespace
         }
 
         let pictures = [];

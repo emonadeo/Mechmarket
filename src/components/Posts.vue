@@ -24,6 +24,13 @@ export default {
             return this.$store.state.size;
         },
     },
+    mounted() {
+        window.addEventListener('resize', () => {
+            if (!window.matchMedia('(min-width: 768px)').matches) {
+                this.$store.dispatch('setSize', 1);
+            }
+        });
+    },
 };
 </script>
 
@@ -51,13 +58,15 @@ export default {
     }
 
     &[size='1'] {
+        grid-template-columns: [start] 1fr [end];
+
         @include r.lg {
-            grid-template-columns: [start] repeat(auto-fit, minmax(max(calc(50% - 1rem), 3 * 9rem), 1fr)) [end];
+            grid-template-columns: [start] repeat(2, 1fr) [end];
         }
     }
 
     &[size='2'] {
-        grid-template-columns: [start] repeat(auto-fit, minmax(min(calc(50% - 1rem), 3 * 9rem), 1fr)) [end];
+        grid-template-columns: [start] repeat(auto-fit, minmax(min(max(19rem, calc(33% - 1rem)), 3 * 9rem), 1fr)) [end];
     }
 }
 </style>

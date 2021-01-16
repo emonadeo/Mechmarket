@@ -1,16 +1,17 @@
 <template>
     <div class="gallery">
-        <loading-picture
-            v-for="(picture, index) in limit > 0 ? pictures.slice(0, limit) : pictures"
+        <async-picture
+            v-for="(picture, index) in pictures"
             :key="picture"
             :src="resize(picture)"
             :alt="`Photo #${index}`"
-        ></loading-picture>
+            @click.native.stop="open(index)"
+        ></async-picture>
     </div>
 </template>
 
 <script>
-import LoadingPicture from 'src/components/LoadingPicture.vue';
+import AsyncPicture from 'src/components/AsyncPicture.vue';
 
 import { resize } from 'src/util/imgur.js';
 
@@ -18,16 +19,16 @@ export default {
     name: 'Gallery',
     props: {
         pictures: Array,
-        limit: {
-            type: Number,
-            default: -1,
-        },
+        href: String,
     },
     components: {
-        LoadingPicture,
+        AsyncPicture,
     },
     methods: {
         resize,
+        open(index) {
+            this.$store.dispatch('setGallery', { pictures: this.pictures, index, href: this.href });
+        },
     },
 };
 </script>
@@ -37,11 +38,12 @@ export default {
 @use 'src/styles/shape';
 
 .gallery {
-    .loading-picture {
+    .picture {
         height: 8rem;
         width: 8rem;
         border-radius: shape.$radius;
         transition: box-shadow 100ms ease-in-out;
+        cursor: pointer;
 
         &:hover,
         &:focus {

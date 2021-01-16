@@ -43,7 +43,7 @@
     "rimraf": "^3.0.2",
     "sass": "^1.32.4",
     "sass-loader": "^10.1.1",
-    "showdown": "^1.9.1",
+    "snudown-js": "^3.2.0",
     "terser-webpack-plugin": "^5.1.1",
     "url-loader": "^4.1.1",
     "vue": "^2.6.12",
