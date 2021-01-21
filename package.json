@@ -1,6 +1,5 @@
 {
   "name": "mechmarket",
-  "version": "1.1.1",
   "description": "user interface for better browsing on r/mechmarket",
   "main": "./src/app.js",
   "scripts": {

@@ -5,7 +5,7 @@
             :key="picture"
             :src="resize(picture)"
             :alt="`Photo #${index}`"
-            @click.native.stop="open(index)"
+            @click.native="open(index)"
         ></async-picture>
     </div>
 </template>

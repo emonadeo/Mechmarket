@@ -1,10 +1,10 @@
 <template>
-    <div class="post surface elevated" :href="post.href" :size="size" @click="redirect">
+    <div class="post surface elevated" :size="size">
         <region class="type-overline" :region="post.region"></region>
         <article>
-            <section class="title">
-                <h1 :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }" v-html="post.title"></h1>
-            </section>
+            <h1 class="title" :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }">
+                <btn inline :href="post.href" v-html="post.title"></btn>
+            </h1>
             <gallery :pictures="post.pictures" :href="post.href"></gallery>
             <section v-show="size === 0" class="description markdown" v-html="post.description"></section>
         </article>
@@ -40,11 +40,6 @@ export default {
     computed: {
         size() {
             return this.$store.state.size;
-        },
-    },
-    methods: {
-        redirect() {
-            window.location = this.post.href;
         },
     },
 };
