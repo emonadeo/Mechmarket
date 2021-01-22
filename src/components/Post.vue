@@ -1,5 +1,5 @@
 <template>
-    <div class="post surface elevated" :size="size">
+    <div class="post surface" :size="size">
         <region class="type-overline" :region="post.region"></region>
         <article>
             <h1 class="title" :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }">

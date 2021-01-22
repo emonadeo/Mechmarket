@@ -83,16 +83,16 @@ export default {
     &[icon] {
         padding: 0;
         border-radius: 50%;
-        width: 2.25em;
-        height: 2.25em;
+        width: 2.25rem;
+        height: 2.25rem;
 
         &[inline] {
             margin: -0.375em;
         }
 
         svg {
-            height: 1.5em;
-            width: 1.5em;
+            height: 1.5rem;
+            width: 1.5rem;
         }
     }
 

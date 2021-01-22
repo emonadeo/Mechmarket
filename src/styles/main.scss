@@ -5,6 +5,7 @@
 @use 'reset';
 @use 'shape';
 @use 'markdown';
+@use 'responsive' as r;
 
 * {
     box-sizing: border-box;
@@ -68,6 +69,27 @@
 
         svg {
             fill: $fg;
+        }
+    }
+}
+
+// special surface type changing to background on larger devices
+.modal {
+    background-color: color.$surface;
+    color: color.$on-surface;
+    border-color: color.$on-surface;
+
+    svg {
+        fill: color.$on-surface;
+    }
+
+    @include r.md {
+        background-color: color.$background;
+        color: color.$on-background;
+        border-color: color.$on-background;
+
+        svg {
+            fill: color.$on-background;
         }
     }
 }

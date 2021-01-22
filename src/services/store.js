@@ -11,6 +11,7 @@ const store = new Vuex.Store({
         theme: storage.getTheme(),
         size: storage.getSize(),
         gallery: undefined,
+        collapseDrawer: true,
     },
     mutations: {
         updateTheme(state, theme) {
@@ -24,6 +25,9 @@ const store = new Vuex.Store({
         updateGallery(state, gallery) {
             state.gallery = gallery;
         },
+        updateDrawer(state, collapse) {
+            state.collapseDrawer = collapse;
+        },
     },
     actions: {
         setTheme({ commit }, theme) {
@@ -34,6 +38,9 @@ const store = new Vuex.Store({
         },
         setGallery({ commit }, gallery) {
             commit('updateGallery', gallery);
+        },
+        toggleDrawer({ commit, state }) {
+            commit('updateDrawer', !state.collapseDrawer);
         },
     },
 });
