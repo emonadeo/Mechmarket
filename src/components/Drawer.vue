@@ -1,5 +1,5 @@
 <template>
-    <aside class="drawer modal" :collapse="collapse">
+    <aside class="drawer modal" :collapse="collapse" ref="drawer">
         <div class="logo">
             <svg viewBox="0 0 320 320" height="2rem" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import Hammer from 'hammerjs';
+
 import Btn from 'src/components/Btn.vue';
 import SizePicker from 'src/components/SizePicker.vue';
 import ThemePicker from 'src/components/ThemePicker.vue';
@@ -68,6 +70,23 @@ export default {
         collapse() {
             return this.$store.state.collapseDrawer;
         },
+    },
+    mounted() {
+        // swipe to close
+        const drawer = this.$refs.drawer;
+        const h = new Hammer(drawer);
+        drawer.style.transition = 'left 300ms ease-in-out';
+        h.on('pan', (e) => {
+            const delta = Math.min(Math.max(e.deltaX, -drawer.scrollWidth), 0);
+            drawer.style.transition = '';
+            drawer.style.left = `${delta}px`;
+
+            if (e.isFinal) {
+                drawer.style.left = '';
+                drawer.style.transition = 'left 300ms ease-in-out';
+                this.$store.dispatch('toggleDrawer');
+            }
+        });
     },
 };
 </script>
@@ -89,7 +108,7 @@ $margin: 2.5rem;
     height: 100%;
     z-index: 100;
     left: 0;
-    transition: left, width 300ms ease-in-out;
+    transition: width 300ms ease-in-out;
     padding: 1rem 1rem $margin 0;
     border-right: shape.$border;
 
