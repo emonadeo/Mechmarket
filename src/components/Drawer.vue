@@ -163,6 +163,10 @@ $margin: 2.5rem;
         > *:not(:last-child) {
             margin-bottom: 1rem;
         }
+
+        .size-picker {
+            display: none;
+        }
     }
 
     .socials {
@@ -178,6 +182,10 @@ $margin: 2.5rem;
         &[collapse] {
             left: 0;
             width: 0;
+        }
+
+        .options .size-picker {
+            display: flex;
         }
     }
 
