@@ -198,19 +198,6 @@ export default {
                 grid-row: 1;
             }
         }
-
-        @include r.lg {
-            .title h1 {
-                box-sizing: content-box;
-                height: 2em;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                padding: 0.5rem 0;
-                margin: -0.5rem 0;
-            }
-        }
     }
 }
 </style>
