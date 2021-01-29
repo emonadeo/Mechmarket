@@ -1,5 +1,5 @@
 <template>
-    <div class="posts" :size="size">
+    <div class="posts" :scale="scale">
         <loading v-if="loading"></loading>
         <post class="posting" v-for="post in posts" :key="post.id" :post="post"></post>
     </div>
@@ -20,16 +20,9 @@ export default {
         Post,
     },
     computed: {
-        size() {
-            return this.$store.state.size;
+        scale() {
+            return this.$store.state.scale;
         },
-    },
-    mounted() {
-        window.addEventListener('resize', () => {
-            if (!window.matchMedia('(min-width: 768px)').matches) {
-                this.$store.dispatch('setSize', 1);
-            }
-        });
     },
 };
 </script>
@@ -41,7 +34,6 @@ export default {
 .posts {
     display: grid;
     grid-gap: 1rem;
-    overflow-y: auto;
     grid-auto-rows: max-content;
 
     // Fix bottom padding bug
@@ -51,13 +43,11 @@ export default {
         grid-column: start / end;
     }
 
-    &[size='0'] {
-        display: flex;
-        flex-direction: column;
-        margin: 0 auto;
+    &[scale='0'] {
+        grid-template-columns: [start] 1fr [end];
     }
 
-    &[size='1'] {
+    &[scale='1'] {
         grid-template-columns: [start] 1fr [end];
 
         @include r.lg {
@@ -65,7 +55,7 @@ export default {
         }
     }
 
-    &[size='2'] {
+    &[scale='2'] {
         grid-template-columns: [start] repeat(auto-fit, minmax(min(max(19rem, calc(33% - 1rem)), 3 * 9rem), 1fr)) [end];
     }
 }

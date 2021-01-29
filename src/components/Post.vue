@@ -1,12 +1,12 @@
 <template>
-    <div class="post surface" :size="size">
+    <div class="post surface" :scale="scale">
         <region class="type-overline" :region="post.region"></region>
         <article>
-            <h1 class="title" :class="{ 'type-h1': size === 0, 'type-h4': size !== 0 }">
+            <h1 class="title">
                 <btn inline :href="post.href" v-html="post.title"></btn>
             </h1>
-            <gallery :pictures="post.pictures" :href="post.href"></gallery>
-            <section v-show="size === 0" class="description markdown" v-html="post.description"></section>
+            <gallery v-if="post.pictures.length > 0" :pictures="post.pictures" :href="post.href"></gallery>
+            <section v-show="scale === 0" class="description markdown" v-html="post.description"></section>
         </article>
         <div class="date type-overline">
             {{
@@ -38,8 +38,8 @@ export default {
         Region,
     },
     computed: {
-        size() {
-            return this.$store.state.size;
+        scale() {
+            return this.$store.state.scale;
         },
     },
 };
@@ -55,6 +55,7 @@ export default {
     display: flex;
     padding: 1rem;
     flex-direction: column;
+    overflow-x: hidden;
 
     @include mixins.interactive;
 
@@ -63,22 +64,59 @@ export default {
         margin-bottom: 1rem;
     }
 
-    &[size='0'] {
-        $padding: 2rem;
-        padding: $padding;
+    article .title {
+        @include mixins.type-h4;
+    }
+
+    &[scale='0'] {
+        .title {
+            @include mixins.type-h1;
+            margin-bottom: 2rem;
+        }
 
         .gallery {
-            display: flex;
-            flex-wrap: wrap;
-
-            .picture {
-                margin-bottom: 1rem;
-                margin-right: 1rem;
-            }
+            margin-bottom: 2rem;
         }
 
         .description {
             margin-bottom: 2rem;
+        }
+
+        @include r.lt-md {
+            article {
+                .title {
+                    @include mixins.type-h4;
+                }
+
+                .gallery {
+                    display: grid;
+                    grid-gap: 1rem;
+                    grid-auto-columns: 8rem;
+                    grid-auto-flow: column;
+                    overflow-x: auto;
+                    padding-left: 1rem;
+                    margin: 0 -1rem 2rem -1rem;
+
+                    // Fix scroll padding bug
+                    &::after {
+                        content: '';
+                        grid-row: 1;
+                        width: 1px;
+                    }
+                }
+            }
+        }
+
+        $padding: 2rem;
+
+        @include r.md {
+            padding: $padding;
+
+            article .gallery {
+                display: flex;
+                grid-gap: 1rem;
+                flex-wrap: wrap;
+            }
         }
 
         @include r.lg {
@@ -96,25 +134,45 @@ export default {
 
                 .title {
                     width: typography.$max-line-width;
-                    margin-left: auto;
-                    margin-right: auto;
                 }
 
                 .gallery {
                     min-width: typography.$max-line-width;
-                    align-self: center;
-                    margin-top: 1rem;
-                    margin-bottom: 1rem;
+                    margin-left: 5rem;
+                    margin-right: auto;
+
+                    @media (min-width: 1120px) {
+                        margin-left: auto;
+                    }
+                }
+
+                .title,
+                .markdown h1,
+                .markdown h2,
+                .markdown h3,
+                .markdown h4,
+                .markdown h5,
+                .markdown h6,
+                .markdown p,
+                .markdown td,
+                .markdown ol,
+                .markdown ul,
+                .markdown pre {
+                    max-width: typography.$max-line-width;
+                    margin-left: 5rem;
+                    margin-right: auto;
+
+                    @media (min-width: 1120px) {
+                        margin-left: auto;
+                    }
                 }
             }
         }
     }
 
     // clamp title to two line on linear view
-    &[size='1'],
-    &[size='2'] {
-        overflow-x: hidden;
-
+    &[scale='1'],
+    &[scale='2'] {
         .gallery {
             display: grid;
             grid-gap: 1rem;

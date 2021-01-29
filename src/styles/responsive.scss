@@ -17,3 +17,7 @@
 @mixin xxl {
     @media (min-width: 1536px) { @content }
 }
+
+@mixin lt-md {
+    @media (max-width: 768px) { @content }
+}

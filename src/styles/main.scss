@@ -12,7 +12,7 @@
 }
 
 // build typography classes
-@mixin type($type, $props) {
+@mixin type($props) {
     @each $prop, $value in $props {
         @if $prop == 'before' {
             &::before {
@@ -37,7 +37,7 @@
 @each $type, $props in typography.$typography {
     @if (list.index((h1, h2, h3, h4, h5, h6), $type) != null) {
         .markdown #{$type} {
-            @include type($type, $props);
+            @include type($props);
         }
     }
     @if ($type == 'body1') {
@@ -45,7 +45,7 @@
         td,
         th,
         .markdown li {
-            @include type($type, $props);
+            @include type($props);
         }
 
         .markdown li {
@@ -53,7 +53,7 @@
         }
     }
     .type-#{$type} {
-        @include type($type, $props);
+        @include type($props);
     }
 }
 

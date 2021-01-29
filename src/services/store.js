@@ -9,7 +9,7 @@ const store = new Vuex.Store({
     strict: true,
     state: {
         theme: storage.getTheme(),
-        size: storage.getSize(),
+        scale: storage.getScale(),
         gallery: undefined,
         collapseDrawer: true,
     },
@@ -18,9 +18,9 @@ const store = new Vuex.Store({
             state.theme = theme;
             storage.setTheme(theme);
         },
-        updateSize(state, size) {
-            state.size = size;
-            storage.setSize(size);
+        updateScale(state, scale) {
+            state.scale = scale;
+            storage.setScale(scale);
         },
         updateGallery(state, gallery) {
             state.gallery = gallery;
@@ -33,8 +33,8 @@ const store = new Vuex.Store({
         setTheme({ commit }, theme) {
             commit('updateTheme', theme);
         },
-        setSize({ commit }, size) {
-            commit('updateSize', size);
+        setScale({ commit }, scale) {
+            commit('updateScale', scale);
         },
         setGallery({ commit }, gallery) {
             commit('updateGallery', gallery);

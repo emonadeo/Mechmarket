@@ -1,12 +1,20 @@
-const sizeName = 'size';
+const scaleName = 'scale';
 const themeName = 'theme';
 
-export function getSize() {
+export function getScale() {
+    const scaleRaw = window.localStorage.getItem(scaleName);
+
+    // default to 1
+    if (!scaleRaw) return 1;
+
+    const scale = parseInt(scaleRaw);
+
+    // set minimum scale on mobile to 1
     if (!window.matchMedia('(min-width: 768px)').matches) {
-        return 1;
+        return Math.min(scale, 1);
     }
-    const size = window.localStorage.getItem(sizeName);
-    return size ? parseInt(size) : 1;
+
+    return scale;
 }
 
 export function getTheme() {
@@ -17,8 +25,8 @@ export function getTheme() {
     );
 }
 
-export function setSize(size) {
-    window.localStorage.setItem(sizeName, size);
+export function setScale(scale) {
+    window.localStorage.setItem(scaleName, scale);
 }
 
 export function setTheme(theme) {

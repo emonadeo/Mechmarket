@@ -90,56 +90,56 @@ export default {
     display: flex;
     height: 100%;
 
+    .drawer {
+        flex: 0 0 auto;
+    }
+
     .container {
         flex: 1;
         display: flex;
         flex-direction: column;
         padding-left: 1rem;
-    }
 
-    .drawer {
-        flex: 0 0 auto;
-    }
+        .title-bar {
+            display: flex;
+            padding: 1rem 1rem 2px 4px;
+            margin-left: -4px; // avoid overflow when hovering above cards
 
-    .title-bar {
-        display: flex;
-        padding: 1rem 1rem 2px 4px;
-        margin-left: -4px; // avoid overflow when hovering above cards
+            > *:not(:last-child) {
+                margin-right: 1rem;
+            }
 
-        > *:not(:last-child) {
-            margin-right: 1rem;
+            .search {
+                flex: 1;
+            }
         }
 
-        .search {
-            flex: 1;
-        }
-    }
+        main {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-left: -4px; // avoid overflow when hovering above cards
 
-    main {
-        flex: 1;
-        position: relative;
-        overflow: hidden;
-        margin-left: -4px; // avoid overflow when hovering above cards
+            // top gradient
+            &::before {
+                content: '';
+                position: absolute;
+                right: 0;
+                left: -0%;
+                top: 0;
+                z-index: 10;
+                display: block;
+                height: 1rem;
+                background-size: 1rem 100%;
+                background-image: linear-gradient(color.$background 25%, transparent 100%);
+                background-position: 0 0;
+            }
 
-        // top gradient
-        &::before {
-            content: '';
-            position: absolute;
-            right: 0;
-            left: -0%;
-            top: 0;
-            z-index: 10;
-            display: block;
-            height: 1rem;
-            background-size: 1rem 100%;
-            background-image: linear-gradient(color.$background 25%, transparent 100%);
-            background-position: 0 0;
-        }
-
-        .posts {
-            height: 100%;
-            overflow-y: auto;
-            padding: 1rem 1rem 0 4px; // avoid overflow when hovering above cards
+            .posts {
+                overflow-y: auto;
+                padding: 1rem 1rem 0 4px; // avoid overflow when hovering above cards
+            }
         }
     }
 

@@ -3,8 +3,6 @@
 @use 'color';
 
 .markdown {
-    width: 100%;
-
     h1,
     h2,
     h3,
@@ -14,14 +12,10 @@
     p,
     td,
     ol,
-    ul {
+    ul,
+    pre {
         overflow-wrap: break-word;
         word-break: break-word;
-
-        @include r.lg {
-            max-width: typography.$max-line-width;
-            margin: 0 auto;
-        }
     }
 
     h1,
@@ -33,6 +27,7 @@
     p,
     ol,
     ul,
+    pre
     table {
         margin-bottom: 2rem;
     }
@@ -77,10 +72,11 @@
         border: $border;
         margin-left: auto;
         margin-right: auto;
-        min-width: typography.$max-line-width;
         border-spacing: 0;
         border-collapse: collapse;
         overflow-x: auto;
+        display: block;
+        max-width: fit-content;
 
         td,
         th {

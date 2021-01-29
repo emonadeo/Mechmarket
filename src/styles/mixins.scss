@@ -1,5 +1,8 @@
+@use "sass:map";
 @use "shape";
 @use "color";
+@use "main";
+@use "typography";
 
 @mixin interactive {
     border: shape.$border;
@@ -19,4 +22,12 @@
         transform: translate(2px, 2px);
         box-shadow: none;
     }
+}
+
+@mixin type-h1 {
+    @include main.type(map.get(typography.$typography, 'h1'));
+}
+
+@mixin type-h4 {
+    @include main.type(map.get(typography.$typography, 'h4'));
 }
