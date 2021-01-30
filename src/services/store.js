@@ -39,8 +39,13 @@ const store = new Vuex.Store({
         setGallery({ commit }, gallery) {
             commit('updateGallery', gallery);
         },
-        toggleDrawer({ commit, state }) {
-            commit('updateDrawer', !state.collapseDrawer);
+        toggleDrawer({ commit, state }, collapse) {
+            if (typeof collapse == 'undefined') {
+                commit('updateDrawer', !state.collapseDrawer);
+                return;
+            }
+
+            commit('updateDrawer', collapse);
         },
     },
 });

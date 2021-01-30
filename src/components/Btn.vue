@@ -40,8 +40,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use "src/styles/color";
+@use "src/styles/shape";
 @use "src/styles/mixins";
 
 .btn {
@@ -57,12 +58,8 @@ export default {
     min-height: 2.25rem;
     text-decoration: none;
 
-    transition-property: background-color;
-    transition-duration: 100ms;
-    transition-timing-function: ease-in-out;
-
     &:hover:not([outline]) {
-        background-color: rgba(var(--primary), color.$alpha-hover);
+        background-color: color.$hover;
     }
 
     // inline variant
@@ -71,11 +68,9 @@ export default {
         min-height: 0;
 
         &:not([icon]) {
-            display: inline;
-        }
+            @include mixins.inline-interactive;
 
-        &:hover:not([icon]) {
-            border-bottom: 1px solid;
+            display: inline;
         }
     }
 
@@ -98,12 +93,16 @@ export default {
 
     // outlined variant
     &[outline] {
-        @include mixins.interactive;
+        @include mixins.raised-interactive;
         background-color: color.$surface;
     }
 
     &[selected]:not([outline]) {
         background-color: rgba(var(--primary), 0.2);
+    }
+
+    &:not([outline]) {
+        @include mixins.interactive;
     }
 }
 </style>

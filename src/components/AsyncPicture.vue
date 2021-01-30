@@ -1,10 +1,10 @@
 <template>
-    <div class="picture">
+    <button class="picture">
         <transition name="fade">
             <div v-show="loading" class="loading primary">Loading</div>
         </transition>
         <img ref="img" :src="src" :alt="alt" />
-    </div>
+    </button>
 </template>
 
 <script>
@@ -31,7 +31,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'src/styles/mixins';
+
 .picture {
+    @include mixins.outline-interactive;
+
+    display: block;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
     position: relative;
     overflow: hidden;
 

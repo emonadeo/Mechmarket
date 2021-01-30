@@ -1,16 +1,59 @@
 @use "sass:map";
 @use "shape";
 @use "color";
-@use "main";
 @use "typography";
 
-@mixin interactive {
+@mixin raised {
     border: shape.$border;
+    border-radius: shape.$radius;
     box-shadow: 2px 2px 0 0 color.$primary;
-    transition-property: box-shadow, transform;
+    transition-property: background-color, box-shadow, transform;
     transition-duration: 100ms;
     transition-timing-function: ease-in-out;
-    border-radius: shape.$radius;
+}
+
+@mixin interactive {
+    transition-property: background-color, box-shadow, transform;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+
+    &:focus:not(:active) {
+        background-color: color.$focus;
+        color: color.$on-focus;
+
+        svg {
+            fill: color.$on-focus;
+        }
+    }
+}
+
+@mixin outline-interactive {
+    transition-property: background-color, box-shadow, transform;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+
+    &:focus:not(:active) {
+        outline: none;
+        box-shadow: 0 0 0 4px color.$focus;
+    }
+}
+
+@mixin inline-interactive {
+    @include interactive;
+    @include outline-interactive;
+
+    border-radius: shape.$radius * 1/2;
+
+    &:hover {
+        background-color: color.$hover;
+        box-shadow: 0 0 0 4px color.$hover;
+    }
+}
+
+
+@mixin raised-interactive {
+    @include raised;
+    @include outline-interactive;
 
     &:hover {
         transform: translate(-2px, -2px);
@@ -18,16 +61,38 @@
     }
 
     &:active,
-    &[selected] {
+    &[selected]:not(:focus) {
         transform: translate(2px, 2px);
         box-shadow: none;
     }
 }
 
+@mixin type($props) {
+    @each $prop, $value in $props {
+        @if $prop == 'before' {
+            &::before {
+                content: '';
+                margin-top: $value;
+                display: block;
+                height: 0;
+            }
+        } @else if $prop == 'after' {
+            &::after {
+                content: '';
+                margin-bottom: $value;
+                display: block;
+                height: 0;
+            }
+        } @else {
+            #{$prop}: #{$value};
+        }
+    }
+}
+
 @mixin type-h1 {
-    @include main.type(map.get(typography.$typography, 'h1'));
+    @include type(map.get(typography.$typography, 'h1'));
 }
 
 @mixin type-h4 {
-    @include main.type(map.get(typography.$typography, 'h4'));
+    @include type(map.get(typography.$typography, 'h4'));
 }

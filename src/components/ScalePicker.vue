@@ -61,7 +61,7 @@
 import Btn from 'src/components/Btn.vue';
 
 export default {
-    name: 'SizePicker',
+    name: 'ScalePicker',
     components: {
         Btn,
     },
@@ -73,6 +73,7 @@ export default {
     methods: {
         update(scale) {
             this.$store.dispatch('setScale', scale);
+            this.$store.dispatch('toggleDrawer', false);
         },
         onResize() {
             if (!window.matchMedia('(min-width: 768px)').matches && this.scale > 1) {
@@ -106,6 +107,10 @@ export default {
 
         &:not(:first-child) {
             margin-left: -2px;
+        }
+
+        &:focus {
+            z-index: 4 !important;
         }
     }
 

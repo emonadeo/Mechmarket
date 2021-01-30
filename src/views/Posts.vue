@@ -98,11 +98,11 @@ export default {
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding-left: 1rem;
+        padding-left: 0.5rem;
 
         .title-bar {
             display: flex;
-            padding: 1rem 1rem 2px 4px;
+            padding: 1rem 1rem 4px 4px;
             margin-left: -4px; // avoid overflow when hovering above cards
 
             > *:not(:last-child) {
@@ -138,7 +138,7 @@ export default {
 
             .posts {
                 overflow-y: auto;
-                padding: 1rem 1rem 0 4px; // avoid overflow when hovering above cards
+                padding: calc(1rem - 2px) 1rem 0 4px; // avoid overflow when hovering above cards
             }
         }
     }

@@ -45,8 +45,7 @@ export default {
         transition: box-shadow 100ms ease-in-out;
         cursor: pointer;
 
-        &:hover,
-        &:focus {
+        &:hover {
             box-shadow: 0 0 0 2px color.$primary;
         }
     }

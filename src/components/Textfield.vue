@@ -28,12 +28,12 @@ input {
     background-color: transparent;
     height: 2.25rem;
     outline: none;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     border-bottom-style: solid;
     opacity: 0.54;
 
     &:focus {
-        border-color: color.$primary;
+        border-color: color.$focus;
         opacity: 1;
 
         &::placeholder {

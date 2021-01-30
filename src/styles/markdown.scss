@@ -1,6 +1,7 @@
 @use 'responsive' as r;
 @use 'typography';
 @use 'color';
+@use 'mixins';
 
 .markdown {
     h1,
@@ -48,14 +49,9 @@
     a {
         border-bottom-style: solid;
         border-bottom-width: 1px;
+        outline: none;
 
-        &:hover {
-            background-color: rgba(var(--primary), color.$alpha-hover);
-        }
-
-        &:focus {
-            background-color: rgba(var(--primary), color.$alpha-focus);
-        }
+        @include mixins.inline-interactive;
     }
 
     hr {
@@ -67,7 +63,7 @@
     }
 
     table {
-        $border: 2px solid rgba(var(--on-surface), color.$alpha-focus);
+        $border: 2px solid rgba(var(--on-surface), 0.3);
 
         border: $border;
         margin-left: auto;

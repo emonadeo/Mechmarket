@@ -1,5 +1,5 @@
 <template>
-    <div class="post surface" :scale="scale">
+    <card class="post" :scale="scale">
         <region class="type-overline" :region="post.region"></region>
         <article>
             <h1 class="title">
@@ -19,11 +19,12 @@
                 })
             }}
         </div>
-    </div>
+    </card>
 </template>
 
 <script>
 import Btn from 'src/components/Btn.vue';
+import Card from 'src/components/Card.vue';
 import Gallery from 'src/components/Gallery.vue';
 import Region from 'src/components/Region.vue';
 
@@ -34,6 +35,7 @@ export default {
     },
     components: {
         Btn,
+        Card,
         Gallery,
         Region,
     },
@@ -52,12 +54,7 @@ export default {
 @use "src/styles/color";
 
 .post {
-    display: flex;
-    padding: 1rem;
-    flex-direction: column;
     overflow-x: hidden;
-
-    @include mixins.interactive;
 
     .region,
     .title {

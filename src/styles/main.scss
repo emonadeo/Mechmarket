@@ -5,6 +5,7 @@
 @use 'reset';
 @use 'shape';
 @use 'markdown';
+@use 'mixins';
 @use 'responsive' as r;
 
 * {
@@ -12,32 +13,10 @@
 }
 
 // build typography classes
-@mixin type($props) {
-    @each $prop, $value in $props {
-        @if $prop == 'before' {
-            &::before {
-                content: '';
-                margin-top: $value;
-                display: block;
-                height: 0;
-            }
-        } @else if $prop == 'after' {
-            &::after {
-                content: '';
-                margin-bottom: $value;
-                display: block;
-                height: 0;
-            }
-        } @else {
-            #{$prop}: #{$value};
-        }
-    }
-}
-
 @each $type, $props in typography.$typography {
     @if (list.index((h1, h2, h3, h4, h5, h6), $type) != null) {
         .markdown #{$type} {
-            @include type($props);
+            @include mixins.type($props);
         }
     }
     @if ($type == 'body1') {
@@ -45,7 +24,7 @@
         td,
         th,
         .markdown li {
-            @include type($props);
+            @include mixins.type($props);
         }
 
         .markdown li {
@@ -53,7 +32,7 @@
         }
     }
     .type-#{$type} {
-        @include type($props);
+        @include mixins.type($props);
     }
 }
 

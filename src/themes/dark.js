@@ -5,4 +5,7 @@ module.exports = {
     onBackground: '#ffffff',
     surface: '#121212',
     onSurface: '#ffffff',
+    focus: '#ffd740',
+    onFocus: '#000000',
+    hover: '#403510',
 };

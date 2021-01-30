@@ -1,14 +1,15 @@
 <template>
     <aside class="drawer modal" :collapse="collapse" ref="drawer">
         <div class="actions">
-            <btn icon class="logo" :to="{ query: {} }" @click.native="$store.dispatch('toggleDrawer')">
-                <svg viewBox="0 0 320 320" height="2rem" xmlns="http://www.w3.org/2000/svg">
+            <router-link icon class="logo" :to="{ query: {} }" @click.native="close">
+                <svg height="2rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
-                        d="M47.693,51.598c0.782,0.002 1.565,0.04 2.342,0.113c65.788,6.38 131.562,12.89 197.333,19.434c7.139,0.728 13.903,4.671 18.032,10.619c1.312,1.89 2.358,3.962 3.106,6.136l0.018,0.052c16.48,48.506 32.833,97.054 49.249,145.581c2.322,6.912 1.474,14.706 -2.288,20.931c-2.891,4.784 -7.436,8.549 -12.673,10.5c-2.754,1.026 -5.683,1.556 -8.638,1.571c-89.066,0.153 -178.131,-0.066 -267.196,-0.099c-5.955,-0.014 -11.873,-2.222 -16.359,-6.112c-4.171,-3.617 -7.088,-8.645 -8.154,-14.072c-0.506,-2.579 -0.598,-5.235 -0.284,-7.843c6.803,-55.011 13.705,-110.01 20.686,-164.999c0.786,-6.034 3.834,-11.72 8.403,-15.686c4.459,-3.872 10.308,-6.091 16.268,-6.126c0.051,0 0.103,0 0.155,0Zm-0.069,20c-2.381,0.014 -4.6,1.904 -4.92,4.362c-6.977,54.957 -14.243,109.88 -20.674,164.904c-0.188,1.654 0.509,3.38 1.793,4.436c0.881,0.724 2.013,1.13 3.157,1.136c89.048,0.216 178.098,0.56 267.144,0.099c1.872,-0.017 3.68,-1.166 4.482,-2.857c0.546,-1.152 0.628,-2.511 0.224,-3.727c-16.313,-48.542 -32.82,-97.019 -49.23,-145.528c-0.007,-0.02 -0.014,-0.04 -0.021,-0.059c-0.629,-1.783 -2.294,-3.123 -4.215,-3.319c-65.747,-6.542 -131.458,-13.464 -197.26,-19.427c-0.16,-0.014 -0.32,-0.021 -0.48,-0.02Z"
+                        d="M1.752,19.219c-0.287,-0 -0.56,-0.125 -0.749,-0.341c-0.188,-0.216 -0.274,-0.503 -0.235,-0.788c0.383,-2.774 1.364,-9.888 1.718,-12.452c0.072,-0.525 0.545,-0.9 1.073,-0.852c3.021,0.274 12.402,1.127 14.939,1.358c0.389,0.035 0.721,0.295 0.848,0.663c0.687,1.985 2.881,8.324 3.84,11.094c0.106,0.304 0.057,0.639 -0.129,0.901c-0.186,0.261 -0.487,0.417 -0.809,0.417c-4.196,-0 -16.657,-0 -20.496,-0Z"
+                        style="stroke-width: 1.5px"
                     />
                 </svg>
-            </btn>
-            <btn icon class="close" @click.native="$store.dispatch('toggleDrawer')">
+            </router-link>
+            <btn icon class="close" @click.native="close">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="2rem">
                     <path
                         d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
@@ -22,7 +23,7 @@
                     class="type-button"
                     :to="{ params: { category: 'selling' }, query: $route.query }"
                     :selected="$route.params.category === 'selling'"
-                    @click.native="$store.dispatch('toggleDrawer')"
+                    @click.native="close"
                     >Selling</router-link
                 >
             </li>
@@ -31,7 +32,7 @@
                     class="type-button"
                     :to="{ params: { category: 'buying' }, query: $route.query }"
                     :selected="$route.params.category === 'buying'"
-                    @click.native="$store.dispatch('toggleDrawer')"
+                    @click.native="close"
                     >Buying</router-link
                 >
             </li>
@@ -40,13 +41,13 @@
                     class="type-button"
                     :to="{ params: { category: 'trading' }, query: $route.query }"
                     :selected="$route.params.category === 'trading'"
-                    @click.native="$store.dispatch('toggleDrawer')"
+                    @click.native="close"
                     >Trading</router-link
                 >
             </li>
         </ul>
         <div class="options">
-            <size-picker></size-picker>
+            <scale-picker></scale-picker>
             <theme-picker></theme-picker>
         </div>
         <ul class="socials">
@@ -68,19 +69,24 @@
 import Hammer from 'hammerjs';
 
 import Btn from 'src/components/Btn.vue';
-import SizePicker from 'src/components/ScalePicker.vue';
+import ScalePicker from 'src/components/ScalePicker.vue';
 import ThemePicker from 'src/components/ThemePicker.vue';
 
 export default {
     name: 'Drawer',
     components: {
         Btn,
-        SizePicker,
+        ScalePicker,
         ThemePicker,
     },
     computed: {
         collapse() {
             return this.$store.state.collapseDrawer;
+        },
+    },
+    methods: {
+        close() {
+            this.$store.dispatch('toggleDrawer', true);
         },
     },
     mounted() {
@@ -110,6 +116,7 @@ export default {
 @use 'src/styles/responsive' as r;
 @use 'src/styles/color';
 @use 'src/styles/shape';
+@use 'src/styles/mixins';
 
 $margin: 2.5rem;
 
@@ -139,8 +146,26 @@ $margin: 2.5rem;
         margin: 0 0 calc(1rem + 2px) $margin;
         height: 2.25rem;
 
-        .logo:hover {
-            background-color: transparent; // hide hover effect
+        .logo {
+            svg {
+                fill: none;
+                stroke: color.$on-surface;
+            }
+
+            &:focus:not(:active) {
+                outline: none;
+
+                svg {
+                    fill: color.$focus;
+                    stroke: color.$focus;
+                }
+            }
+
+            &:hover {
+                svg {
+                    fill: color.$on-surface;
+                }
+            }
         }
     }
 
@@ -161,6 +186,8 @@ $margin: 2.5rem;
                 padding-left: $margin;
                 height: $margin;
                 align-items: center;
+
+                @include mixins.outline-interactive;
 
                 &:hover,
                 &:focus {
@@ -193,7 +220,7 @@ $margin: 2.5rem;
     @include r.md {
         position: static;
         overflow-x: hidden;
-        padding-right: 0;
+        padding-right: 0.5rem;
         border: none;
 
         &[collapse] {
