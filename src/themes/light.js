@@ -7,5 +7,5 @@ module.exports = {
     onSurface: '#35342f',
     focus: '#304ffe',
     onFocus: '#ffffff',
-    hover: '#c0cfff',
+    hover: '#D8DDFE',
 };

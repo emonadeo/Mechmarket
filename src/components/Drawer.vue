@@ -191,7 +191,7 @@ $margin: 2.5rem;
 
                 &:hover,
                 &:focus {
-                    background-color: rgba(var(--primary), color.$alpha-hover);
+                    background-color: color.$hover;
                 }
 
                 &[selected] {
