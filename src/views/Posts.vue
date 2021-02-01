@@ -1,7 +1,7 @@
 <template>
     <div id="posts" :class="{ 'viewing-post': id }">
         <drawer></drawer>
-        <div class="container">
+        <div class="container" :collapsed="collapsed">
             <div class="title-bar background">
                 <btn class="menu" icon outline @click.native="toggleDrawer">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -53,6 +53,9 @@ export default {
         post() {
             return this.posts.find((p) => p.id === this.id);
         },
+        collapsed() {
+            return this.$store.state.collapseDrawer;
+        },
     },
     watch: {
         category: function (category) {
@@ -98,7 +101,7 @@ export default {
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding-left: 0.5rem;
+        padding-left: 1rem;
 
         .title-bar {
             display: flex;
@@ -143,7 +146,17 @@ export default {
         }
     }
 
+    @include r.md {
+        .container:not([collapsed]) {
+            padding-left: 0.5rem;
+        }
+    }
+
     @include r.lg {
+        .container {
+            padding-left: 0.5rem;
+        }
+
         .title-bar .menu {
             display: none;
         }

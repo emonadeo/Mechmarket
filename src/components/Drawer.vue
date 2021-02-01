@@ -124,19 +124,12 @@ $margin: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    position: absolute;
     width: 16rem;
     max-width: 100%;
     height: 100%;
     z-index: 100;
-    left: 0;
     transition: width 300ms ease-in-out;
     padding: 1rem 1rem $margin 0;
-    border-right: shape.$border;
-
-    &[collapse] {
-        left: -16rem;
-    }
 
     .actions {
         display: flex;
@@ -217,24 +210,33 @@ $margin: 2.5rem;
         margin-left: $margin;
     }
 
-    @include r.md {
-        position: static;
-        overflow-x: hidden;
-        padding-right: 0.5rem;
-        border: none;
+    @include r.lt-md {
+        position: absolute;
+        border-right: shape.$border;
+    }
 
+    @include r.lt-lg {
         &[collapse] {
-            left: 0;
-            width: 0;
+            left: -16rem;
+        }
+
+        @include r.md {
+            overflow-x: hidden;
+            border: none;
+
+            &[collapse] {
+                padding-right: 0;
+                width: 0;
+            }
         }
     }
 
-    @include r.lg {
-        &[collapse] {
-            left: 0;
-            width: 16rem;
-        }
+    @include r.md {
+        padding-right: 0.5rem;
+    }
 
+    // Hide Menu button on >= large devices
+    @include r.lg {
         .actions .close {
             display: none;
         }

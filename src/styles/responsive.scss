@@ -21,3 +21,7 @@
 @mixin lt-md {
     @media (max-width: 768px) { @content }
 }
+
+@mixin lt-lg {
+    @media (max-width: 1024px) { @content }
+}
