@@ -1,5 +1,5 @@
 <template>
-    <div class="region-picker">
+    <form class="region-picker" @submit.prevent="$router.push({ query: { ...$route.query, region } })">
         <!-- button -->
         <btn outline v-show="!editing" type="button" @click="edit">
             <div class="region-container">
@@ -14,7 +14,7 @@
         <textfield
             v-show="editing"
             id="textfield"
-            placeholder="US-NJ"
+            placeholder="e.g. US-NJ"
             v-model="region"
             @blur.native="unedit"
         ></textfield>
@@ -32,7 +32,7 @@
                 </svg>
             </btn>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -51,7 +51,7 @@ export default {
     }),
     computed: {
         regions() {
-            return this.$route.query.region
+            return this.region
                 ?.toUpperCase()
                 .split('-')
                 .filter((s) => s && s !== '');
@@ -68,6 +68,11 @@ export default {
         },
         unedit() {
             this.timeout = setTimeout(() => (this.editing = false), 1000);
+        },
+    },
+    watch: {
+        '$route.query.region'(value) {
+            this.region = value?.toUpperCase();
         },
     },
 };

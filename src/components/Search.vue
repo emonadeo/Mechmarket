@@ -1,5 +1,5 @@
 <template>
-    <div class="search">
+    <form class="search" @submit.prevent="$router.push({ query: { ...$route.query, q: query } })">
         <textfield
             name="q"
             type="text"
@@ -23,7 +23,7 @@
                 </svg>
             </btn>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
