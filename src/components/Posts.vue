@@ -1,7 +1,9 @@
 <template>
-    <div class="posts" :scale="scale">
+    <div class="posts">
         <loading v-if="loading"></loading>
-        <post class="posting" v-for="post in posts" :key="post.id" :post="post"></post>
+        <div class="container" :scale="scale">
+            <post class="posting" v-for="post in posts" :key="post.id" :post="post"></post>
+        </div>
     </div>
 </template>
 
@@ -32,26 +34,43 @@ export default {
 @use "src/styles/responsive" as r;
 
 .posts {
-    column-gap: 1rem;
-    grid-gap: 1rem;
-    grid-auto-rows: max-content;
-    grid-template-columns: [start] 1fr [end];
+    overflow-x: hidden;
+    overflow-y: auto;
 
-    // Fix bottom padding bug
-    &::after {
-        content: '';
-        height: 1px;
-        grid-column: start / end;
-    }
+    .container {
+        column-gap: 1rem;
+        column-fill: balance;
+        grid-gap: 1rem;
+        grid-auto-rows: max-content;
+        grid-template-columns: [start] 1fr [end];
 
-    &[scale='0'] {
-        display: grid;
-    }
+        // Fix bottom padding bug
+        &::after {
+            content: '';
+            height: 1px;
+            grid-column: start / end;
+        }
 
-    &[scale='1'] {
-        display: grid;
+        &[scale='0'] {
+            display: grid;
+        }
 
-        @include r.lg {
+        &[scale='1'] {
+            display: grid;
+
+            @include r.lg {
+                display: block;
+                columns: 2 0;
+
+                .posting {
+                    width: 100%;
+                    margin-bottom: 1rem;
+                    display: inline-block;
+                }
+            }
+        }
+
+        &[scale='2'] {
             display: block;
             columns: 2 0;
 
@@ -60,25 +79,14 @@ export default {
                 margin-bottom: 1rem;
                 display: inline-block;
             }
-        }
-    }
 
-    &[scale='2'] {
-        display: block;
-        columns: 2 0;
+            @include r.xl {
+                columns: 3 0;
+            }
 
-        .posting {
-            width: 100%;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        @include r.xl {
-            columns: 3 0;
-        }
-
-        @include r.xxl {
-            columns: 25rem auto;
+            @include r.xxl {
+                columns: 25rem auto;
+            }
         }
     }
 }

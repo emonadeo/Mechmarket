@@ -140,7 +140,6 @@ export default {
             }
 
             .posts {
-                overflow-y: auto;
                 padding: calc(1rem - 2px) 1rem 0 4px; // avoid overflow when hovering above cards
             }
         }
