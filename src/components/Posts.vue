@@ -32,9 +32,10 @@ export default {
 @use "src/styles/responsive" as r;
 
 .posts {
-    display: grid;
+    column-gap: 1rem;
     grid-gap: 1rem;
     grid-auto-rows: max-content;
+    grid-template-columns: [start] 1fr [end];
 
     // Fix bottom padding bug
     &::after {
@@ -44,19 +45,41 @@ export default {
     }
 
     &[scale='0'] {
-        grid-template-columns: [start] 1fr [end];
+        display: grid;
     }
 
     &[scale='1'] {
-        grid-template-columns: [start] 1fr [end];
+        display: grid;
 
         @include r.lg {
-            grid-template-columns: [start] repeat(2, 1fr) [end];
+            display: block;
+            columns: 2 0;
+
+            .posting {
+                width: 100%;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
         }
     }
 
     &[scale='2'] {
-        grid-template-columns: [start] repeat(auto-fit, minmax(min(max(19rem, calc(33% - 1rem)), 3 * 9rem), 1fr)) [end];
+        display: block;
+        columns: 2 0;
+
+        .posting {
+            width: 100%;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        @include r.xl {
+            columns: 3 0;
+        }
+
+        @include r.xxl {
+            columns: 25rem auto;
+        }
     }
 }
 </style>
