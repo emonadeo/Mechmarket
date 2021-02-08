@@ -87,10 +87,12 @@ module.exports = {
         new ThemePlugin(path.resolve(__dirname, './src/themes')),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
+            favicon: path.resolve(__dirname, './src/assets/favicon.png'),
         }),
         new HtmlWebpackPlugin({
             filename: '404.html',
             template: path.resolve(__dirname, './src/index.html'),
+            favicon: path.resolve(__dirname, './src/assets/favicon.png'),
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin(),
