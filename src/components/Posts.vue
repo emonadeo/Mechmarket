@@ -1,9 +1,11 @@
 <template>
     <div class="posts">
         <loading v-if="loading"></loading>
-        <div class="container" :scale="scale">
-            <post class="posting" v-for="post in posts" :key="post.id" :post="post"></post>
-        </div>
+        <template v-else>
+            <div class="container" :scale="scale">
+                <post class="posting" v-for="post in posts" :key="post.id" :post="post"></post>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -34,6 +36,7 @@ export default {
 @use "src/styles/responsive" as r;
 
 .posts {
+    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
 

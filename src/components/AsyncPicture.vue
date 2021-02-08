@@ -1,18 +1,23 @@
 <template>
     <button class="picture">
         <transition name="fade">
-            <div v-show="loading" class="loading primary">Loading</div>
+            <loading v-if="loading"></loading>
         </transition>
         <img ref="img" :src="src" :alt="alt" />
     </button>
 </template>
 
 <script>
+import Loading from 'src/components/Loading.vue';
+
 export default {
     name: 'AsyncPicture',
     props: {
         src: String,
         alt: String,
+    },
+    components: {
+        Loading,
     },
     data: () => ({
         loading: true,
@@ -43,17 +48,6 @@ export default {
     background-color: transparent;
     position: relative;
     overflow: hidden;
-
-    .loading {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
     img {
         height: 100%;

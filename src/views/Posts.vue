@@ -122,6 +122,7 @@ export default {
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            flex: 1;
             margin-left: -4px; // avoid overflow when hovering above cards
 
             // top gradient
@@ -140,6 +141,7 @@ export default {
             }
 
             .posts {
+                flex: 1;
                 padding: calc(1rem - 2px) 1rem 0 4px; // avoid overflow when hovering above cards
             }
         }
