@@ -1,6 +1,6 @@
 <template>
     <input
-        class="textfield type-body1"
+        class="textfield type-body"
         :name="name"
         :type="type"
         :placeholder="placeholder"

@@ -2,9 +2,15 @@
     <card class="post" :scale="scale">
         <region class="type-overline" :region="post.region"></region>
         <article>
-            <h1 class="title">
-                <btn inline :href="post.href" v-html="post.title"></btn>
-            </h1>
+            <div v-if="post.category !== 'trading'" class="title">
+                <h1>
+                    <btn inline :href="post.href" v-html="post.category === 'selling' ? post.have : post.want"></btn>
+                </h1>
+                <div>
+                    <h6 class="type-overline">{{ post.category === 'selling' ? 'Accepting' : 'Offering' }}</h6>
+                    <payment-methods :methods="post.category === 'selling' ? post.want : post.have"></payment-methods>
+                </div>
+            </div>
             <gallery v-if="post.pictures.length > 0" :pictures="post.pictures" :href="post.href"></gallery>
             <section v-show="scale === 0" class="description markdown" v-html="post.description"></section>
         </article>
@@ -26,6 +32,7 @@
 import Btn from 'src/components/Btn.vue';
 import Card from 'src/components/Card.vue';
 import Gallery from 'src/components/Gallery.vue';
+import PaymentMethods from 'src/components/PaymentMethods.vue';
 import Region from 'src/components/Region.vue';
 
 export default {
@@ -37,6 +44,7 @@ export default {
         Btn,
         Card,
         Gallery,
+        PaymentMethods,
         Region,
     },
     computed: {
@@ -62,13 +70,23 @@ export default {
     }
 
     article .title {
-        @include mixins.type-h4;
+        h1 {
+            @include mixins.type-h4;
+        }
+
+        .type-overline {
+            margin-bottom: 0.5rem;
+        }
     }
 
     &[scale='0'] {
-        .title {
-            @include mixins.type-h1;
+        article .title {
             margin-bottom: 2rem;
+
+            h1 {
+                @include mixins.type-h1;
+                margin-bottom: 2rem;
+            }
         }
 
         .gallery {
@@ -81,7 +99,7 @@ export default {
 
         @include r.lt-md {
             article {
-                .title {
+                .title h1 {
                     @include mixins.type-h4;
                 }
 
@@ -170,6 +188,10 @@ export default {
     // clamp title to two line on linear view
     &[scale='1'],
     &[scale='2'] {
+        article .title h1 {
+            margin-bottom: 1rem;
+        }
+
         .gallery {
             display: grid;
             grid-gap: 1rem;

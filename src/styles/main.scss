@@ -37,7 +37,7 @@
             @include mixins.type($props);
         }
     }
-    @if ($type == 'body1') {
+    @if ($type == 'body') {
         p,
         td,
         th,

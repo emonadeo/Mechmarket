@@ -1,8 +1,5 @@
 import { markdown } from 'snudown-js';
 import imgur from 'src/util/imgur.js';
-import { methods } from 'src/components/PaymentMethod.vue';
-
-const paymentMethods = Object.keys(methods);
 
 /**
  * Represents a mechmarket entry
@@ -15,8 +12,8 @@ export default class Post {
      * @param {Date} date
      * @param {string} region
      * @param {string} description
-     * @param {string[]} have
-     * @param {string[]} want
+     * @param {string} have
+     * @param {string} want
      * @param {string} href
      * @param {string[]} pictures
      */
@@ -31,22 +28,22 @@ export default class Post {
         this.want = want;
         this.pictures = pictures;
         this.href = href;
-        this.haveProducts = this.have.filter((m) => paymentMethods.indexOf(m.toLowerCase()) === -1);
-        this.wantProducts = this.want.filter((m) => paymentMethods.indexOf(m.toLowerCase()) === -1);
-        this.havePaymentMethods = this.have.filter((m) => paymentMethods.indexOf(m.toLowerCase()) !== -1);
-        this.wantPaymentMethods = this.want.filter((m) => paymentMethods.indexOf(m.toLowerCase()) !== -1);
+        //this.haveProducts = this.have.filter((m) => paymentMethods.indexOf(m.toLowerCase()) === -1);
+        //this.wantProducts = this.want.filter((m) => paymentMethods.indexOf(m.toLowerCase()) === -1);
+        //this.havePaymentMethods = this.have.filter((m) => paymentMethods.indexOf(m.toLowerCase()) !== -1);
+        //this.wantPaymentMethods = this.want.filter((m) => paymentMethods.indexOf(m.toLowerCase()) !== -1);
     }
 
     get title() {
         switch (this.category) {
             case 'selling': {
-                return this.have.join(', ');
+                return this.have;
             }
             case 'buying': {
-                return this.want.join(', ');
+                return this.want;
             }
             case 'trading': {
-                return `${this.have.join(', ')} <-> ${this.want.join(', ')}`;
+                return `${this.have} <-> ${this.want}`;
             }
         }
     }
@@ -79,15 +76,10 @@ export default class Post {
         /**
          * @param {string} text
          * @param {boolean} have
-         * @returns {string[]}
+         * @returns {string}
          */
         function extractProducts(text, have) {
-            return text
-                .split('[H]')[1]
-                .split('[W]')
-                [have ? 0 : 1].split(',')
-                .map((s) => s.trim())
-                .filter((s) => s.length !== 0);
+            return text.split('[H]')[1].split('[W]')[have ? 0 : 1];
         }
 
         /**
