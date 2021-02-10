@@ -10,6 +10,24 @@
 
 * {
     box-sizing: border-box;
+
+    scrollbar-color: color.$on-surface transparent;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        width: 2 * shape.$radius;
+        height: 2 * shape.$radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: color.$surface;
+        border: shape.$border;
+        border-radius: shape.$radius;
+
+        &:hover {
+            background-color: color.$on-surface;
+        }
+    }
 }
 
 // build typography classes

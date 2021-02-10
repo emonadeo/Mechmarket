@@ -2,6 +2,7 @@
 @use 'typography';
 @use 'color';
 @use 'mixins';
+@use 'shape';
 
 .markdown {
     h1,
@@ -63,7 +64,8 @@
     }
 
     table {
-        $border: 2px solid rgba(var(--on-surface), 0.3);
+        $color: rgba(var(--on-surface), 0.2);
+        $border: 2px solid $color;
 
         border: $border;
         margin-left: auto;
@@ -73,6 +75,10 @@
         overflow-x: auto;
         display: block;
         max-width: fit-content;
+
+        &::-webkit-scrollbar {
+            background-color: $color;
+        }
 
         td,
         th {

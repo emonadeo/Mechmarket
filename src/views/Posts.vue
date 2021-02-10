@@ -87,6 +87,7 @@ export default {
 <style lang="scss" scoped>
 @use "src/styles/responsive" as r;
 @use "src/styles/color";
+@use "src/styles/shape";
 
 #posts {
     margin: 0 auto;
@@ -129,7 +130,7 @@ export default {
             &::before {
                 content: '';
                 position: absolute;
-                right: 0;
+                right: calc(1rem - 2 * #{shape.$radius});
                 left: -0%;
                 top: 0;
                 z-index: 10;
@@ -142,7 +143,7 @@ export default {
 
             .posts {
                 flex: 1;
-                padding: calc(1rem - 2px) 1rem 0 4px; // avoid overflow when hovering above cards
+                padding: calc(1rem - 2px) calc(1rem - 2 * #{shape.$radius}) 0 4px; // avoid overflow when hovering above cards
             }
         }
     }
@@ -160,6 +161,12 @@ export default {
 
         .title-bar .menu {
             display: none;
+        }
+    }
+
+    @include r.xxl {
+        .container {
+            margin-right: 16rem;
         }
     }
 }

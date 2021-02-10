@@ -33,6 +33,8 @@ export default {
 
 <style scoped lang="scss">
 @use "src/styles/typography";
+@use "src/styles/shape";
+@use "src/styles/color";
 @use "src/styles/responsive" as r;
 
 .posts {
