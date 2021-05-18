@@ -109,7 +109,7 @@ export default {
             margin-left: -2px;
         }
 
-        &:focus {
+        &:focus-visible {
             z-index: 4 !important;
         }
     }

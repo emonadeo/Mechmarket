@@ -17,7 +17,7 @@
     transition-duration: 100ms;
     transition-timing-function: ease-in-out;
 
-    &:focus:not(:active) {
+    &:focus-visible {
         background-color: color.$focus;
         color: color.$on-focus;
 
@@ -32,7 +32,7 @@
     transition-duration: 100ms;
     transition-timing-function: ease-in-out;
 
-    &:focus:not(:active) {
+    &:focus-visible {
         outline: none;
         box-shadow: 0 0 0 4px color.$focus;
     }
@@ -61,7 +61,7 @@
     }
 
     &:active,
-    &[selected]:not(:focus) {
+    &[selected]:not(:focus-visible) {
         transform: translate(2px, 2px);
         box-shadow: none;
     }
